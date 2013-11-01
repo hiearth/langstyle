@@ -1,0 +1,5 @@
+
+Play sound -> 
+select the right image related to sound -> 
+check whether correct -> 
+display word

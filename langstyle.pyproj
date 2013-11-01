@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>langstyle\server.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>langstyle</Name>
+    <RootNamespace>langstyle</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="langstyle.py" />
+    <Compile Include="langstyle\webservice\character_for_test.py" />
+    <Compile Include="langstyle\webservice\image_for_test.py" />
+    <Compile Include="langstyle\server.py" />
+    <Compile Include="langstyle\webservice\character.py" />
+    <Compile Include="langstyle\webservice\image.py" />
+    <Compile Include="langstyle\webservice\page.py" />
+    <Compile Include="langstyle\webservice\router.py" />
+    <Compile Include="langstyle\webservice\sound.py" />
+    <Compile Include="langstyle\webservice\util.py" />
+    <Compile Include="langstyle\webservice\sound_for_test.py" />
+    <Compile Include="langstyle\webservice\web.py" />
+    <Compile Include="langstyle\webservice\__init__.py" />
+    <Compile Include="langstyle\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="langstyle\" />
+    <Folder Include="langstyle\database\" />
+    <Folder Include="langstyle\image\" />
+    <Folder Include="langstyle\sound\" />
+    <Folder Include="langstyle\test\" />
+    <Folder Include="langstyle\test\unit\" />
+    <Folder Include="langstyle\ui\" />
+    <Folder Include="langstyle\ui\resource\" />
+    <Folder Include="langstyle\voice\" />
+    <Folder Include="langstyle\webservice\" />
+    <Folder Include="usecase\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="langstyle\image\Desert.jpg" />
+    <Content Include="langstyle\image\Hydrangeas.jpg" />
+    <Content Include="langstyle\image\Jellyfish.jpg" />
+    <Content Include="langstyle\image\Koala.jpg" />
+    <Content Include="langstyle\image\Lighthouse.jpg" />
+    <Content Include="langstyle\image\Penguins.jpg" />
+    <Content Include="langstyle\sound\desert.mp3" />
+    <Content Include="langstyle\sound\hydrangeas.mp3" />
+    <Content Include="langstyle\sound\jellyfish.mp3" />
+    <Content Include="langstyle\sound\koala.mp3" />
+    <Content Include="langstyle\sound\lighthouse.mp3" />
+    <Content Include="langstyle\sound\penguins.mp3" />
+    <Content Include="langstyle\sound\vogtland.mp3" />
+    <Content Include="langstyle\ui\index.html" />
+    <Content Include="langstyle\ui\resource\ajax.js" />
+    <Content Include="langstyle\ui\resource\index.js" />
+    <Content Include="langstyle\ui\resource\langstyle.css" />
+    <Content Include="langstyle\ui\resource\langstyle.js" />
+    <Content Include="langstyle\ui\resource\promise.js" />
+    <Content Include="langstyle\ui\resource\simpleDom.js" />
+    <Content Include="langstyle\ui\resource\wordCharacter.js" />
+    <Content Include="langstyle\ui\resource\wordImage.js" />
+    <Content Include="langstyle\ui\resource\wordSound.js" />
+    <Content Include="langstyle\ui\resource\wordStage.js" />
+    <Content Include="UseCase\ImageToSound_1.txt" />
+    <Content Include="UseCase\ImageToVoice_3.txt" />
+    <Content Include="usecase\problem.txt" />
+    <Content Include="UseCase\SoundToImage_2.txt" />
+    <Content Include="usecase\tasks.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

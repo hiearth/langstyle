@@ -1,0 +1,13 @@
+
+
+1. write a js promise library 
+
+2. use database to store character, image and sound
+
+3. get sound for each character
+
+4. generate different sizes of photos automatically
+
+5. support taking photo from Phone and Pad
+
+6. support cache because wireless is very slow

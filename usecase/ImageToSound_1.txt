@@ -1,0 +1,16 @@
+
+Display image -> 
+Play sound -> 
+Display word
+
+1. user first click the start button
+2. word stage display
+3. get the on-stage word from the word list
+4. show the image of current word
+5. after some buffer time, the sound play
+6. show word when sound finish
+
+option:
+7. need user type the word.
+   if correct, continue to next word
+   otherwise, show word, go to the sound step.

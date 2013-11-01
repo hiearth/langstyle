@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+    <head title="language style">
+        <link rel="Stylesheet" href="resource/langstyle.css" />
+        <script type="text/javascript" src="resource/promise.js"></script>
+        <script type="text/javascript" src="resource/ajax.js"></script>
+        <script type="text/javascript" src="resource/simpleDom.js"></script>
+        <script type="text/javascript" src="resource/langstyle.js"></script>
+        <script type="text/javascript" src="resource/wordStage.js"></script>
+        <script type="text/javascript" src="resource/wordCharacter.js"></script>
+        <script type="text/javascript" src="resource/wordImage.js"></script>
+        <script type="text/javascript" src="resource/wordSound.js"></script>
+    </head>
+    <body>
+        <div class="b-start">
+            <button id="start" class="js-start" onclick="wordStage.start();">Start</button>
+        </div>
+        <div id="stage" class="js-wordStage b-stage hidden">
+            <div class="js-wordStageTop">
+                <div class="js-wordCharacter">
+                    <label id="character"></label>
+                </div>
+                <div class="js-wordSound">
+                    <audio id="sound"></audio>
+                </div>
+                <div class="js-needRemove">
+                    <button type="button" class="js-next" onclick="wordStage.nextWord();">Next</button>
+                </div>
+            </div>
+            <div class="">
+                <img id="image" alt="word image" />
+            </div>
+        </div>
+        <script type="text/javascript" src="resource/index.js"></script>
+    </body>
+</html>

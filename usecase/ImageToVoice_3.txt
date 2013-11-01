@@ -1,0 +1,5 @@
+
+Display image -> 
+record the voice -> 
+check whether correct -> 
+display word
