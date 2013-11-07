@@ -17,20 +17,15 @@
 
 	Principle:
 	1. manange change, because database will change always
-	2. script can only be append, must not modify or delete original script when update
-	3. use table SchemaChange(ScriptName, MD5, Length, DateApplied) to track changes
-		MD5 can be used to check whether the script is updated or not
-		Length is used to check whether modify/delete original script, because script is only allowed to add,
-		Version Control Tool(git) can be used to store history, so we can re-build database at some past moment
-	4. Each time we want to upgrade database, the db install tool will compare scripts in file system 
-	   and the records in SchemaChange table, if the MD5 is not equal, we think the script need to update to database
-	   for example: TableName1.sql(md5 = 03495jjjdp994jwlelejlse99349f3334) in file system
-					TableName1.sql(md5 = 0l49994rjdp994jwlelejlse99349f399) in database
-					we need to run TableName1.sql to update it.
-					Before we do the update, we need to make sure the script only adds more sql statement without modifying original statements.
-					First compute the md5 of truncated content from start to length position of the updated script,
-					then compare this computed md5 to the md5 in the table record.
-					If the two md5 are not equal, we must not update the updated script.
+	2. once the script is committed to the Source Version Control Tool (git), the script must not be modified.
+	3. use table SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied) to track build version history
+	4. each time we run update database tool, the tool will compare DBMaxBuildNumber (the max build number in SchemaChange table) 
+	   with SrcMaxBuildNumber (the max build number in file system), if the SrcMaxBuildNumber is greater, 
+	   the tool will run the added scripts in the file system to update the database.
+	5. each script has prefix to mark the execution sequence, name to explain script purpose, seperator to seperate prefix and name. 
+	   Prefix format: MajorReleaseNumber.MinorReleaseNumber.BuildNumber, for example: 0.0.4
+	   Seperator: hyphen(-)
+	   For example 0.0.4-WordSound.sql means this script is in the 4th execution position
 
 3. get sound for each character
 
