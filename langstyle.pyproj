@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="langstyle.py" />
+    <Compile Include="langstyle\test\unit\character_service_test.py" />
     <Compile Include="langstyle\webservice\character_for_test.py" />
     <Compile Include="langstyle\webservice\image_for_test.py" />
     <Compile Include="langstyle\server.py" />
@@ -38,17 +39,17 @@
     <Compile Include="langstyle\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="data\image\" />
+    <Folder Include="data\sound\" />
     <Folder Include="langstyle\" />
     <Folder Include="langstyle\database\" />
     <Folder Include="langstyle\database\schema\" />
-    <Folder Include="langstyle\image\" />
-    <Folder Include="langstyle\sound\" />
     <Folder Include="langstyle\test\" />
     <Folder Include="langstyle\test\unit\" />
     <Folder Include="langstyle\ui\" />
     <Folder Include="langstyle\ui\resource\" />
-    <Folder Include="langstyle\voice\" />
     <Folder Include="langstyle\webservice\" />
+    <Folder Include="data\" />
     <Folder Include="usecase\" />
   </ItemGroup>
   <ItemGroup>
@@ -58,19 +59,19 @@
     <Content Include="langstyle\database\schema\0.0.2-Language.sql" />
     <Content Include="langstyle\database\schema\0.0.5-WordImage.sql" />
     <Content Include="langstyle\database\schema\0.0.6-WordSound.sql" />
-    <Content Include="langstyle\image\Desert.jpg" />
-    <Content Include="langstyle\image\Hydrangeas.jpg" />
-    <Content Include="langstyle\image\Jellyfish.jpg" />
-    <Content Include="langstyle\image\Koala.jpg" />
-    <Content Include="langstyle\image\Lighthouse.jpg" />
-    <Content Include="langstyle\image\Penguins.jpg" />
-    <Content Include="langstyle\sound\desert.mp3" />
-    <Content Include="langstyle\sound\hydrangeas.mp3" />
-    <Content Include="langstyle\sound\jellyfish.mp3" />
-    <Content Include="langstyle\sound\koala.mp3" />
-    <Content Include="langstyle\sound\lighthouse.mp3" />
-    <Content Include="langstyle\sound\penguins.mp3" />
-    <Content Include="langstyle\sound\vogtland.mp3" />
+    <Content Include="data\image\Desert.jpg" />
+    <Content Include="data\image\Hydrangeas.jpg" />
+    <Content Include="data\image\Jellyfish.jpg" />
+    <Content Include="data\image\Koala.jpg" />
+    <Content Include="data\image\Lighthouse.jpg" />
+    <Content Include="data\image\Penguins.jpg" />
+    <Content Include="data\sound\desert.mp3" />
+    <Content Include="data\sound\hydrangeas.mp3" />
+    <Content Include="data\sound\jellyfish.mp3" />
+    <Content Include="data\sound\koala.mp3" />
+    <Content Include="data\sound\lighthouse.mp3" />
+    <Content Include="data\sound\penguins.mp3" />
+    <Content Include="data\sound\vogtland.mp3" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\ajax.js" />
     <Content Include="langstyle\ui\resource\index.js" />

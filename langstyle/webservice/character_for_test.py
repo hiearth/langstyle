@@ -2,7 +2,8 @@
 import os
 from . import util
 
-ROOT_DIRECTORY = os.path.abspath(os.path.join("langstyle", "image"))
+#ROOT_DIRECTORY = os.path.abspath(os.path.join("langstyle", "image"))
+ROOT_DIRECTORY = os.path.abspath(os.path.join("data", "image"))
 SUFFIX = "txt"
 
 def _get_all_characters():
