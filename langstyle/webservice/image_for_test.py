@@ -2,7 +2,6 @@
 import os
 from . import util
 
-#ROOT_DIRECTORY = os.path.join("langstyle", "image")
 ROOT_DIRECTORY = os.path.join("data", "image")
 IMAGE_EXTENSION = ".jpg"
 

@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>langstyle\server.py</StartupFile>
+    <StartupFile>langstyle\test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,7 +23,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="langstyle.py" />
+    <Compile Include="langstyle\database\character.py" />
+    <Compile Include="langstyle\database\__init__.py" />
+    <Compile Include="langstyle\service\character.py" />
+    <Compile Include="langstyle\service\__init__.py" />
+    <Compile Include="langstyle\test.py" />
+    <Compile Include="langstyle\test\unit\character_repository_test.py" />
     <Compile Include="langstyle\test\unit\character_service_test.py" />
+    <Compile Include="langstyle\test\unit\__init__.py" />
+    <Compile Include="langstyle\test\__init__.py" />
     <Compile Include="langstyle\webservice\character_for_test.py" />
     <Compile Include="langstyle\webservice\image_for_test.py" />
     <Compile Include="langstyle\server.py" />
@@ -44,6 +52,7 @@
     <Folder Include="langstyle\" />
     <Folder Include="langstyle\database\" />
     <Folder Include="langstyle\database\schema\" />
+    <Folder Include="langstyle\service\" />
     <Folder Include="langstyle\test\" />
     <Folder Include="langstyle\test\unit\" />
     <Folder Include="langstyle\ui\" />

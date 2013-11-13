@@ -4,7 +4,6 @@
 import os
 from . import util
 
-#ROOT_DIRECTORY = os.path.join("langstyle", "sound")
 ROOT_DIRECTORY = os.path.join("data", "sound")
 SOUND_EXTENSION = ".mp3"
 

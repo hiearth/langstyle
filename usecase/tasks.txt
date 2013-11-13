@@ -21,10 +21,23 @@
 	   Seperator: hyphen(-)
 	   For example 0.0.4-WordSound.sql means this script is in the 4th execution position
 
-3. get sound for each character
+3. write unit test
 
-4. generate different sizes of photos automatically
+4. support hundreds of thousands of users
+	how to pass user info to service, to database
+	parameter? 
+	context? 
+	parameter object?
 
-5. support taking photo from Phone and Pad
+	how to dependency injection in python?
+	constructor?
+	setter?
 
-6. support cache because wireless is very slow
+
+5. get sound for each character
+
+6. generate different sizes of photos automatically
+
+7. support taking photo from Phone and Pad
+
+8. support cache because wireless is very slow
