@@ -1,13 +1,12 @@
 
 import os
 from . import util
+from .. import config
 
-ROOT_DIRECTORY = os.path.join("data", "image")
 IMAGE_EXTENSION = ".jpg"
 
-
 def _get_full_path(character):
-    return os.path.abspath(os.path.join(ROOT_DIRECTORY,character + IMAGE_EXTENSION))
+    return os.path.abspath(os.path.join(config.DATA_DIRECTORY,"image",character + IMAGE_EXTENSION))
 
 def exists(character):
     image_path = _get_full_path(character)

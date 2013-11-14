@@ -1,13 +1,13 @@
 
 import os
 from . import util
+from .. import config
 
-ROOT_DIRECTORY = os.path.abspath(os.path.join("data", "image"))
 SUFFIX = "txt"
 
 def _get_all_characters():
     characters = []
-    for root_path, dirs, files in os.walk(ROOT_DIRECTORY):
+    for root_path, dirs, files in os.walk(os.path.join(config.DATA_DIRECTORY,"image")):
         characters = [_get_character_from_file_name(f) for f in files if _is_character_file(f)]
     return characters
 

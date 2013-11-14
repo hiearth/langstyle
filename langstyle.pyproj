@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>langstyle\test.py</StartupFile>
+    <StartupFile>run_test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,12 +22,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="langstyle.py" />
+    <Compile Include="langstyle\config.py" />
     <Compile Include="langstyle\database\character.py" />
     <Compile Include="langstyle\database\__init__.py" />
     <Compile Include="langstyle\service\character.py" />
     <Compile Include="langstyle\service\__init__.py" />
-    <Compile Include="langstyle\test.py" />
+    <Compile Include="langstyle\tester.py" />
     <Compile Include="langstyle\test\unit\character_repository_test.py" />
     <Compile Include="langstyle\test\unit\character_service_test.py" />
     <Compile Include="langstyle\test\unit\__init__.py" />
@@ -45,6 +45,8 @@
     <Compile Include="langstyle\webservice\web.py" />
     <Compile Include="langstyle\webservice\__init__.py" />
     <Compile Include="langstyle\__init__.py" />
+    <Compile Include="run_server.py" />
+    <Compile Include="run_test.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\image\" />

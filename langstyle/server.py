@@ -1,13 +1,14 @@
+#!/usr/bin/env python3
 
 from http.server import HTTPServer
 from http.server import BaseHTTPRequestHandler
-import webservice.router
+from .webservice import router
 
 class HTTPRequestHandler(BaseHTTPRequestHandler):
     """handle all types of request"""
 
     def _get_handler(self):
-        request_handler_router = webservice.router.RequestHandlerRouter()
+        request_handler_router = router.RequestHandlerRouter()
         handler_class = request_handler_router.get_handler(self)
         if handler_class:
             return handler_class(self)
@@ -41,6 +42,8 @@ def start():
     serverAddress = "127.0.0.1"
     BaseHTTPRequestHandler.protocol_version = protocol
     server = HTTPServer((serverAddress, port), HTTPRequestHandler)
+    print("server start, address: " + serverAddress + "/" + str(port))
     server.serve_forever()
+    
 
 start()

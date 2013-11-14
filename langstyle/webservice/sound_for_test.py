@@ -3,12 +3,12 @@
 
 import os
 from . import util
+from .. import config
 
-ROOT_DIRECTORY = os.path.join("data", "sound")
 SOUND_EXTENSION = ".mp3"
 
 def _get_full_path(character):
-    return os.path.abspath(os.path.join(ROOT_DIRECTORY, character + SOUND_EXTENSION))
+    return os.path.abspath(os.path.join(config.DATA_DIRECTORY, "sound", character + SOUND_EXTENSION))
 
 def exists(character):
     sound_path = _get_full_path(character)
