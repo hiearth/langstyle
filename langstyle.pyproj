@@ -26,10 +26,12 @@
     <Compile Include="langstyle\database\character.py" />
     <Compile Include="langstyle\database\__init__.py" />
     <Compile Include="langstyle\service\character.py" />
+    <Compile Include="langstyle\service\user.py" />
     <Compile Include="langstyle\service\__init__.py" />
     <Compile Include="langstyle\tester.py" />
     <Compile Include="langstyle\test\unit\character_repository_test.py" />
     <Compile Include="langstyle\test\unit\character_service_test.py" />
+    <Compile Include="langstyle\test\unit\user_service_test.py" />
     <Compile Include="langstyle\test\unit\__init__.py" />
     <Compile Include="langstyle\test\__init__.py" />
     <Compile Include="langstyle\webservice\character_for_test.py" />
@@ -83,6 +85,7 @@
     <Content Include="data\sound\lighthouse.mp3" />
     <Content Include="data\sound\penguins.mp3" />
     <Content Include="data\sound\vogtland.mp3" />
+    <Content Include="langstyle\database\schema\0.0.7-User.sql" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\ajax.js" />
     <Content Include="langstyle\ui\resource\index.js" />
