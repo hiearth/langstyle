@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 import unittest
-from langstyle.database import character
+from langstyle.database import character_repository
 
 class NextTest(unittest.TestCase):
 
     def setUp(self):
         self._user_id = 1
-        self._repository_context = None
-        self._character_repository = character.CharacterRepository(self._repository_context)
+        self._character_repository = character_repository.CharacterRepository()
 
     def tearDown(self):
         return super().tearDown()

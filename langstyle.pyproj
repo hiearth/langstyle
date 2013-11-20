@@ -23,10 +23,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="langstyle\config.py" />
-    <Compile Include="langstyle\database\character.py" />
+    <Compile Include="langstyle\database\character_repository.py" />
+    <Compile Include="langstyle\database\repository_context.py" />
+    <Compile Include="langstyle\database\user_repository.py" />
     <Compile Include="langstyle\database\__init__.py" />
-    <Compile Include="langstyle\service\character.py" />
-    <Compile Include="langstyle\service\user.py" />
+    <Compile Include="langstyle\helper.py" />
+    <Compile Include="langstyle\service\character_service.py" />
+    <Compile Include="langstyle\service\log_service.py" />
+    <Compile Include="langstyle\service\service_context.py" />
+    <Compile Include="langstyle\service\service_factory.py" />
+    <Compile Include="langstyle\service\user_service.py" />
     <Compile Include="langstyle\service\__init__.py" />
     <Compile Include="langstyle\tester.py" />
     <Compile Include="langstyle\test\unit\character_repository_test.py" />
@@ -55,6 +61,7 @@
     <Folder Include="data\sound\" />
     <Folder Include="langstyle\" />
     <Folder Include="langstyle\database\" />
+    <Folder Include="langstyle\database\procedure\" />
     <Folder Include="langstyle\database\schema\" />
     <Folder Include="langstyle\service\" />
     <Folder Include="langstyle\test\" />
@@ -66,6 +73,7 @@
     <Folder Include="usecase\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="langstyle\database\procedure\UserProcess_Learning_S.sql" />
     <Content Include="langstyle\database\schema\0.0.1-Langstyle.sql" />
     <Content Include="langstyle\database\schema\0.0.4-SchemaChange.sql" />
     <Content Include="langstyle\database\schema\0.0.3-Character.sql" />

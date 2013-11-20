@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 
 import unittest
-from langstyle.service import user
+from langstyle.service import user_service
+from langstyle.database import user_repository
+from langstyle.service import service_context
+from langstyle.database import repository_context
 
-class GraspTest(unittest.TestCase):
+class UserServiceTestCase(unittest.TestCase):
 
     def setUp(self):
         # get a mock user
         self._user_id = 1
-        self._service_context = None
-        self._user_service = user.UserService(self._service_context)
+        self._user_repository = user_repository.UserRepository()
+        self._user_service = user_service.UserService(self._user_repository)
 
-    def tearDown(self):
-        return super().tearDown()
+
+class GraspTest(UserServiceTestCase):
 
     def test_FirstTime_ReturnEmpty(self):
         # make the user has no learning record
@@ -29,17 +32,11 @@ class GraspTest(unittest.TestCase):
     def test_Complete_ReturnAllCharacters(self):
         # make user has full learning records
         grasp_characters = self._user_service.grasp(self._user_id)
-        # assert grasp_characters is the same as all character list 
+        # assert grasp_characters is the same as all character list
         self.fail("no assertion yet")
 
 
-class CharacterCountTest(unittest.TestCase):
-
-    def setUp(self):
-        # get a mock user
-        self._user_id = 1
-        self._service_context = None
-        self._user_service = user.UserService(self._service_context)
+class CharacterCountTest(UserServiceTestCase):
 
     def _get_random_character(self):
         # reurn a random
@@ -70,13 +67,7 @@ class CharacterCountTest(unittest.TestCase):
         self.fail("no assertion yet")
 
 
-class CharacterLearningTest(unittest.TestCase):
-
-    def setUp(self):
-        # get a mock user
-        self._user_id = 1
-        self._service_context = None
-        self._user_service = user.UserService(self._service_context)
+class CharacterLearningTest(UserServiceTestCase):
 
     def _get_in_learing_max_count(self):
         pass
@@ -91,7 +82,8 @@ class CharacterLearningTest(unittest.TestCase):
         # make the user has some learning records
         learning_characters = self._user_service.get_learning(self._user_id)
         max_count = self._get_in_learing_max_count()
-        # assert learning_characters is not empty and less than max in learning count
+        # assert learning_characters is not empty and less than max in learning
+        # count
         self.fail("no assertion yet")
 
     def test_Complete_ReturnEmpty(self):
@@ -99,3 +91,24 @@ class CharacterLearningTest(unittest.TestCase):
         learning_characters = self._user_service.get_learning(self._user_id)
         # assert learning_characters is empty
         self.fail("no assertion yet")
+
+
+class CurrentCharacterTest(UserServiceTestCase):
+
+    def test_FirstTime_ReturnNone(self):
+        # make the user has no learning record
+        current_character = self._user_service.get_current_character(self._user_id)
+        # assert current_character is None
+        self.fail("no assertion yet") 
+
+    def test_StartButNotComplete(self):
+        # make the user has some learning records
+        current_character = self._user_service.get_current_character(self._user_id)
+        # assert current_character not None
+        self.fail("no assertion yet") 
+
+    def test_Complete_ReturnNone(self):
+        # make user has full learning records
+        current_character = self._user_service.get_current_character(self._user_id)
+        # assert current_character is None 
+        self.fail("no assertion yet") 

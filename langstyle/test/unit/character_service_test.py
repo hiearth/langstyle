@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 
 import unittest
-from langstyle.service import character
+from langstyle.service import character_service
+from langstyle.database import character_repository
+from langstyle.database import repository_context
+from langstyle.service import service_context
 
 class NextTest(unittest.TestCase):
 
     def setUp(self):
         # get a mock user
         self._user_id = 1
-        self._service_context = None
-        self._character_service = character.CharacterService(self._service_context)
+        self._character_repository = character_repository.CharacterRepository()
+        self._character_service = character_service.CharacterService(self._character_repository)
 
     def tearDown(self):
         return super().tearDown()
