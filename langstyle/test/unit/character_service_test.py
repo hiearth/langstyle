@@ -14,9 +14,6 @@ class NextTest(unittest.TestCase):
         self._character_repository = character_repository.CharacterRepository()
         self._character_service = character_service.CharacterService(self._character_repository)
 
-    def tearDown(self):
-        return super().tearDown()
-
     def test_FirstTime(self):
         # make the user has no learning record
         first_character = self._character_service.next(self._user_id)

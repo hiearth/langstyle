@@ -31,7 +31,6 @@
     <Compile Include="langstyle\service\character_service.py" />
     <Compile Include="langstyle\service\log_service.py" />
     <Compile Include="langstyle\service\service_context.py" />
-    <Compile Include="langstyle\service\service_factory.py" />
     <Compile Include="langstyle\service\user_service.py" />
     <Compile Include="langstyle\service\__init__.py" />
     <Compile Include="langstyle\tester.py" />
@@ -73,7 +72,7 @@
     <Folder Include="usecase\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="langstyle\database\procedure\UserProcess_Learning_S.sql" />
+    <Content Include="langstyle\database\procedure\UserProgress_Learning_S.sql" />
     <Content Include="langstyle\database\schema\0.0.1-Langstyle.sql" />
     <Content Include="langstyle\database\schema\0.0.4-SchemaChange.sql" />
     <Content Include="langstyle\database\schema\0.0.3-Character.sql" />

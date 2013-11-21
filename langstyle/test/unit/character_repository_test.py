@@ -9,9 +9,6 @@ class NextTest(unittest.TestCase):
         self._user_id = 1
         self._character_repository = character_repository.CharacterRepository()
 
-    def tearDown(self):
-        return super().tearDown()
-    
     def test_FirstTime(self):
         # pre condition, no learning record
         first_character = self._character_repository.next(self._user_id)
