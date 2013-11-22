@@ -5,7 +5,7 @@ drop procedure if exists UserProgress_Learning_S;
 delimiter //
 create procedure UserProgress_Learning_S(in userId int)
 begin
-	select Code as CharacterCode 
+	select c.CharacterCode 
 	from WordCharacter as c
 	join UserProgress as u
 	on c.CharacterId = u.CharacterId

@@ -72,6 +72,9 @@
     <Folder Include="usecase\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="langstyle\database\procedure\UserCurrentCharacter_S.sql" />
+    <Content Include="langstyle\database\procedure\UserProgress_Count_S.sql" />
+    <Content Include="langstyle\database\procedure\UserProgress_Grasp_S.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Learning_S.sql" />
     <Content Include="langstyle\database\schema\0.0.1-Langstyle.sql" />
     <Content Include="langstyle\database\schema\0.0.4-SchemaChange.sql" />
