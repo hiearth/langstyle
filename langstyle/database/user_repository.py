@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 from mysql import connector as dbconnector
 from .. import config
@@ -24,7 +24,7 @@ class UserRepository:
                 fetched_results = cursor.fetchmany()
                 if not fetched_results:
                     break
-                grasp_list.extend([character_result["CharacterCode"] 
+                grasp_list.extend([character_result["CharacterCode"]
                                    for character_result in fetched_results])
         except dbconnector.DatabaseError as db_error:
             self._log_error(db_error)

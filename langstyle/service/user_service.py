@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 class UserService:
 
@@ -21,8 +21,8 @@ class UserService:
     def grasp(self, user_id):
         return self._user_repository.grasp(user_id)
 
-    def count(self, user_id, character):
-        return self._user_repository.count(user_id, character)
+    def count(self, user_id, character_id):
+        return self._user_repository.count(user_id, character_id)
 
     def get_learning(self, user_id):
         return self._user_repository.get_learning(user_id)
