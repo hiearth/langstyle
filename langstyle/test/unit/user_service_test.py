@@ -2,7 +2,6 @@
 
 import unittest
 from langstyle.service import user_service
-#from langstyle.database import user_repository
 from ..mock import mock_user_repository
 
 class UserServiceTestCase(unittest.TestCase):
@@ -12,10 +11,6 @@ class UserServiceTestCase(unittest.TestCase):
         self._user_id = 1
         self._user_repository = mock_user_repository.MockUserRepository()
         self._user_service = user_service.UserService(self._user_repository)
-
-    def tearDown(self):
-        # clean data
-        pass
 
     def _get_random_character(self):
         raise NotImplementedError()
@@ -135,20 +130,3 @@ class CurrentCharacterTest(UserServiceTestCase):
         current_character = self._user_service.get_current_character(self._user_id)
         # assert current_character is None 
         self.fail("no assertion yet") 
-
-
-class VisualTest(UserServiceTestCase):
-
-    def _get_random_image(self):
-        raise NotImplementedError()
-    
-    def test_NonExist(self):
-        character_id = self._get_random_character()
-        image_id = self._get_random_image()
-        self._user_service.visual(character_id, image_id)
-        self.fail("no assertion yet") 
-
-
-class AuralTest(UserServiceTestCase):
-    pass
-    
