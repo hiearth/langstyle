@@ -40,6 +40,7 @@
     <Compile Include="langstyle\test\mock\mock_image_repository.py" />
     <Compile Include="langstyle\test\mock\mock_user_repository.py" />
     <Compile Include="langstyle\test\mock\__init__.py" />
+    <Compile Include="langstyle\test\test_helper.py" />
     <Compile Include="langstyle\test\unit\character_image_service_test.py" />
     <Compile Include="langstyle\test\unit\character_repository_test.py" />
     <Compile Include="langstyle\test\unit\character_service_test.py" />
