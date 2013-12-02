@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import unittest
 from . import config
@@ -14,7 +14,7 @@ def run():
     all_tests = _load_from_test_case()
     #all_tests = _load_all()
     test_suite.addTests(all_tests)
-    unittest.TextTestRunner().run(test_suite)
+    unittest.TextTestRunner().run(all_tests)
 
 def _load_all():
     test_loader = unittest.TestLoader()
@@ -22,7 +22,8 @@ def _load_all():
 
 def _load_from_test_case():
     test_loader = unittest.TestLoader()
-    return test_loader.loadTestsFromTestCase(test.unit.character_service_test.AddTest)
+    return test_loader.loadTestsFromModule(test.unit.character_service_test)
+    #return test_loader.loadTestsFromTestCase(test.unit.character_service_test.AddTest)
 
 if __name__ == '__main__':
     run()

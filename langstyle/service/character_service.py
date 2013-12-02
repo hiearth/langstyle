@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 from .. import config
 from .. import helper
@@ -10,7 +10,7 @@ class CharacterService:
 
     def add(self, word_character):
         character_id = self.get_id(word_character)
-        if character_id:
+        if character_id is not None:
             return character_id
         return self._user_repository.add(word_character)
 
@@ -19,7 +19,7 @@ class CharacterService:
 
     def exist(self, word_character):
         character_id = self.get_id(word_character)
-        return character_id > 0
+        return character_id is not None
 
     def get(self, character_id):
         return self._user_repository.get(character_id)

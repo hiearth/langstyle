@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 import itertools
 import random
 
@@ -39,3 +40,9 @@ def choice_character(characters):
 def A_to_Z_a_to_z():
     return [str(chr(char_int)) 
             for char_int in itertools.chain(range(65,91), range(97, 123))]
+
+def generate_int_exclude(exclude_ints = []):
+    random_int = random.randrange(0, sys.maxsize)
+    if random_int not in exclude_ints:
+        return random_int
+    return generate_int_exclude(exclude_ints)
