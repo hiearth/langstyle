@@ -46,3 +46,12 @@ def generate_int_exclude(exclude_ints = []):
     if random_int not in exclude_ints:
         return random_int
     return generate_int_exclude(exclude_ints)
+
+def generate_some_character_ids(count):
+    '''generate distinct character ids'''
+    if count< 0:
+        count = 0
+    ids =[]
+    for i in range(0, count):
+        ids.append(generate_int_exclude(ids))
+    return ids

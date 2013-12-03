@@ -14,8 +14,14 @@ create table UserProgress(
 	Grasp bit(1)
 );
 
-create table UserCurrentCharacter(
+create table UserGrasp(
 	UserId int,
 	CharacterId int,
-	BeginTime datetime
+	RepeatCount int
+);
+
+create table UserCharacterAudit(
+	UserId int,
+	CharacterId int,
+	AuditTime datetime
 );

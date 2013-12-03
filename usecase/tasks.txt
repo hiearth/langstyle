@@ -39,11 +39,14 @@
 	 if the user bind some image to this character,
 	 display the custom image(s) in high priority.
 
+6. record each character learning datetime for analysing learning habit and improve performance
 
-6. get sound for each character
+7. compute best in-learning count for each user according the user's learning history
 
-7. generate different sizes of photos automatically
+8. get sound for each character
 
-8. support taking photo from Phone and Pad
+9. generate different sizes of photos automatically
 
-9. support cache because wireless is very slow
+10. support taking photo from Phone and Pad
+
+11. support cache because wireless is very slow
