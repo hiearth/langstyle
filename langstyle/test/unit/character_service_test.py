@@ -24,7 +24,7 @@ class CharacterServiceTestCase(unittest.TestCase):
         return test_helper.generate_character_exclude(exist_characters)
 
     def _get_random_exist_character(self, exist_characters):
-        return test_helper.choice_character(exist_characters)
+        return test_helper.choice(exist_characters)
 
 
 class AddTest(CharacterServiceTestCase):

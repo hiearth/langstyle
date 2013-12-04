@@ -34,8 +34,8 @@ def generate_character_exclude(exclude_characters = []):
         return random_character
     return generate_character_exclude(exclude_characters)
 
-def choice_character(characters):
-    return random.choice(characters)
+def choice(seq):
+    return random.choice(seq)
 
 def A_to_Z_a_to_z():
     return [str(chr(char_int)) 

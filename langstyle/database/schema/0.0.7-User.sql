@@ -7,17 +7,19 @@ create table User(
 	UserPassword varchar(256)
 );
 
-create table UserProgress(
+create table UserLearning(
 	UserId int,
 	CharacterId int,
 	RepeatCount	int,
-	Grasp bit(1)
+	IsCurrent bit(1),
+	LastLearningTime datetime
 );
 
 create table UserGrasp(
 	UserId int,
 	CharacterId int,
-	RepeatCount int
+	RepeatCount int,
+	GraspTime datetime
 );
 
 create table UserCharacterAudit(

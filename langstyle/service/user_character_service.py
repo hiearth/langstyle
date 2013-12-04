@@ -18,7 +18,7 @@ class UserCharacterService:
                 return learning_list[current_character_index + 1]
         return next_character
 
-    def grasp(self, user_id):
+    def get_grasp(self, user_id):
         return self._user_character_repository.grasp(user_id)
 
     def count(self, user_id, character_id):
