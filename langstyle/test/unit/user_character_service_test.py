@@ -1,23 +1,23 @@
 #!/usr/bin/env python
 
 import unittest
-from langstyle.service import user_service
+from langstyle.service import user_character_service
 from .. import test_helper
-from ..mock import mock_user_repository
+from ..mock import mock_user_character_repository
 
-class UserServiceTestCase(unittest.TestCase):
+class UserCharacterServiceTestCase(unittest.TestCase):
 
     def setUp(self):
         # get a mock user
         self._user_id = 1
-        self._user_repository = mock_user_repository.MockUserRepository()
-        self._user_service = user_service.UserService(self._user_repository)
+        self._user_character_repository = mock_user_character_repository.MockUserCharacterRepository()
+        self._user_service = user_character_service.UserCharacterService(self._user_character_repository)
 
     def _get_random_character(self):
         raise NotImplementedError()
 
 
-class GraspTest(UserServiceTestCase):
+class GraspTest(UserCharacterServiceTestCase):
 
     def setUp(self):
         super().setUp()
@@ -31,7 +31,7 @@ class GraspTest(UserServiceTestCase):
         character_count = 10
         self._character_ids = test_helper.generate_some_character_ids(character_count)
         for character_id in self._character_ids:
-            self._user_repository.mark_grasp(self._user_id, character_id)
+            self._user_character_repository.mark_grasp(self._user_id, character_id)
 
     def test_StartButNotComplete(self):
         self._add_some_grasp_character()
@@ -39,7 +39,7 @@ class GraspTest(UserServiceTestCase):
         self.assertCountEqual(grasp_character_ids, self._character_ids, "grasp return wrong list")
 
 
-class CharacterLearningTest(UserServiceTestCase):
+class CharacterLearningTest(UserCharacterServiceTestCase):
 
     def setUp(self):
         super().setUp()
@@ -56,7 +56,7 @@ class CharacterLearningTest(UserServiceTestCase):
         character_count = 10
         self._character_ids = test_helper.generate_some_character_ids(character_count)
         for character_id in self._character_ids:
-            self._user_repository.begin_learn(self._user_id, character_id)
+            self.__user_character_repository.begin_learn(self._user_id, character_id)
 
     def test_StartButNotComplete(self):
         self._add_some_learning_character()
@@ -64,7 +64,7 @@ class CharacterLearningTest(UserServiceTestCase):
         self.assertCountEqual(learning_character_ids, self._character_ids, "get learning return wrong list")
 
 
-class NextTest(UserServiceTestCase):
+class NextTest(UserCharacterServiceTestCase):
     
     def test_FirstTime(self):
         # make the user has no learning record
@@ -86,7 +86,7 @@ class NextTest(UserServiceTestCase):
 
 
 
-class CharacterCountTest(UserServiceTestCase):
+class CharacterCountTest(UserCharacterServiceTestCase):
 
     def _get_learning_character(self):
         raise NotImplementedError()
@@ -116,7 +116,7 @@ class CharacterCountTest(UserServiceTestCase):
 
 
 
-class CurrentCharacterTest(UserServiceTestCase):
+class CurrentCharacterTest(UserCharacterServiceTestCase):
 
     def test_FirstTime_ReturnNone(self):
         # make the user has no learning record

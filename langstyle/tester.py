@@ -5,7 +5,7 @@ from . import config
 from . import test
 from .test import unit
 from .test.unit import character_service_test
-from .test.unit import user_service_test
+from .test.unit import user_character_service_test
 
 def run():
     """discover all unit tests, and run"""
@@ -23,8 +23,10 @@ def _load_all():
 
 def _load_from_test_case():
     test_loader = unittest.TestLoader()
-    #return test_loader.loadTestsFromModule(test.unit.user_service_test)
-    return test_loader.loadTestsFromTestCase(test.unit.user_service_test.CharacterLearningTest)
+    #test_case_module = test.unit.user_character_service_test
+    #return test_loader.loadTestsFromModule(test_case_module)
+    test_case_class = test.unit.user_character_service_test.CharacterLearningTest
+    return test_loader.loadTestsFromTestCase(test_case_class)
 
 if __name__ == '__main__':
     run()

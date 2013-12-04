@@ -3,7 +3,7 @@
 from mysql import connector as dbconnector
 from .. import config
 
-class UserRepository:
+class UserCharacterRepository:
 
     def __init__(self):
         pass

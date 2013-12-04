@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import os
 from . import database
@@ -8,17 +8,17 @@ class _RepositoryFactory:
     
     def __init__(self):
         self._character_repository = None
-        self._user_repository = None
+        self._user_character_repository = None
        
     def get_character_repository(self):
         if not self._character_repository:
             self._character_repository = database.character_repository.CharacterRepository()
         return self._character_repository
 
-    def get_user_repository(self):
-        if not self._user_repository:
-            self._user_repository = database.user_repository.UserRepository()
-        return self._user_repository
+    def get_user_character_repository(self):
+        if not self._user_character_repository:
+            self._user_character_repository = database.user_character_repository.UserCharacterRepository()
+        return self._user_character_repository
 
 
 class _ServiceFactory:
@@ -35,12 +35,14 @@ class _ServiceFactory:
 
     def get_character_service(self):
         if not self._character_service:
-            self._character_service = service.character_service.CharacterService(repository_factory.get_character_repository())
+            repository = repository_factory.get_character_repository()
+            self._character_service = service.character_service.CharacterService(repository)
         return self._character_service
 
-    def get_user_service(self):
+    def get_user_character_service(self):
         if not self._user_service:
-            self._user_service = service.user_service.UserService(repository_factory.get_user_repository())
+            repository = repository_factory.get_user_character_repository()
+            self._user_service = service.user_service.UserService(repository)
         return self._user_service
 
 

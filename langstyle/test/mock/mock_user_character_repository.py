@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-class MockUserRepository:
+class MockUserCharacterRepository:
 
     def __init__(self):
         self._user_grasp = {}

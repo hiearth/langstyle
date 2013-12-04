@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>run_test.py</StartupFile>
+    <StartupFile>run_server.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,7 +25,7 @@
     <Compile Include="langstyle\config.py" />
     <Compile Include="langstyle\database\character_repository.py" />
     <Compile Include="langstyle\database\repository_context.py" />
-    <Compile Include="langstyle\database\user_repository.py" />
+    <Compile Include="langstyle\database\user_character_repository.py" />
     <Compile Include="langstyle\database\__init__.py" />
     <Compile Include="langstyle\helper.py" />
     <Compile Include="langstyle\service\character_image_service.py" />
@@ -33,19 +33,19 @@
     <Compile Include="langstyle\service\image_service.py" />
     <Compile Include="langstyle\service\log_service.py" />
     <Compile Include="langstyle\service\service_context.py" />
-    <Compile Include="langstyle\service\user_service.py" />
+    <Compile Include="langstyle\service\user_character_service.py" />
     <Compile Include="langstyle\service\__init__.py" />
     <Compile Include="langstyle\tester.py" />
     <Compile Include="langstyle\test\mock\mock_character_repository.py" />
     <Compile Include="langstyle\test\mock\mock_image_repository.py" />
-    <Compile Include="langstyle\test\mock\mock_user_repository.py" />
+    <Compile Include="langstyle\test\mock\mock_user_character_repository.py" />
     <Compile Include="langstyle\test\mock\__init__.py" />
     <Compile Include="langstyle\test\test_helper.py" />
     <Compile Include="langstyle\test\unit\character_image_service_test.py" />
     <Compile Include="langstyle\test\unit\character_repository_test.py" />
     <Compile Include="langstyle\test\unit\character_service_test.py" />
     <Compile Include="langstyle\test\unit\image_service_test.py" />
-    <Compile Include="langstyle\test\unit\user_service_test.py" />
+    <Compile Include="langstyle\test\unit\user_character_service_test.py" />
     <Compile Include="langstyle\test\unit\__init__.py" />
     <Compile Include="langstyle\test\__init__.py" />
     <Compile Include="langstyle\webservice\character_for_test.py" />
