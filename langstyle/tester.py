@@ -25,8 +25,9 @@ def _load_from_test_case():
     test_loader = unittest.TestLoader()
     #test_case_module = test.unit.user_character_service_test
     #return test_loader.loadTestsFromModule(test_case_module)
-    test_case_class = test.unit.user_character_service_test.CurrentCharacterTest
+    #test_case_class = test.unit.user_character_service_test.CurrentCharacterTest
     #test_case_class = test.unit.user_character_service_test.GetLearningTest
+    test_case_class = test.unit.user_character_service_test.NextTest
     return test_loader.loadTestsFromTestCase(test_case_class)
 
 if __name__ == '__main__':

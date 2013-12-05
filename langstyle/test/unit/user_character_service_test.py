@@ -77,22 +77,20 @@ class CurrentCharacterTest(UserCharacterServiceTestCase):
 class NextTest(UserCharacterServiceTestCase):
     
     def test_FirstTime(self):
-        # make the user has no learning record
-        next_character = self._user_character_service.next(self._user_id)
-        # assert next_character 
-        self.fail("no assertion yet")
+        next_character_id = self._user_character_service.next(self._user_id)
+        self.assertIsNone(next_character_id)
 
-    def test_StartButNotComplete(self):
-        # make the user has some learning records
-        next_character = self._user_character_service.next(self._user_id)
-        # assert next_character 
-        self.fail("no assertion yet")
+    def test_StartButNoCurrentCharacter(self):
+        self._add_some_learning_character()
+        next_character_id = self._user_character_service.next(self._user_id)
+        self.assertIn(next_character_id, self._learning_character_ids)
 
-    def test_Complete_ReturnNone(self):
-        # make user has full learning records
-        next_character = self._user_character_service.next(self._user_id)
-        # assert next_character 
-        self.fail("no assertion yet")
+    def test_StartAndHasCurrentCharacter(self):
+        self._add_some_learning_character()
+        some_character_id = test_helper.choice(self._learning_character_ids)
+        self._user_character_repository.set_current_character(self._user_id, some_character_id)
+        next_character_id = self._user_character_service.next(self._user_id)
+        self.assertEqual(some_character_id, next_character_id)
 
 
 
