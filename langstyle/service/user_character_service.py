@@ -19,18 +19,13 @@ class UserCharacterService:
     def _get_next_from_list(self, learning_ids):
         if learning_ids:
             return random.choice(learning_ids)
-            #current_character_index = helper.try_index(learning_ids, current_character_id)
-            #if current_character_index is not None:
-            #    return learning_ids[(current_character_index + 1) % len(learning_ids)]
-            #else:
-            #    return random.choice(learning_ids)
         return None
 
     def get_grasp(self, user_id):
-        return self._user_character_repository.grasp(user_id)
+        return self._user_character_repository.get_grasp(user_id)
 
-    def count(self, user_id, character_id):
-        return self._user_character_repository.count(user_id, character_id)
+    def get_count(self, user_id, character_id):
+        return self._user_character_repository.get_count(user_id, character_id)
 
     def get_learning(self, user_id):
         '''get recent learning character id list'''

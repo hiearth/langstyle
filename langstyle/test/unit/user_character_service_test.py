@@ -12,12 +12,12 @@ class UserCharacterServiceTestCase(unittest.TestCase):
         self._user_id = 1
         self._user_character_repository = mock_user_character_repository.MockUserCharacterRepository()
         self._user_character_service = user_character_service.UserCharacterService(self._user_character_repository)
-        self._learning_character_ids = []
+        self._character_ids = []
 
     def _add_some_learning_character(self):
         character_count = 10
-        self._learning_character_ids = test_helper.generate_some_character_ids(character_count)
-        for character_id in self._learning_character_ids:
+        self._character_ids = test_helper.generate_some_character_ids(character_count)
+        for character_id in self._character_ids:
             self._user_character_repository.begin_learn(self._user_id, character_id)
 
     def _get_random_character(self):
@@ -26,24 +26,19 @@ class UserCharacterServiceTestCase(unittest.TestCase):
 
 class GetGraspTest(UserCharacterServiceTestCase):
 
-    def setUp(self):
-        super().setUp()
-        self._character_ids = []
-
     def test_FirstTime_ReturnEmpty(self):
         grasp_character_ids = self._user_character_service.get_grasp(self._user_id)
-        self.assertCountEqual(grasp_character_ids, [], "Should not grasp any character")
+        self.assertCountEqual(grasp_character_ids, [])
 
-    def _add_some_grasp_character(self):
-        character_count = 10
-        self._character_ids = test_helper.generate_some_character_ids(character_count)
+    def _set_some_grasp_character(self):
+        self._add_some_learning_character()
         for character_id in self._character_ids:
             self._user_character_repository.mark_grasp(self._user_id, character_id)
 
     def test_StartButNotComplete(self):
-        self._add_some_grasp_character()
+        self._set_some_grasp_character()
         grasp_character_ids = self._user_character_service.get_grasp(self._user_id)
-        self.assertCountEqual(grasp_character_ids, self._character_ids, "grasp return wrong list")
+        self.assertCountEqual(grasp_character_ids, self._character_ids)
 
 
 class GetLearningTest(UserCharacterServiceTestCase):
@@ -55,11 +50,11 @@ class GetLearningTest(UserCharacterServiceTestCase):
     def test_StartButNotComplete(self):
         self._add_some_learning_character()
         learning_character_ids = self._user_character_service.get_learning(self._user_id)
-        self.assertCountEqual(learning_character_ids, self._learning_character_ids, "get learning return wrong list")
+        self.assertCountEqual(learning_character_ids, self._character_ids)
 
 
 
-class CurrentCharacterTest(UserCharacterServiceTestCase):
+class GetCurrentTest(UserCharacterServiceTestCase):
 
     def test_FirstTime_ReturnNone(self):
         current_character_id = self._user_character_service.get_current_character(self._user_id)
@@ -67,7 +62,7 @@ class CurrentCharacterTest(UserCharacterServiceTestCase):
 
     def test_StartButNotComplete(self):
         self._add_some_learning_character()
-        character_id = test_helper.choice(self._learning_character_ids)
+        character_id = test_helper.choice(self._character_ids)
         self._user_character_repository.set_current_character(self._user_id, character_id)
         current_character_id = self._user_character_service.get_current_character(self._user_id)
         self.assertEqual(character_id, current_character_id)
@@ -83,40 +78,31 @@ class NextTest(UserCharacterServiceTestCase):
     def test_StartButNoCurrentCharacter(self):
         self._add_some_learning_character()
         next_character_id = self._user_character_service.next(self._user_id)
-        self.assertIn(next_character_id, self._learning_character_ids)
+        self.assertIn(next_character_id, self._character_ids)
 
     def test_StartAndHasCurrentCharacter(self):
         self._add_some_learning_character()
-        some_character_id = test_helper.choice(self._learning_character_ids)
+        some_character_id = test_helper.choice(self._character_ids)
         self._user_character_repository.set_current_character(self._user_id, some_character_id)
         next_character_id = self._user_character_service.next(self._user_id)
         self.assertEqual(some_character_id, next_character_id)
 
 
 
-class CharacterCountTest(UserCharacterServiceTestCase):
+class GetCountTest(UserCharacterServiceTestCase):
 
     def _get_learning_character(self):
         raise NotImplementedError()
 
     def test_FirstTime_ReturnZero(self):
-        # make the user has no learning record
-        character_id = self._get_random_character()
-        character_count = self._user_character_service.count(self._user_id, character_id)
-        # assert character_count equal 0
-        self.fail("no assertion yet")
+        self._add_some_learning_character()
+        some_character_id = test_helper.choice(self._character_ids)
+        character_count = self._user_character_service.get_count(self._user_id, some_character_id)
+        self.assertEqual(character_count, 0)
 
-    def test_IsLearning_GreaterThanOne(self):
-        # make the user has some learning records
-        character_id = self._get_learning_character()
-        character_count = self._user_character_service.count(self._user_id, character_id)
-        # assert character_count > 1
-        self.fail("no assertion yet")
-
-    def test_Complete_GreaterThanOne(self):
-        # make user has full learning records
-        character_id = self._get_random_character()
-        character_count = self._user_character_service.count(self._user_id, character_id)
-        # assert character_count > 1
-        self.fail("no assertion yet")
-
+    def test_IsLearning_GreaterThanZero(self):
+        self._add_some_learning_character()
+        some_character_id = test_helper.choice(self._character_ids)
+        self._user_character_repository.add_count(self._user_id, some_character_id)
+        character_count = self._user_character_service.get_count(self._user_id, some_character_id)
+        self.assertEqual(character_count, 1)
