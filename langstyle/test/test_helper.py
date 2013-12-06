@@ -42,7 +42,7 @@ def A_to_Z_a_to_z():
             for char_int in itertools.chain(range(65,91), range(97, 123))]
 
 def generate_int_exclude(exclude_ints = []):
-    random_int = random.randrange(0, sys.maxsize)
+    random_int = random.randrange(0, 1000000000)
     if random_int not in exclude_ints:
         return random_int
     return generate_int_exclude(exclude_ints)

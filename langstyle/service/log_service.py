@@ -12,7 +12,10 @@ class LogService:
         pass
 
     def error(self, msg):
-        pass
+        self._print("ERROR", msg)
 
     def fatal(self, msg):
         pass
+
+    def _print(self, log_level, msg):
+        print(log_level + ": " + msg)

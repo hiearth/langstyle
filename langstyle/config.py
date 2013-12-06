@@ -3,6 +3,7 @@
 import os
 from . import database
 from . import service
+from .service import log_service
 
 class _RepositoryFactory:
     

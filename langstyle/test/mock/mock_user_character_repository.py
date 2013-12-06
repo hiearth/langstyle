@@ -69,7 +69,7 @@ class MockUserCharacterRepository:
             else:
                 item.is_current = False
 
-    def add_count(self, user_id, character_id):
+    def increase_count(self, user_id, character_id):
         if not self._is_in_progress_list(user_id, character_id):
             raise Exception("character_id not in progress list")
         progress_character = self._get_character_by_id(user_id, character_id)

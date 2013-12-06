@@ -1,18 +1,9 @@
 #!/usr/bin/env python
 
 from mysql import connector as dbconnector
-from .. import config
+from . import base_repository
 
-class UserCharacterRepository:
-
-    def __init__(self):
-        pass
-
-    def _create_connection(self):
-        return dbconnector.connect(**config.database_connection)
-
-    def _log_error(self, error):
-        config.service_factory.get_log_service().error(error.msg)
+class UserCharacterRepository(base_repository.BaseRepository):
 
     def grasp(self, user_id):
         grasp_list= []

@@ -9,5 +9,5 @@ begin
 	from WordCharacter as c
 	join UserProgress as u
 	on c.CharacterId = u.CharacterId
-	where u.UserId = userId;
+	where u.UserId = userId and GraspTime = null;
 end //

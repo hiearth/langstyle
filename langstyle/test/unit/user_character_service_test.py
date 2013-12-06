@@ -103,6 +103,6 @@ class GetCountTest(UserCharacterServiceTestCase):
     def test_IsLearning_GreaterThanZero(self):
         self._add_some_learning_character()
         some_character_id = test_helper.choice(self._character_ids)
-        self._user_character_repository.add_count(self._user_id, some_character_id)
+        self._user_character_repository.increase_count(self._user_id, some_character_id)
         character_count = self._user_character_service.get_count(self._user_id, some_character_id)
         self.assertEqual(character_count, 1)
