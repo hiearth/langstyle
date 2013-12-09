@@ -19,7 +19,7 @@ class MockUserCharacterRepository:
 
     def get_learning(self, user_id):
         progress_characters = self._user_progress.get(user_id,[])
-        return [item.character_id for item in progress_characters 
+        return [item.character_id for item in progress_characters
                 if item.grasp_time is None]
 
     def get_current_character(self, user_id):

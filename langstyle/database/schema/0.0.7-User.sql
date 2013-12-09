@@ -10,7 +10,7 @@ create table User(
 create table UserProgress(
 	UserId int,
 	CharacterId int,
-	RepeatCount	int,
+	RepeatCount int,
 	IsCurrent bit(1),
 	LastLearningTime datetime,
 	GraspTime datetime

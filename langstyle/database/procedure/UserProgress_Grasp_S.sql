@@ -5,9 +5,7 @@ drop procedure if exists UserProgress_Grasp_S;
 delimiter //
 create procedure UserProgress_Grasp_S(in userId int)
 begin
-	select c.CharacterCode 
-	from WordCharacter as c
-	join UserProgress as u
-	on c.CharacterId = u.CharacterId
-	where u.UserId = userId and GraspTime != null;
+	select CharacterId, RepeatCount, LastLearningTime, GraspTime
+	from UserProgress as u
+	where u.UserId = userId and GraspTime is not null;
 end //
