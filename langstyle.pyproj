@@ -84,6 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="langstyle\database\procedure\UserProgress_Count_S.sql" />
+    <Content Include="langstyle\database\procedure\UserProgress_Count_U.sql" />
+    <Content Include="langstyle\database\procedure\UserProgress_Current_S.sql" />
+    <Content Include="langstyle\database\procedure\UserProgress_Current_U.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Grasp_S.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Grasp_U.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_I.sql" />

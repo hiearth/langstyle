@@ -26,11 +26,11 @@ def _load_from_test_case():
     #test_case_module = test.unit.user_character_service_test
     #test_case_module = test.unit.character_service_test
     #return test_loader.loadTestsFromModule(test_case_module)
-    #test_case_class = test.unit.user_character_service_test.CurrentCharacterTest
+    #test_case_class = test.unit.user_character_service_test.GetCurrentTest
     #test_case_class = test.unit.user_character_service_test.GetLearningTest
     #test_case_class = test.unit.user_character_service_test.NextTest
-    #test_case_class = test.unit.user_character_service_test.GetCountTest
-    test_case_class = test.unit.user_character_service_test.GetGraspTest
+    test_case_class = test.unit.user_character_service_test.GetCountTest
+    #test_case_class = test.unit.user_character_service_test.GetGraspTest
     #test_case_class = test.unit.character_service_test.AddTest
     #test_case_class = test.unit.character_service_test.GetIdTest
     #test_case_class = test.unit.character_service_test.GetTest

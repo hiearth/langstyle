@@ -3,11 +3,9 @@ use langstyle;
 drop procedure if exists UserProgress_Learning_S;
 
 delimiter //
-create procedure UserProgress_Learning_S(in userId int)
+create procedure UserProgress_Learning_S(in p_userId int)
 begin
-	select c.CharacterId, c.CharacterCode
-	from WordCharacter as c
-	join UserProgress as u
-	on c.CharacterId = u.CharacterId
-	where u.UserId = userId and GraspTime is null;
+	select CharacterId, RepeatCount, LastLearningTime
+	from UserProgress
+	where UserId = p_userId and GraspTime is null;
 end //
