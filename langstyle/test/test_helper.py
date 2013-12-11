@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import sys
 import itertools
 import random
@@ -8,9 +9,9 @@ def generate_character(prefixes=[], rests=[], length=None):
     if length == 0:
         return ""
     if not prefixes:
-        prefixes = A_to_Z_a_to_z()
+        prefixes = _A_to_Z_a_to_z()
     if not rests:
-        rests = A_to_Z_a_to_z()
+        rests = _A_to_Z_a_to_z()
     if length is None or length < 0:
         length = random.randrange(1, 50)
     random_character = []
@@ -37,9 +38,12 @@ def generate_character_exclude(exclude_characters = []):
 def choice(seq):
     return random.choice(seq)
 
-def A_to_Z_a_to_z():
+def _A_to_Z_a_to_z():
     return [str(chr(char_int)) 
             for char_int in itertools.chain(range(65,91), range(97, 123))]
+
+def _0_to_9():
+    return [str(num) for num in range(0, 10)]
 
 def generate_int_exclude(exclude_ints = []):
     random_int = random.randrange(0, 1000000000)
@@ -55,3 +59,21 @@ def generate_some_character_ids(count):
     for i in range(0, count):
         ids.append(generate_int_exclude(ids))
     return ids
+
+def generate_mock_image():
+    image_data = []
+    image_data_src = [os.linesep]
+    image_data_src.extend(_A_to_Z_a_to_z())
+    image_data_src.extend(_0_to_9())
+    length = random.randrange(100, 10000)
+    for i in range(0, length):
+        image_data.append(random.choice(image_data_src))
+    return "".join(image_data)
+
+def generate_mock_images(count):
+    images = []
+    if count is None or count <= 0:
+        count = 0
+    for i in range(0, count):
+        images.append(generate_mock_image())
+    return images

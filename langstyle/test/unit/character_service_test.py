@@ -61,9 +61,9 @@ class GetTest(CharacterServiceTestCase):
 
     def test_CharacterIdExist(self):
         word_character = self._get_random_new_character(self._added_characters)
-        character_id = self._character_service.add(word_character)
+        character_id = self._character_repository.add(word_character)
         got_character = self._character_service.get(character_id)
-        self.assertEqual(word_character, got_character, "get wrong character by id")
+        self.assertEqual(word_character, got_character)
 
     def test_CharacterIdNotExist(self):
         exist_ids = [self._character_service.get_id(word_character)

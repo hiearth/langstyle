@@ -4,15 +4,15 @@ import unittest
 from langstyle.service import user_character_service
 from .. import test_helper
 from ..mock import mock_user_character_repository
-from langstyle.database import user_character_repository
+#from langstyle.database import user_character_repository
 
 class UserCharacterServiceTestCase(unittest.TestCase):
 
     def setUp(self):
         # get a mock user
         self._user_id = 1
-        #self._user_character_repository = mock_user_character_repository.MockUserCharacterRepository()
-        self._user_character_repository = user_character_repository.UserCharacterRepository()
+        self._user_character_repository = mock_user_character_repository.MockUserCharacterRepository()
+        #self._user_character_repository = user_character_repository.UserCharacterRepository()
         self._user_character_service = user_character_service.UserCharacterService(self._user_character_repository)
         self._character_ids = []
 

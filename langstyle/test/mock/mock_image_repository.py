@@ -1,4 +1,7 @@
 #!/usr/bin/env python
 
 class MockImageRepository:
-    pass
+
+    def add(self, image_data):
+        pass
+        #raise NotImplementedError()

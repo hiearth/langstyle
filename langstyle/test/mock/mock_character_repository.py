@@ -10,7 +10,9 @@ class MockCharacterRepository:
         return len(self._characters) - 1
 
     def get(self, character_id):
-        if character_id >=0 and character_id < len(self._characters):
+        if (character_id is not None 
+            and character_id >=0 
+            and character_id < len(self._characters)):
             return self._characters[character_id]
         return None
 
