@@ -65,7 +65,7 @@ def generate_mock_image():
     image_data_src = [os.linesep]
     image_data_src.extend(_A_to_Z_a_to_z())
     image_data_src.extend(_0_to_9())
-    length = random.randrange(100, 10000)
+    length = random.randrange(100, 1000)
     for i in range(0, length):
         image_data.append(random.choice(image_data_src))
     return "".join(image_data)
@@ -77,3 +77,9 @@ def generate_mock_images(count):
     for i in range(0, count):
         images.append(generate_mock_image())
     return images
+
+def generate_mock_image_exclude(exclude_images=[]):
+    random_image = generate_mock_image()
+    if random_image not in exclude_images:
+        return random_image
+    return generate_mock_image_exclude(exclude_images)

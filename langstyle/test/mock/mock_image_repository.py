@@ -2,6 +2,11 @@
 
 class MockImageRepository:
 
+    def __init__(self):
+        self._image_ids = []
+
     def add(self, image_data):
         pass
-        #raise NotImplementedError()
+
+    def get(self, image_id):
+        pass
