@@ -2,6 +2,7 @@
 
 from mysql import connector as dbconnector
 from . import base_repository
+from .. import helper
 
 class CharacterRepository(base_repository.BaseRepository):
 
@@ -15,4 +16,5 @@ class CharacterRepository(base_repository.BaseRepository):
         return self._call_proc_query_one("WordCharacter_S_By_Id", [character_id])
 
     def get_id(self, word_character):
-        return self._call_proc_query_one("WordCharacter_S_By_Code", [word_character])
+        similar_characters = self._call_proc_query_all("WordCharacter_S_By_Code", [word_character])
+        return helper.find_first(similar_characters, (lambda character: character[1] == word_character))

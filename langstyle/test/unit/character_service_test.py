@@ -3,15 +3,15 @@
 import unittest
 from langstyle.service import character_service
 from ..mock import mock_character_repository
-#from langstyle.database import character_repository
+from langstyle.database import character_repository
 from .. import test_helper
 
 class CharacterServiceTestCase(unittest.TestCase):
 
     def setUp(self):
         self._user_id = 1
-        self._character_repository = mock_character_repository.MockCharacterRepository()
-        #self._character_repository = character_repository.CharacterRepository()
+        #self._character_repository = mock_character_repository.MockCharacterRepository()
+        self._character_repository = character_repository.CharacterRepository()
         self._character_service = character_service.CharacterService(self._character_repository)
         self._added_characters = []
         self._add_some_characters()
@@ -49,12 +49,12 @@ class GetIdTest(CharacterServiceTestCase):
     def test_CharacterExist(self):
         word_character = self._get_random_exist_character(self._added_characters)
         character_id = self._character_service.get_id(word_character)
-        self.assertIsNotNone(character_id, "does not find exist character")
+        self.assertIsNotNone(character_id)
 
     def test_CharacterNotExist(self):
         word_character = self._get_random_new_character(self._added_characters)
         character_id = self._character_service.get_id(word_character)
-        self.assertIsNone(character_id, "find non exist character")
+        self.assertIsNone(character_id)
 
 
 class GetTest(CharacterServiceTestCase):
