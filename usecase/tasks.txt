@@ -23,7 +23,11 @@
 
 3. write unit test
 
-4. support hundreds of thousands of users
+4. compute md5 of image/sound file, then store the md5 in database
+   file data is stored in file system, if md5 is j4k0k306jw99j6h0jhhm2nb46bvuyo5qe, 
+   the file path is root_dir/j4/k0/j4k0k306jw99j6h0jhhm2nb46bvuyo5qe
+
+5. support hundreds of thousands of users
 	how to pass user info to service, to database
 	parameter? 
 	context? 
@@ -33,20 +37,20 @@
 	constructor?
 	setter?
 
-5. when user view one character, 
+6. when user view one character, 
      if the user does not bind image to this character,
 	 display the default image(s).
 	 if the user bind some image to this character,
 	 display the custom image(s) in high priority.
 
-6. record each character learning datetime for analysing learning habit and improve performance
+7. record each character learning datetime for analysing learning habit and improve performance
 
-7. compute best in-learning count for each user according the user's learning history
+8. compute best in-learning count for each user according the user's learning history
 
-8. get sound for each character
+9. get sound for each character
 
-9. generate different sizes of photos automatically
+10. generate different sizes of photos automatically
 
-10. support taking photo from Phone and Pad
+11. support taking photo from Phone and Pad
 
-11. support cache because wireless is very slow
+12. support cache because wireless is very slow

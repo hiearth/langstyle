@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>run_test.py</StartupFile>
+    <StartupFile>md5_test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -31,6 +31,7 @@
     <Compile Include="langstyle\helper.py" />
     <Compile Include="langstyle\service\character_image_service.py" />
     <Compile Include="langstyle\service\character_service.py" />
+    <Compile Include="langstyle\service\file_service.py" />
     <Compile Include="langstyle\service\image_service.py" />
     <Compile Include="langstyle\service\log_service.py" />
     <Compile Include="langstyle\service\service_context.py" />
@@ -62,6 +63,7 @@
     <Compile Include="langstyle\webservice\web.py" />
     <Compile Include="langstyle\webservice\__init__.py" />
     <Compile Include="langstyle\__init__.py" />
+    <Compile Include="md5_test.py" />
     <Compile Include="run_server.py" />
     <Compile Include="run_test.py" />
   </ItemGroup>

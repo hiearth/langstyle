@@ -4,6 +4,7 @@ import os
 from . import database
 from . import service
 from .service import log_service
+from .service import file_service
 
 class _RepositoryFactory:
     
@@ -28,6 +29,7 @@ class _ServiceFactory:
         self._character_service = None
         self._user_service = None
         self._log_service = None
+        self._image_file_service=None
 
     def get_log_service(self):
         if not self._log_service:
@@ -46,12 +48,24 @@ class _ServiceFactory:
             self._user_service = service.user_service.UserService(repository)
         return self._user_service
 
+    def get_image_file_service(self):
+        if not self._image_file_service:
+            self._image_file_service = service.file_service.FileService(IMAGE_DATA_DIRECTORY)
+        return self._image_file_service
+
+    #def get_file_service(self):
+    #    if not self._file_service:
+    #        self._file_service = service.file_service.FileService()
+    #    return self._file_service
+
 
 repository_factory = _RepositoryFactory()
 service_factory = _ServiceFactory()
 
 ROOT_DIRECTORY = os.path.dirname(__file__)
 DATA_DIRECTORY = os.path.abspath(os.path.join(ROOT_DIRECTORY,"..","data"))
+IMAGE_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "image")
+SOUND_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "sound")
 MAX_IN_LEARNING_COUNT = 50 # need to customize to fit each user
 
 database_connection = {"user": "hiearth", 
