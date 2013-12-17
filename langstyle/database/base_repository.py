@@ -55,7 +55,7 @@ class BaseRepository:
         for result in cursor.stored_results():
             first_result = result.fetchone()
             if first_result:
-                return first_result[0]
+                return first_result
         return None
 
     def _fetch_all(self, cursor):

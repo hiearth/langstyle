@@ -1,22 +1,31 @@
 #!/usr/bin/env python
 
 from .. import config
+from .. import helper
 
 class ImageService:
     '''image service for public'''
 
-    def __init__(self, image_repository):
+    def __init__(self, image_repository, image_file_service):
         self._image_repository = image_repository
-        self._image_file_service = config.service_factory.get_image_file_service()
+        self._image_file_service = image_file_service
 
     def get(self, image_id):
         image_item = self._image_repository.get(image_id)
         if image_item:
-            return self._image_file_service.read(image_item.path)
+            return self._image_file_service.read(image_item.md5)
         return None
 
-    def add(self, image_data):
+    def add(self, image_data, user_provider_id):
         # 1. file service to save the image data in the file system
-        # 2. image repository store summary image info, such as id, imagePath, providerUserId, md5(maybe) and so on
+        # 2. image repository store summary image info, such as id, providerUserId, md5 and so on
         # 3. if image repository add action fail, file service can rollback to delete the saved image file
-        return self._image_repository.add(image_data)
+        image_md5 = helper.md5_hash_str(image_data)
+        image_path = helper.generate_path_from_md5(image_md5)
+        try:
+            self._image_file_service.write(image_path, image_data)
+            image_id = self._image_repository.add(image_md5, user_provider_id)
+            return image_id
+        except Exception as e:
+            config.service_factory.get_log_service().error(e.args[0])
+        return None

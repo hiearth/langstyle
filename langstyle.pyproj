@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>md5_test.py</StartupFile>
+    <StartupFile>run_test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,7 @@
     <Compile Include="langstyle\config.py" />
     <Compile Include="langstyle\database\base_repository.py" />
     <Compile Include="langstyle\database\character_repository.py" />
+    <Compile Include="langstyle\database\image_repository.py" />
     <Compile Include="langstyle\database\repository_context.py" />
     <Compile Include="langstyle\database\user_character_repository.py" />
     <Compile Include="langstyle\database\__init__.py" />
@@ -39,6 +40,7 @@
     <Compile Include="langstyle\service\__init__.py" />
     <Compile Include="langstyle\tester.py" />
     <Compile Include="langstyle\test\mock\mock_character_repository.py" />
+    <Compile Include="langstyle\test\mock\mock_file_service.py" />
     <Compile Include="langstyle\test\mock\mock_image_repository.py" />
     <Compile Include="langstyle\test\mock\mock_user_character_repository.py" />
     <Compile Include="langstyle\test\mock\__init__.py" />
@@ -63,7 +65,6 @@
     <Compile Include="langstyle\webservice\web.py" />
     <Compile Include="langstyle\webservice\__init__.py" />
     <Compile Include="langstyle\__init__.py" />
-    <Compile Include="md5_test.py" />
     <Compile Include="run_server.py" />
     <Compile Include="run_test.py" />
   </ItemGroup>
@@ -96,6 +97,8 @@
     <Content Include="langstyle\database\procedure\WordCharacter_I.sql" />
     <Content Include="langstyle\database\procedure\WordCharacter_S_By_Code.sql" />
     <Content Include="langstyle\database\procedure\WordCharacter_S_By_Id.sql" />
+    <Content Include="langstyle\database\procedure\WordImage_I.sql" />
+    <Content Include="langstyle\database\procedure\WordImage_S_By_Id.sql" />
     <Content Include="langstyle\database\schema\0.0.1-Langstyle.sql" />
     <Content Include="langstyle\database\schema\0.0.4-SchemaChange.sql" />
     <Content Include="langstyle\database\schema\0.0.3-Character.sql" />

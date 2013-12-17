@@ -36,6 +36,8 @@ def _load_from_test_case():
     #test_case_class = test.unit.character_service_test.AddTest
     #test_case_class = test.unit.character_service_test.GetIdTest
     #test_case_class = test.unit.character_service_test.GetTest
+    #test_case_class = test.unit.image_service_test.AddTest
+    #test_case_class = test.unit.image_service_test.GetTest
     #return test_loader.loadTestsFromTestCase(test_case_class)
 
 if __name__ == '__main__':
