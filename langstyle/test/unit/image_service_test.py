@@ -21,7 +21,7 @@ class ImageServiceTestCase(unittest.TestCase):
 
     def _add_some_images(self):
         image_count = 10
-        images_data = test_helper.generate_mock_images(image_count)
+        images_data = test_helper.generate_some_mock_images(image_count)
         for image_data in images_data:
             self._add_image(image_data)
 

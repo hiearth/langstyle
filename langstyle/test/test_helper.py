@@ -51,8 +51,8 @@ def generate_int_exclude(exclude_ints = []):
         return random_int
     return generate_int_exclude(exclude_ints)
 
-def generate_some_character_ids(count):
-    '''generate distinct character ids'''
+def generate_some_ids(count):
+    '''generate distinct ids'''
     if count< 0:
         count = 0
     ids =[]
@@ -70,7 +70,7 @@ def generate_mock_image():
         image_data.append(random.choice(image_data_src))
     return "".join(image_data)
 
-def generate_mock_images(count):
+def generate_some_mock_images(count):
     images = []
     if count is None or count <= 0:
         count = 0

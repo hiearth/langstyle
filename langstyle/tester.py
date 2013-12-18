@@ -13,8 +13,8 @@ def run():
 
     test_suite = unittest.TestSuite()
     
-    all_tests = _load_from_test_case()
-    #all_tests = _load_all()
+    #all_tests = _load_from_test_case()
+    all_tests = _load_all()
     test_suite.addTests(all_tests)
     unittest.TextTestRunner().run(all_tests)
 

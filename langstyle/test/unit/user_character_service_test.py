@@ -18,7 +18,7 @@ class UserCharacterServiceTestCase(unittest.TestCase):
 
     def _add_some_learning_character(self):
         character_count = 10
-        self._character_ids = test_helper.generate_some_character_ids(character_count)
+        self._character_ids = test_helper.generate_some_ids(character_count)
         for character_id in self._character_ids:
             self._user_character_repository.begin_learn(self._user_id, character_id)
 
