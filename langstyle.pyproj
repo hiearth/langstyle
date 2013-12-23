@@ -28,6 +28,8 @@
     <Compile Include="langstyle\database\image_repository.py" />
     <Compile Include="langstyle\database\user_character_repository.py" />
     <Compile Include="langstyle\database\__init__.py" />
+    <Compile Include="langstyle\entity\word_image.py" />
+    <Compile Include="langstyle\entity\__init__.py" />
     <Compile Include="langstyle\helper.py" />
     <Compile Include="langstyle\service\character_image_service.py" />
     <Compile Include="langstyle\service\character_service.py" />
@@ -74,6 +76,7 @@
     <Folder Include="langstyle\database\" />
     <Folder Include="langstyle\database\procedure\" />
     <Folder Include="langstyle\database\schema\" />
+    <Folder Include="langstyle\entity\" />
     <Folder Include="langstyle\service\" />
     <Folder Include="langstyle\test\" />
     <Folder Include="langstyle\test\mock\" />
@@ -118,6 +121,7 @@
     <Content Include="data\sound\penguins.mp3" />
     <Content Include="data\sound\vogtland.mp3" />
     <Content Include="langstyle\database\schema\0.0.7-User.sql" />
+    <Content Include="langstyle\database\schema\0.0.8-CharacterImage.sql" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\ajax.js" />
     <Content Include="langstyle\ui\resource\index.js" />
