@@ -6,7 +6,7 @@ from langstyle import helper
 from .. import test_helper
 from ..mock import mock_image_repository
 from ..mock import mock_file_service
-from langstyle.database import image_repository
+#from langstyle.database import image_repository
 
 class ImageServiceTestCase(unittest.TestCase):
 

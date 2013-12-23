@@ -3,7 +3,7 @@
 import unittest
 from langstyle.service import character_service
 from ..mock import mock_character_repository
-from langstyle.database import character_repository
+#from langstyle.database import character_repository
 from .. import test_helper
 
 class CharacterServiceTestCase(unittest.TestCase):
