@@ -3,6 +3,7 @@
 import unittest
 from langstyle.service import character_image_service
 from ..mock import mock_character_image_repository as mock_repository
+#from langstyle.database import character_image_repository
 from .. import test_helper
 
 class CharacterImageServiceTestCase(unittest.TestCase):
@@ -10,6 +11,7 @@ class CharacterImageServiceTestCase(unittest.TestCase):
     def setUp(self):
         self._user_id = 1
         _RepositoryClass = mock_repository.MockCharacterImageRepository
+        #_RepositoryClass = character_image_repository.CharacterImageRepository
         _ServiceClass = character_image_service.CharacterImageService
         self._character_image_repository = _RepositoryClass()
         self._character_image_service = _ServiceClass(
@@ -83,7 +85,43 @@ class GetImagesTest(CharacterImageServiceTestCase):
 
 
 class LinkImageTest(CharacterImageServiceTestCase):
-    pass
+
+    def test_LinkIsNew(self):
+        exist_character_id = self._get_random_exist_character_id()
+        exist_images = self._get_images_link_to_character(exist_character_id)
+        new_image = test_helper.generate_int_exclude(exist_images)
+        self._character_image_service.link(self._user_id, exist_character_id, new_image)
+        updated_images = self._character_image_repository.get_images(
+            self._user_id, exist_character_id)
+        self.assertIn(new_image, updated_images)
+
+    def test_LinkAlreadyExist(self):
+        exist_character_id = self._get_random_exist_character_id()
+        exist_images = self._get_images_link_to_character(exist_character_id)
+        already_link_image = test_helper.choice(exist_images)
+        self._character_image_service.link(
+            self._user_id, exist_character_id, already_link_image)
+        updated_images = self._character_image_repository.get_images(
+            self._user_id,exist_character_id)
+        self.assertCountEqual(updated_images, exist_images)
 
 class UnlinkImageTest(CharacterImageServiceTestCase):
-    pass
+
+    def test_HasLink(self):
+        exist_character_id = self._get_random_exist_character_id()
+        exist_images = self._get_images_link_to_character(exist_character_id)
+        already_link_image = test_helper.choice(exist_images)
+        self._character_image_service.unlink(
+            self._user_id, exist_character_id, already_link_image)
+        updated_images = self._character_image_repository.get_images(
+            self._user_id, exist_character_id)
+        self.assertNotIn(already_link_image, updated_images)
+
+    def test_NoLink(self):
+        exist_character_id = self._get_random_exist_character_id()
+        exist_images = self._get_images_link_to_character(exist_character_id)
+        new_image = test_helper.generate_int_exclude(exist_images)
+        self._character_image_service.unlink(self._user_id, exist_character_id, new_image)
+        custom_images = self._character_image_repository.get_images(
+            self._user_id, exist_character_id)
+        self.assertCountEqual(exist_images, custom_images)

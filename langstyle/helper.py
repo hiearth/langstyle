@@ -18,6 +18,18 @@ def find_first(iter, find_fn):
 def list_comprehension_by_index(iter, index):
     return [item[index] for item in iter]
 
+def get_matched_items(iter, filter_fn, count):
+    matched = []
+    for item in iter:
+        if len(matched) >= count:
+            break
+        if filter_fn(item):
+            matched.append(item)
+    return matched
+
+def chain_lists(*lists):
+    return [item for list_item in lists for item in list_item]
+
 def md5_hash_str(str_arg):
     return md5_hash(str_arg.encode())
 

@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="langstyle\config.py" />
     <Compile Include="langstyle\database\base_repository.py" />
+    <Compile Include="langstyle\database\character_image_repository.py" />
     <Compile Include="langstyle\database\character_repository.py" />
     <Compile Include="langstyle\database\image_repository.py" />
     <Compile Include="langstyle\database\user_character_repository.py" />
@@ -88,6 +89,10 @@
     <Folder Include="usecase\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="langstyle\database\procedure\CharacterImage_D.sql" />
+    <Content Include="langstyle\database\procedure\CharacterImage_I.sql" />
+    <Content Include="langstyle\database\procedure\CharacterImage_Statistic_S.sql" />
+    <Content Include="langstyle\database\procedure\CharacterImage_Images_S.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Count_S.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Count_U.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Current_S.sql" />

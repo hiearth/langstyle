@@ -28,7 +28,8 @@ def _load_from_test_case():
     #test_case_module = test.unit.user_character_service_test
     #test_case_module = test.unit.character_service_test
     #test_case_module = test.unit.image_service_test
-    #return test_loader.loadTestsFromModule(test_case_module)
+    test_case_module = test.unit.character_image_service_test
+    return test_loader.loadTestsFromModule(test_case_module)
     #test_case_class = test.unit.user_character_service_test.GetCurrentTest
     #test_case_class = test.unit.user_character_service_test.GetLearningTest
     #test_case_class = test.unit.user_character_service_test.NextTest
@@ -39,8 +40,10 @@ def _load_from_test_case():
     #test_case_class = test.unit.character_service_test.GetTest
     #test_case_class = test.unit.image_service_test.AddTest
     #test_case_class = test.unit.image_service_test.GetTest
-    test_case_class = test.unit.character_image_service_test.GetImagesTest
-    return test_loader.loadTestsFromTestCase(test_case_class)
+    #test_case_class = test.unit.character_image_service_test.GetImagesTest
+    #test_case_class = test.unit.character_image_service_test.LinkImageTest
+    #test_case_class = test.unit.character_image_service_test.UnlinkImageTest
+    #return test_loader.loadTestsFromTestCase(test_case_class)
 
 if __name__ == '__main__':
     run()
