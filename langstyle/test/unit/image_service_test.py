@@ -2,10 +2,10 @@
 
 import unittest
 from langstyle.service import image_service
+from langstyle.service import file_service
 from langstyle import helper
 from .. import test_helper
 from ..mock import mock_image_repository
-from ..mock import mock_file_service
 #from langstyle.database import image_repository
 
 class ImageServiceTestCase(unittest.TestCase):
@@ -14,8 +14,11 @@ class ImageServiceTestCase(unittest.TestCase):
         self._user_id = 1
         self._image_repository = mock_image_repository.MockImageRepository()
         #self._image_repository = image_repository.ImageRepository()
-        self._image_file_service = mock_file_service.MockFileService()
-        self._image_service = image_service.ImageService(self._image_repository, self._image_file_service)
+        self._image_data_dir = test_helper.get_image_data_directory()
+        self._image_file_service = file_service.FileService(
+            self._image_data_dir)
+        self._image_service = image_service.ImageService(
+            self._image_repository, self._image_file_service)
         self._added_images = []
         self._add_some_images()
 
@@ -26,14 +29,15 @@ class ImageServiceTestCase(unittest.TestCase):
             self._add_image(image_data)
 
     def _add_image(self,image_data):
-        image_md5 = helper.md5_hash_str(image_data)
+        image_md5 = helper.md5_hash(image_data)
         image_id = self._image_repository.add(image_md5, self._user_id)
         self._image_file_service.write(image_md5, image_data)
         self._added_images.append((image_id, image_md5, image_data))
         return image_id
 
     def _get_random_new_image(self):
-        exist_images = helper.list_comprehension_by_index(self._added_images, 2)
+        exist_images = helper.list_comprehension_by_index(
+            self._added_images, 2)
         return test_helper.generate_mock_image_exclude(exist_images)
 
     def _get_exist_image_ids(self):

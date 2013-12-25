@@ -4,6 +4,7 @@ import os
 import sys
 import itertools
 import random
+from langstyle import helper
 
 def generate_character(prefixes=[], rests=[], length=None):
     if length == 0:
@@ -68,7 +69,7 @@ def generate_mock_image():
     length = random.randrange(100, 1000)
     for i in range(0, length):
         image_data.append(random.choice(image_data_src))
-    return "".join(image_data)
+    return "".join(image_data).encode()
 
 def generate_some_mock_images(count):
     images = []
@@ -83,3 +84,20 @@ def generate_mock_image_exclude(exclude_images=[]):
     if random_image not in exclude_images:
         return random_image
     return generate_mock_image_exclude(exclude_images)
+
+def get_file_data_directory():
+    current_dir = os.path.dirname(__file__)
+    return os.path.join(current_dir, "data")
+
+def get_image_data_directory():
+    return os.path.join(get_file_data_directory(), "image")
+
+def get_sound_data_directory():
+    return os.path.join(get_file_data_directory(), "sound")
+
+def create_random_new_file(dir):
+    random_image = generate_mock_image()
+    file_name = helper.md5_hash(random_image)
+    with open(os.path.join(dir, file_name), "wb") as f:
+        f.write(random_image)
+    return file_name

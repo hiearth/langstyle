@@ -24,14 +24,16 @@ class CharacterImageServiceTestCase(unittest.TestCase):
         image_count = 5
         character_ids = test_helper.generate_some_ids(character_count)
         for character_id in character_ids:
-            image_ids = self._link_images_to_character(self._user_id, character_id)
+            image_ids = self._link_images_to_character(
+                self._user_id, character_id)
             self._character_images[character_id] = image_ids
 
     def _link_images_to_character(self, user_id, character_id):
         image_count = 5
         image_ids = test_helper.generate_some_ids(image_count)
         for image_id in image_ids:
-            self._character_image_repository.link(user_id, character_id, image_id)
+            self._character_image_repository.link(
+                user_id, character_id, image_id)
         return image_ids
 
     def _get_exist_character_ids(self):
@@ -67,9 +69,12 @@ class GetImagesTest(CharacterImageServiceTestCase):
     def test_PartialCustomImages(self):
         another_user = 2
         exist_character_id = self._get_random_exist_character_id()
-        other_user_image_ids = self._get_images_link_to_character(exist_character_id)
-        custom_images = self._link_images_to_character(another_user, exist_character_id)
-        images_link_to_character = self._combine_no_dup(custom_images, other_user_image_ids)
+        other_user_image_ids = self._get_images_link_to_character(
+            exist_character_id)
+        custom_images = self._link_images_to_character(
+            another_user, exist_character_id)
+        images_link_to_character = self._combine_no_dup(
+            custom_images, other_user_image_ids)
         character_image_ids = self._character_image_service.get_images(
             another_user, exist_character_id)
         self.assertCountEqual(character_image_ids, images_link_to_character)
@@ -90,7 +95,8 @@ class LinkImageTest(CharacterImageServiceTestCase):
         exist_character_id = self._get_random_exist_character_id()
         exist_images = self._get_images_link_to_character(exist_character_id)
         new_image = test_helper.generate_int_exclude(exist_images)
-        self._character_image_service.link(self._user_id, exist_character_id, new_image)
+        self._character_image_service.link(
+            self._user_id, exist_character_id, new_image)
         updated_images = self._character_image_repository.get_images(
             self._user_id, exist_character_id)
         self.assertIn(new_image, updated_images)
@@ -121,7 +127,8 @@ class UnlinkImageTest(CharacterImageServiceTestCase):
         exist_character_id = self._get_random_exist_character_id()
         exist_images = self._get_images_link_to_character(exist_character_id)
         new_image = test_helper.generate_int_exclude(exist_images)
-        self._character_image_service.unlink(self._user_id, exist_character_id, new_image)
+        self._character_image_service.unlink(
+            self._user_id, exist_character_id, new_image)
         custom_images = self._character_image_repository.get_images(
             self._user_id, exist_character_id)
         self.assertCountEqual(exist_images, custom_images)
