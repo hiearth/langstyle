@@ -21,9 +21,8 @@ class ImageService:
         # 2. image repository store summary image info, such as id, providerUserId, md5 and so on
         # 3. if image repository add action fail, file service can rollback to delete the saved image file
         image_md5 = helper.md5_hash(image_data)
-        image_path = helper.generate_path_from_md5(image_md5)
         try:
-            self._image_file_service.write(image_path, image_data)
+            self._image_file_service.write(image_md5, image_data)
             image_id = self._image_repository.add(image_md5, user_provider_id)
             return image_id
         except Exception as e:

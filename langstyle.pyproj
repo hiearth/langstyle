@@ -50,6 +50,7 @@
     <Compile Include="langstyle\test\unit\character_image_service_test.py" />
     <Compile Include="langstyle\test\unit\character_repository_test.py" />
     <Compile Include="langstyle\test\unit\character_service_test.py" />
+    <Compile Include="langstyle\test\unit\file_service_test.py" />
     <Compile Include="langstyle\test\unit\image_service_test.py" />
     <Compile Include="langstyle\test\unit\user_character_service_test.py" />
     <Compile Include="langstyle\test\unit\__init__.py" />

@@ -52,7 +52,7 @@ def md5_hash_file(file_path):
     return md5.hexdigest()
 
 def generate_path_from_md5(md5):
-    return md5[0:2] + os.sep + md5[2:4] + os.sep + md5
+    return os.path.join(md5[0:2], md5[2:4], md5)
 
 def create_dir_if_not_exist(full_path):
     owner_dir = os.path.dirname(full_path)

@@ -94,10 +94,3 @@ def get_image_data_directory():
 
 def get_sound_data_directory():
     return os.path.join(get_file_data_directory(), "sound")
-
-def create_random_new_file(dir):
-    random_image = generate_mock_image()
-    file_name = helper.md5_hash(random_image)
-    with open(os.path.join(dir, file_name), "wb") as f:
-        f.write(random_image)
-    return file_name

@@ -8,15 +8,16 @@ from .test.unit import character_service_test
 from .test.unit import user_character_service_test
 from .test.unit import image_service_test
 from .test.unit import character_image_service_test
+from .test.unit import file_service_test
 
 def run():
     """discover all unit tests, and run"""
 
     test_suite = unittest.TestSuite()
     
-    all_tests = _load_from_test_case()
+    #all_tests = _load_from_test_case()
     all_tests = _load_all()
-    #test_suite.addTests(all_tests)
+    test_suite.addTests(all_tests)
     unittest.TextTestRunner().run(all_tests)
 
 def _load_all():
@@ -27,8 +28,9 @@ def _load_from_test_case():
     test_loader = unittest.TestLoader()
     #test_case_module = test.unit.user_character_service_test
     #test_case_module = test.unit.character_service_test
-    #test_case_module = test.unit.image_service_test
-    test_case_module = test.unit.character_image_service_test
+    test_case_module = test.unit.image_service_test
+    #test_case_module = test.unit.character_image_service_test
+    #test_case_module = test.unit.file_service_test
     return test_loader.loadTestsFromModule(test_case_module)
     #test_case_class = test.unit.user_character_service_test.GetCurrentTest
     #test_case_class = test.unit.user_character_service_test.GetLearningTest
