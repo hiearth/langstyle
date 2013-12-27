@@ -1,13 +1,27 @@
 
 import os
 import shutil
+import http
+import http.cookies
 from . import util
+from .. import config
 
 class RequestHandler:
 
     def __init__(self, request):
         self._request = request
         self._headers = {}
+        self.user_id = self._get_user()
+
+    def _get_user(self):
+        user_value = self.get_cookie("user")
+        if user_value is not None:
+            try:
+                return int(user_value)
+            except ValueError as e:
+                self._log_error(str(e))
+        # to do need return None
+        return 1
 
     def get(self):
         raise NotImplementedError()
@@ -23,6 +37,15 @@ class RequestHandler:
 
     def head(self):
         raise NotImplementedError()
+
+    def get_cookie(self, cookie_name):
+        request_cookie = self._request.headers.get("cookie")
+        cookie = http.cookies.SimpleCookie()
+        cookie.load(request_cookie)
+        cookie_item = cookie.get(cookie_name, None)
+        if cookie_item:
+            return cookie_item.value
+        return None
     
     def get_path(self):
         return self._request.path
@@ -45,11 +68,28 @@ class RequestHandler:
         self._request.end_headers()
 
     def send_content(self, str):
+        if str is None:
+            str = "Not Found"
         content_bytes = str.encode(encoding = "utf-8")
         self._request.wfile.write(content_bytes)
 
+    def send_success_headers(self):
+        self.set_response_code(200)
+        self.set_header("Content-Type", self.get_content_type())
+        self.set_header("Content-Length", self.get_content_length())
+        self.send_headers()
+
+    def send_not_found(self):
+        self.send_error(404)
+
+    def send_access_denied(self):
+        self.send_error(401, "No permission")
+
     def send_error(self, status_code, message=None):
         self._request.send_error(status_code, message)
+
+    def _log_error(self, msg):
+        config.service_factory.get_log_service().error(msg)
 
 
 class StaticFileHandler(RequestHandler):
@@ -61,7 +101,7 @@ class StaticFileHandler(RequestHandler):
     def get(self):
         self._file_path = self.get_full_path()
         if os.path.exists(self._file_path):
-            self._send_headers()
+            self.send_success_headers()
             self.send_content()
         else:
             self.send_error(404)
@@ -72,12 +112,6 @@ class StaticFileHandler(RequestHandler):
 
     def get_content_length(self):
         return util.get_file_size(self._file_path)
-
-    def _send_headers(self):
-        self.set_response_code(200)
-        self.set_header("Content-Type", self.get_content_type())
-        self.set_header("Content-Length", self.get_content_length())
-        self.send_headers()
 
     def send_content(self):
         with open(self._file_path, self._get_read_mode()) as f:

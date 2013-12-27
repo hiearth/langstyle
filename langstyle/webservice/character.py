@@ -1,16 +1,22 @@
+#!/usr/bin/env python
 
 from . import util
 from . import web
 from . import character_for_test
+from .. import config
 
-class CharacterBaitHandler(web.RequestHandler):
+class CharacterHandler(web.RequestHandler):
 
     def __init__(self, request):
         super().__init__(request)
         self._character = None
         self._next_character = None
 
+    def _get_service(self):
+        return config.service_factory.get_character_service()
+
     def get(self):
+        self._get_service()
         self._character = self._get_character()
         self._get_next()
 

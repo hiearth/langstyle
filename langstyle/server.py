@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 from http.server import HTTPServer
 from http.server import BaseHTTPRequestHandler
@@ -42,7 +42,7 @@ def start():
     serverAddress = "127.0.0.1"
     BaseHTTPRequestHandler.protocol_version = protocol
     server = HTTPServer((serverAddress, port), HTTPRequestHandler)
-    print("server start, address: " + serverAddress + "/" + str(port))
+    print("server start, address: " + serverAddress + ":" + str(port))
     server.serve_forever()
     
 

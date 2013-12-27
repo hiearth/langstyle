@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>run_test.py</StartupFile>
+    <StartupFile>run_server.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -42,7 +42,6 @@
     <Compile Include="langstyle\tester.py" />
     <Compile Include="langstyle\test\mock\mock_character_image_repository.py" />
     <Compile Include="langstyle\test\mock\mock_character_repository.py" />
-    <Compile Include="langstyle\test\mock\mock_file_service.py" />
     <Compile Include="langstyle\test\mock\mock_image_repository.py" />
     <Compile Include="langstyle\test\mock\mock_user_character_repository.py" />
     <Compile Include="langstyle\test\mock\__init__.py" />
@@ -63,6 +62,7 @@
     <Compile Include="langstyle\webservice\page.py" />
     <Compile Include="langstyle\webservice\router.py" />
     <Compile Include="langstyle\webservice\sound.py" />
+    <Compile Include="langstyle\webservice\user_character.py" />
     <Compile Include="langstyle\webservice\util.py" />
     <Compile Include="langstyle\webservice\sound_for_test.py" />
     <Compile Include="langstyle\webservice\web.py" />

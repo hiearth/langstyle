@@ -13,7 +13,9 @@ langstyle.WordCharacter.prototype = {
 
     next: function () {
         var characterUrl = this._getRequestUrl();
-        return ajax.get(characterUrl).then(this._setCurrentCharacter.bind(this));
+        return ajax.get(characterUrl).then(
+            this._setCurrentCharacter.bind(this)
+        );
     },
 
     getCharacter: function () {

@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 
 import os
-from . import database
-from . import service
-from .service import log_service
-from .service import file_service
 
 class _RepositoryFactory:
     
@@ -14,12 +10,14 @@ class _RepositoryFactory:
        
     def get_character_repository(self):
         if not self._character_repository:
-            self._character_repository = database.character_repository.CharacterRepository()
+            from .database import character_repository
+            self._character_repository = character_repository.CharacterRepository()
         return self._character_repository
 
     def get_user_character_repository(self):
         if not self._user_character_repository:
-            self._user_character_repository = database.user_character_repository.UserCharacterRepository()
+            from .database import user_character_repository
+            self._user_character_repository = user_character_repository.UserCharacterRepository()
         return self._user_character_repository
 
 
@@ -27,36 +25,42 @@ class _ServiceFactory:
 
     def __init__(self):
         self._character_service = None
-        self._user_service = None
+        self._user_character_service = None
         self._log_service = None
         self._image_file_service=None
+        self._sound_file_service = None
 
     def get_log_service(self):
         if not self._log_service:
-            self._log_service = service.log_service.LogService()
+            from .service import log_service
+            self._log_service = log_service.LogService()
         return self._log_service
 
     def get_character_service(self):
         if not self._character_service:
+            from .service import character_service
             repository = repository_factory.get_character_repository()
-            self._character_service = service.character_service.CharacterService(repository)
+            self._character_service = character_service.CharacterService(repository)
         return self._character_service
 
     def get_user_character_service(self):
-        if not self._user_service:
+        if not self._user_character_service:
+            from .service import user_character_service
             repository = repository_factory.get_user_character_repository()
-            self._user_service = service.user_service.UserService(repository)
-        return self._user_service
+            self._user_character_service = user_character_service.UserCharacterService(repository)
+        return self._user_character_service
 
     def get_image_file_service(self):
         if not self._image_file_service:
-            self._image_file_service = service.file_service.FileService(IMAGE_DATA_DIRECTORY)
+            from .service import file_service
+            self._image_file_service = file_service.FileService(IMAGE_DATA_DIRECTORY)
         return self._image_file_service
 
-    #def get_file_service(self):
-    #    if not self._file_service:
-    #        self._file_service = service.file_service.FileService()
-    #    return self._file_service
+    def get_sound_file_service(self):
+        if not self._sound_file_service:
+            from .service import file_service
+            self._sound_file_service = file_service.FileService(SOUND_DATA_DIRECTORY)
+        return self._sound_file_service
 
 
 repository_factory = _RepositoryFactory()

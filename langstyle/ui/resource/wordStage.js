@@ -7,7 +7,7 @@ langstyle.WordStage = function (options) {
     this._stageNode = dom.getById(options.stageId);
 
     this.wordCharacter = new langstyle.WordCharacter({
-        "restUrl": "/characterbait/",
+        "restUrl": "/character/",
         "characterId": options.characterId
     });
     this.wordImage = new langstyle.WordImage({

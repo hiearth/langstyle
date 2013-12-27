@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+
+import re
+from . import web
+from .. import config
+
+class UserCharacterHandler(web.RequestHandler):
+
+    def _get_user_character_service(self):
+        return config.service_factory.get_user_character_service()
+
+    def _get_character_service(self):
+        return config.service_factory.get_character_service()
+
+    def get_content_type(self):
+        return "text/plain"
+
+class UserCharacterCountHandler(UserCharacterHandler):
+
+    def _get_request_character(self):
+        request_path = self.get_path()
+        character_regex = re.compile(r"/usercharacter/count/(.*)")
+        characters = resource_regex.findall(request_path)
+        return characters[0]
+
+    def get(self):
+        query_character = self._get_request_character()
+        if not query_character:
+            self.send_not_found()
+            return
+        character_service = self._get_character_service()
+        character_id = character_service.get_id(query_character)
+        if character_id is None:
+            self.send_not_found()
+            return
+        user_character_service = self._get_user_character_service()
+        character_count = user_character_service.get_count(self.user_id, character_id)
+        self.send_success_headers()
+        self.send_content(str(character_count))
+
+
+class UserCharacterGraspHandler(UserCharacterHandler):
+
+    def get(self):
+        if self.user_id is None:
+            self.send_access_denied()
+            return
+        grasp_characters = self._get_grasp_characters()
+        self.send_success_headers()
+        self.send_content(", ".join(grasp_characters))
+
+    def _get_grasp_characters(self):
+        user_character_service = self._get_user_character_service()
+        character_service = self._get_character_service()
+        grasp_character_ids = user_character_service.get_grasp(self.user_id)
+        for character_id in grasp_character_ids:
+            grasp_character = character_service.get(character_id)
+            if grasp_character:
+                yield grasp_character
+
+
+class UserCharacterCurrentHandler(UserCharacterHandler):
+
+    def get(self):
+        if self.user_id is None:
+            self.send_access_denied()
+            return
+        current_character = None
+        user_character_service = self._get_user_character_service()
+        character_id = user_character_service.get_current_character(self.user_id)
+        if character_id is None:
+            self.send_not_found()
+            return
+        character_service = self._get_character_service()
+        current_character = character_service.get(character_id)
+        if not current_character:
+            self.send_not_found()
+            return
+        self.send_success_headers()
+        self.send_content(current_character)
