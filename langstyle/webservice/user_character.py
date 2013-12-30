@@ -20,8 +20,10 @@ class UserCharacterCountHandler(UserCharacterHandler):
     def _get_request_character(self):
         request_path = self.get_path()
         character_regex = re.compile(r"/usercharacter/count/(.*)")
-        characters = resource_regex.findall(request_path)
-        return characters[0]
+        characters = character_regex.findall(request_path)
+        if characters:
+            return characters[0]
+        return None
 
     def get(self):
         query_character = self._get_request_character()
@@ -46,8 +48,12 @@ class UserCharacterGraspHandler(UserCharacterHandler):
             self.send_access_denied()
             return
         grasp_characters = self._get_grasp_characters()
-        self.send_success_headers()
-        self.send_content(", ".join(grasp_characters))
+        characters_string = ", ".join(grasp_characters)
+        if characters_string:
+            self.send_success_headers()
+            self.send_content(characters_string)
+        else:
+            self.send_not_found()
 
     def _get_grasp_characters(self):
         user_character_service = self._get_user_character_service()

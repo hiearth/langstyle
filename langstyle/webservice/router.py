@@ -25,6 +25,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/character/(.*)", character.CharacterHandler)
         self._add_handler(r"/usercharacter/grasp", user_character.UserCharacterGraspHandler)
         self._add_handler(r"/usercharacter/current", user_character.UserCharacterCurrentHandler)
+        self._add_handler(r"/usercharacter/count/(.*)", user_character.UserCharacterCountHandler)
         self._add_handler(r"/image/(.*)", image.ImageHandler)
         self._add_handler(r"/sound/(.*)",sound.SoundHandler)
         self._add_handler(r"(.*)\.js", web.StaticFileHandler)
