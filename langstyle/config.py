@@ -7,6 +7,8 @@ class _RepositoryFactory:
     def __init__(self):
         self._character_repository = None
         self._user_character_repository = None
+        self._character_image_repository = None
+        self._image_repository = None
        
     def get_character_repository(self):
         if not self._character_repository:
@@ -20,12 +22,26 @@ class _RepositoryFactory:
             self._user_character_repository = user_character_repository.UserCharacterRepository()
         return self._user_character_repository
 
+    def get_character_image_repository(self):
+        if not self._character_image_repository:
+            from .database import character_image_repository
+            self._character_image_repository = character_image_repository.CharacterImageRepository()
+        return self._character_image_repository
+
+    def get_image_repository(self):
+        if not self._image_repository:
+            from .database import image_repository
+            self._image_repository = image_repository.ImageRepository()
+        return self._image_repository
+
 
 class _ServiceFactory:
 
     def __init__(self):
         self._character_service = None
         self._user_character_service = None
+        self._character_image_service = None
+        self._image_service = None
         self._log_service = None
         self._image_file_service=None
         self._sound_file_service = None
@@ -49,6 +65,20 @@ class _ServiceFactory:
             repository = repository_factory.get_user_character_repository()
             self._user_character_service = user_character_service.UserCharacterService(repository)
         return self._user_character_service
+
+    def get_character_image_service(self):
+        if not self._character_image_service:
+            from .service import character_image_service
+            repository = repository_factory.get_character_image_repository()
+            self._character_image_service = character_image_service.CharacterImageService(repository)
+        return self._character_image_service
+
+    def get_image_service(self):
+        if not self._image_service:
+            from .service import image_service
+            repository = repository_factory.get_image_repository()
+            self._image_service = image_service.ImageService(repository)
+        return self._image_service
 
     def get_image_file_service(self):
         if not self._image_file_service:

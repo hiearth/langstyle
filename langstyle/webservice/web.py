@@ -24,18 +24,23 @@ class RequestHandler:
         return 1
 
     def get(self):
+        '''get'''
         raise NotImplementedError()
 
     def post(self):
+        '''add'''
         raise NotImplementedError()
 
     def put(self):
+        '''update'''
         raise NotImplementedError()
 
     def delete(self):
+        '''delete'''
         raise NotImplementedError()
 
     def head(self):
+        '''get header'''
         raise NotImplementedError()
 
     def get_cookie(self, cookie_name):

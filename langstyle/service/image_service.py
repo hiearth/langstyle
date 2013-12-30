@@ -16,6 +16,12 @@ class ImageService:
             return self._image_file_service.read(image_item.md5)
         return None
 
+    def get_key(self, image_id):
+        image_item = self._image_repository.get(image_id)
+        if image_item:
+            return image_item.md5
+        return None
+
     def add(self, image_data, user_provider_id):
         # 1. file service to save the image data in the file system
         # 2. image repository store summary image info, such as id, providerUserId, md5 and so on

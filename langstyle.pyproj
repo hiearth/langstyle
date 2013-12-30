@@ -55,6 +55,7 @@
     <Compile Include="langstyle\test\unit\__init__.py" />
     <Compile Include="langstyle\test\__init__.py" />
     <Compile Include="langstyle\webservice\character_for_test.py" />
+    <Compile Include="langstyle\webservice\character_image.py" />
     <Compile Include="langstyle\webservice\image_for_test.py" />
     <Compile Include="langstyle\server.py" />
     <Compile Include="langstyle\webservice\character.py" />
