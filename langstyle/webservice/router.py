@@ -28,6 +28,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/usercharacter/current", user_character.UserCharacterCurrentHandler)
         self._add_handler(r"/usercharacter/count/(.*)", user_character.UserCharacterCountHandler)
         self._add_handler(r"/usercharacter/learning", user_character.UserCharacterCountHandler)
+        # todo character image restful url
         self._add_handler(r"/characterimage/(.*)", character_image.CharacterImageHandler)
         self._add_handler(r"/image/(.*)", image.ImageHandler)
         self._add_handler(r"/sound/(.*)",sound.SoundHandler)

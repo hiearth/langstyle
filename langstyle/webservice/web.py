@@ -3,6 +3,7 @@ import os
 import shutil
 import http
 import http.cookies
+import urllib.parse
 from . import util
 from .. import config
 
@@ -10,7 +11,8 @@ class RequestHandler:
 
     def __init__(self, request):
         self._request = request
-        self._headers = {}
+        self._response_headers = {}
+        self._request_body = {}
         self.user_id = self._get_user()
 
     def _get_user(self):
@@ -41,34 +43,42 @@ class RequestHandler:
 
     def head(self):
         '''get header'''
-        raise NotImplementedError()
+        raise NotImplementedError()    
+    def has_permission(self):
+        return self.user_id is not None
+
+    def get_body(self):
+        body_length = self._request.headers.get("content-length")
+        post_vars = urllib.parse.parse_qs(self._request.rfile.read(int(body_length)), keep_blank_values=1)
+        return post_vars
 
     def get_cookie(self, cookie_name):
         request_cookie = self._request.headers.get("cookie")
         cookie = http.cookies.SimpleCookie()
-        cookie.load(request_cookie)
-        cookie_item = cookie.get(cookie_name, None)
-        if cookie_item:
-            return cookie_item.value
+        if request_cookie:
+            cookie.load(request_cookie)
+            cookie_item = cookie.get(cookie_name, None)
+            if cookie_item:
+                return cookie_item.value
         return None
     
     def get_path(self):
         return self._request.path
 
     def get_content_type(self):
-        pass
+        return "text/plain"
 
     def get_content_length(self):
-        pass
+        return 0
 
     def set_response_code(self, code, message=None):
         self._request.send_response(code, message)
 
     def set_header(self, key, value):
-        self._headers[key] = value
+        self._response_headers[key] = value
 
     def send_headers(self):
-        for key, value in self._headers.items():
+        for key, value in self._response_headers.items():
             self._request.send_header(key, value)
         self._request.end_headers()
 

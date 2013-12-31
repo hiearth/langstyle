@@ -6,9 +6,6 @@ from .. import config
 
 class UserCharacterHandler(web.RequestHandler):
 
-    def has_permission(self):
-        return self.user_id is not None
-
     def _get_user_character_service(self):
         return config.service_factory.get_user_character_service()
 
