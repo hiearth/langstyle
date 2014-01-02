@@ -12,7 +12,7 @@ class RequestHandler:
     def __init__(self, request):
         self._request = request
         self._response_headers = {}
-        self._request_body = {}
+        self._request_form = None
         self.user_id = self._get_user()
 
     def _get_user(self):
@@ -24,6 +24,11 @@ class RequestHandler:
                 self._log_error(str(e))
         # to do need return None
         return 1
+
+    def _get_regex(self):
+        from . import router
+        request_handler_router = router.RequestHandlerRouter()
+        return request_handler_router.get_regex(type(self))
 
     def get(self):
         '''get'''
@@ -47,10 +52,18 @@ class RequestHandler:
     def has_permission(self):
         return self.user_id is not None
 
-    def get_body(self):
-        body_length = self._request.headers.get("content-length")
-        post_vars = urllib.parse.parse_qs(self._request.rfile.read(int(body_length)), keep_blank_values=1)
-        return post_vars
+    def get_form_parameter(self, parameter_name):
+        form = self.get_request_form()
+        parameter_value = form.get(parameter_name.encode(), None)
+        if parameter_value:
+            return parameter_value[0].decode()
+        return None
+
+    def get_request_form():
+        if self._request_form is None:
+            body_length = self._request.headers.get("content-length")
+            self._request_form = urllib.parse.parse_qs(self._request.rfile.read(int(body_length)), keep_blank_values=1)
+        return self._request_form
 
     def get_cookie(self, cookie_name):
         request_cookie = self._request.headers.get("cookie")

@@ -4,7 +4,7 @@ import re
 from . import web
 from .. import config
 
-class CharacterImageHandler(web.RequestHandler):
+class CharacterImagesHandler(web.RequestHandler):
 
     def get(self):
         if not self.has_permission():
@@ -41,8 +41,7 @@ class CharacterImageHandler(web.RequestHandler):
 
     def _get_request_character(self):
         request_path = self.get_path()
-        character_regex = re.compile(r"/characterimage/(.*)")
-        characters = character_regex.findall(request_path)
+        characters = self._get_regex().findall(request_path)
         if characters:
             try:
                 return int(characters[0])
@@ -50,28 +49,44 @@ class CharacterImageHandler(web.RequestHandler):
                 self._log_error(str(e))
         return None
 
+
+class CharacterImageHandler(web.RequestHandler):
+
+    def __init__(self, request):
+        super().__init__(request)
+        self.character_id = None
+        self.image_id = None
+
+    def _get_request_character_image(self):
+        request_path = self.get_path()
+        resources = self._get_regex().findall(request_path)
+        if resources:
+            try:
+                self.character_id = int(resources[0][0])
+                self.image_id = int(resources[0][1])
+            except ValueError as e:
+                self._log_error(str(e))
+
     def post(self):
         if not self.has_permission():
             self.send_access_denied()
             return
-        character_id = self._get_request_character()
-        if not character_id:
-            self.send_not_found()
-            return
-        image_id = self._get_image_id()
-        if not image_id:
+        self._get_request_character_image()
+        if (self.character_id is None) or (self.image_id is None):
             self.send_not_found()
             return
         character_image_service = config.service_factory.get_character_image_service()
-        character_image_service.link(self.user_id, character_id, image_id)
+        character_image_service.link(self.user_id, self.character_id, self.image_id)
         self.send_success_headers()
 
-    def _get_image_id(self):
-        body = self.get_body()
-        image_id = body.get("imageid".encode(), None)
-        if image_id:
-            return image_id[0].decode()
-        return None
-
     def delete(self):
-        pass
+        if not self.has_permission():
+            self.send_access_denied()
+            return
+        self._get_request_character_image()
+        if (self.character_id is None) or (self.image_id is None):
+            self.send_not_found()
+            return
+        character_image_service = config.service_factory.get_character_image_service()
+        character_image_service.unlink(self.user_id, self.character_id, self.image_id)
+        self.send_success_headers()
