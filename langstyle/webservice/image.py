@@ -2,7 +2,7 @@
 import shutil
 from . import util
 from . import web
-from . import image_for_test
+from .. import config
 
 class ImageHandler(web.RequestHandler):
 
@@ -10,37 +10,22 @@ class ImageHandler(web.RequestHandler):
         super().__init__(request)
         self._character = None
 
+    def _get_service(self):
+        return config.service_factory.get_image_service()
+
     def get(self):
-        self._character = self._get_character()
-        if image_for_test.exists(self._character):
-            self._send_headers()
-            image_stream = image_for_test.get(self._character)
-            shutil.copyfileobj(image_stream, self._request.wfile)
-            image_stream.close()
-        else:
-            self.send_error(404)
+        image_id = self._get_request_image()
+        image_content = self._get_service().get(image_id)
+        if image_content is None:
+            self.send_not_found()
+            return
+        self.send_headers_and_content(image_content)
 
-    #def post(self):
-    #    # get word by character
-    #    # call image_for_test.add
-    #    pass
-
-    #def put(self):
-    #    # get word by character
-    #    # call image_for_test.update
-        #pass
-
-    def _get_character(self):
-        return util.get_path_tail(self.get_path())
+    def _get_request_image(self):
+        image_ids = self._get_regex().findall(self.get_path())
+        if image_ids:
+            return image_ids[0]
+        return None
 
     def get_content_type(self):
-        return image_for_test.get_content_type(self._character)
-
-    def get_content_length(self):
-        return image_for_test.get_image_size(self._character)
-
-    def _send_headers(self):
-        self.set_response_code(200)
-        self.set_header("Content-Type", self.get_content_type())
-        self.set_header("Content-Length", self.get_content_length())
-        self.send_headers()
+        return "image/jpeg"

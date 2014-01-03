@@ -25,13 +25,14 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._routes = []
         self._add_handler(r"/$", page.HTMLHandler)
         self._add_handler(r"/character/(.*)", character.CharacterHandler)
+        self._add_handler(r"/charactercode/(.*)", character.CharacterCodeHandler)
+        self._add_handler(r"/image/(.*)", image.ImageHandler)
         self._add_handler(r"/usercharacter/grasp", user_character.UserCharacterGraspHandler)
         self._add_handler(r"/usercharacter/current", user_character.UserCharacterCurrentHandler)
         self._add_handler(r"/usercharacter/count/(.*)", user_character.UserCharacterCountHandler)
         self._add_handler(r"/usercharacter/learning", user_character.UserCharacterCountHandler)
         self._add_handler(r"/characterimages/(.*)", character_image.CharacterImagesHandler)
         self._add_handler(r"/characterimage/character/([0-9a-zA-Z]*)/image/(.*)", character_image.CharacterImageHandler)
-        self._add_handler(r"/image/(.*)", image.ImageHandler)
         self._add_handler(r"/sound/(.*)",sound.SoundHandler)
         self._add_handler(r"(.*)\.js", web.StaticFileHandler)
         self._add_handler(r"(.*)\.css", web.StaticFileHandler)
@@ -44,7 +45,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         for pattern, handler_class in self._routes:
             if pattern.match(request.path):
                 return handler_class
-        return None
+        return web.NotFoundHandler
 
     def get_regex(self, handler_class):
         handler_filter = (lambda route: route[1] == handler_class)

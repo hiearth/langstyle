@@ -11,7 +11,7 @@ class CharacterImagesHandler(web.RequestHandler):
             self.send_access_denied()
             return
         character_id = self._get_request_character()
-        if not character_id:
+        if character_id is None:
             self.send_not_found()
             return
         character_image_service = config.service_factory.get_character_image_service()
@@ -19,29 +19,19 @@ class CharacterImagesHandler(web.RequestHandler):
         if not image_ids:
             self.send_not_found()
             return
-        image_keys = self._get_image_keys_by_ids(image_ids)
-        image_keys_string = self._join_image_keys(image_keys)
-        if image_keys_string:
-            self.send_success_headers()
-            self.send_content(image_keys_string)
+        image_ids_string = self._join_image_ids(image_ids)
+        if image_ids_string:
+            self.send_headers_and_content(image_ids_string)
         else:
             self.send_not_found()
 
-    def _get_image_keys_by_ids(self, image_ids):
-        image_service = config.service_factory.get_image_service()
-        for image_id in image_ids:
-            image_key = image_service.get_key(image_id)
-            if image_key:
-                yield image_key
-
-    def _join_image_keys(self, image_keys_iter):
-        if image_keys_iter:
-            return ", ".join(image_keys_iter)
+    def _join_image_ids(self, image_ids_iter):
+        if image_ids_iter:
+            return ", ".join(str(image_id) for image_id in image_ids_iter)
         return None
 
     def _get_request_character(self):
-        request_path = self.get_path()
-        characters = self._get_regex().findall(request_path)
+        characters = self._get_regex().findall(self.get_path())
         if characters:
             try:
                 return int(characters[0])

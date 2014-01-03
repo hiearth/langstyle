@@ -77,7 +77,7 @@ class _ServiceFactory:
         if not self._image_service:
             from .service import image_service
             repository = repository_factory.get_image_repository()
-            self._image_service = image_service.ImageService(repository)
+            self._image_service = image_service.ImageService(repository, self.get_image_file_service())
         return self._image_service
 
     def get_image_file_service(self):

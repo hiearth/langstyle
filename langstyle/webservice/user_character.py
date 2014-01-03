@@ -51,8 +51,7 @@ class UserCharacterCountHandler(UserCharacterHandler):
             return
         user_character_service = self._get_user_character_service()
         character_count = user_character_service.get_count(self.user_id, character_id)
-        self.send_success_headers()
-        self.send_content(str(character_count))
+        self.send_headers_and_content(str(character_count))
 
 
 class UserCharacterGraspHandler(UserCharacterHandler):
@@ -64,8 +63,7 @@ class UserCharacterGraspHandler(UserCharacterHandler):
         grasp_characters = self._get_grasp_characters()
         characters_string = self._join_characters(grasp_characters)
         if characters_string:
-            self.send_success_headers()
-            self.send_content(characters_string)
+            self.send_headers_and_content(characters_string)
         else:
             self.send_not_found()
 
@@ -92,8 +90,7 @@ class UserCharacterCurrentHandler(UserCharacterHandler):
         if not current_character:
             self.send_not_found()
             return
-        self.send_success_headers()
-        self.send_content(current_character)
+        self.send_headers_and_content(current_character)
 
 
 class UserCharacterLearningHanlder(UserCharacterHandler):
@@ -105,8 +102,7 @@ class UserCharacterLearningHanlder(UserCharacterHandler):
         learning_characters = self._get_learning_characters()
         characters_string = self._join_characters(learning_characters)
         if characters_string:
-            self.send_success_headers()
-            self.send_content(characters_string)
+            self.send_headers_and_content(characters_string)
         else:
             self.send_not_found()
 

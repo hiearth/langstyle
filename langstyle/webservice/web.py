@@ -32,23 +32,23 @@ class RequestHandler:
 
     def get(self):
         '''get'''
-        raise NotImplementedError()
+        self.send_method_not_allowed()
 
     def post(self):
         '''add'''
-        raise NotImplementedError()
+        self.send_method_not_allowed()
 
     def put(self):
         '''update'''
-        raise NotImplementedError()
+        self.send_method_not_allowed()
 
     def delete(self):
         '''delete'''
-        raise NotImplementedError()
+        self.send_method_not_allowed()
 
     def head(self):
         '''get header'''
-        raise NotImplementedError()    
+        self.send_method_not_allowed()    
     def has_permission(self):
         return self.user_id is not None
 
@@ -81,43 +81,68 @@ class RequestHandler:
     def get_content_type(self):
         return "text/plain"
 
-    def get_content_length(self):
-        return 0
-
     def set_response_code(self, code, message=None):
         self._request.send_response(code, message)
 
     def set_header(self, key, value):
         self._response_headers[key] = value
 
-    def send_headers(self):
+    def _send_headers(self):
         for key, value in self._response_headers.items():
             self._request.send_header(key, value)
         self._request.end_headers()
 
-    def send_content(self, str):
-        if str is None:
-            str = "Not Found"
-        content_bytes = str.encode(encoding = "utf-8")
-        self._request.wfile.write(content_bytes)
-
     def send_success_headers(self):
         self.set_response_code(200)
+        self.set_header("Connection", "close")
+        self._send_headers()
+
+    def send_headers_and_content(self, content):
+        self.set_response_code(200)
+        content = self._convert_content_to_bytes(content)
+        self._set_content_headers(content)
+        self._send_headers()
+        self._write_response_content(content)
+
+    def _set_content_headers(self, content):
         self.set_header("Content-Type", self.get_content_type())
-        self.set_header("Content-Length", self.get_content_length())
-        self.send_headers()
+        self.set_header("Content-Length", len(content))
+
+    def _convert_content_to_bytes(self, content):
+        if content is None:
+            return b""
+        if type(content) is str:
+            return content.encode(encoding="utf-8")
+        return content
+
+    def _write_response_content(self, content_bytes):
+        self._request.wfile.write(content_bytes)
 
     def send_not_found(self):
-        self.send_error(404)
+        self._send_error(404, "Not Found")
 
     def send_access_denied(self):
-        self.send_error(401, "No permission")
+        self._send_error(401, "No permission")
 
-    def send_error(self, status_code, message=None):
-        self._request.send_error(status_code, message)
+    def send_method_not_allowed(self):
+        self._send_error(405, "Method Not Allowed")
+
+    def _send_error(self, status_code, message="Error"):
+        self.set_response_code(status_code, message)
+        message = self._convert_content_to_bytes(message)
+        self._set_content_headers(message)
+        self.set_header("Connection", "close")
+        self._send_headers()
+        self._write_response_content(message)
 
     def _log_error(self, msg):
         config.service_factory.get_log_service().error(msg)
+
+
+class NotFoundHandler(RequestHandler):
+
+    def get(self):
+        self.send_not_found()
 
 
 class StaticFileHandler(RequestHandler):
@@ -132,7 +157,7 @@ class StaticFileHandler(RequestHandler):
             self.send_success_headers()
             self.send_content()
         else:
-            self.send_error(404)
+            self.send_not_found()
 
     def get_content_type(self):
         file_suffix = util.get_file_suffix(self._file_path)

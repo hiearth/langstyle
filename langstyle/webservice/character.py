@@ -2,40 +2,58 @@
 
 from . import util
 from . import web
-from . import character_for_test
 from .. import config
 
 class CharacterHandler(web.RequestHandler):
-
-    def __init__(self, request):
-        super().__init__(request)
-        self._character = None
-        self._next_character = None
 
     def _get_service(self):
         return config.service_factory.get_character_service()
 
     def get(self):
-        self._get_service()
-        self._character = self._get_character()
-        self._get_next()
+        character_id = self._get_request_character()
+        if character_id is None:
+            self.send_not_found()
+            return
+        character_service = self._get_service()
+        character_code = character_service.get(character_id)
+        if character_code is None:
+            self.send_not_found()
+            return
+        self.send_headers_and_content(character_code)
 
-    def _get_next(self):
-        self._next_character = character_for_test.get(self._character)
-        self._send_headers()
-        self.send_content(self._next_character)
+    def _get_request_character(self):
+        characters = self._get_regex().findall(self.get_path())
+        if characters:
+            try:
+                return int(characters[0])
+            except ValueError as e:
+                self._log_error(str(e))
+        return None
 
-    def _get_character(self):
-        return util.get_path_tail(self.get_path())
 
-    def get_content_type(self):
-        return character_for_test.get_content_type()
+class CharacterCodeHandler(web.RequestHandler):
 
-    def get_content_length(self):
-        return len(self._next_character)
+    def _get_service(self):
+        return config.service_factory.get_character_service()
 
-    def _send_headers(self):
-        self.set_response_code(200)
-        self.set_header("Content-Type", self.get_content_type())
-        self.set_header("Content-Length", self.get_content_length())
-        self.send_headers()
+    def get(self):
+        character_code = self._get_request_character_code()
+        character_id = self._get_service().get_id(character_code)
+        if character_id is None:
+            self.send_not_found()
+            return
+        self.send_headers_and_content(str(character_id))
+
+    def post(self):
+        character_code = self._get_request_character_code()
+        character_id = self._get_service().add(character_code)
+        if character_id is None:
+            self.send_error(500, "Fail to add character.")
+            return
+        self.send_headers_and_content(str(character_id))
+
+    def _get_request_character_code(self):
+        character_codes = self._get_regex().findall(self.get_path())
+        if character_codes:
+            return character_codes[0]
+        return None

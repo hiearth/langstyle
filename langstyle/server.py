@@ -44,6 +44,3 @@ def start():
     server = HTTPServer((serverAddress, port), HTTPRequestHandler)
     print("server start, address: " + serverAddress + ":" + str(port))
     server.serve_forever()
-    
-
-start()
