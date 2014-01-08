@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>run_test.py</StartupFile>
+    <StartupFile>run_server.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -55,7 +55,6 @@
     <Compile Include="langstyle\test\unit\__init__.py" />
     <Compile Include="langstyle\test\__init__.py" />
     <Compile Include="langstyle\webservice\character_image.py" />
-    <Compile Include="langstyle\webservice\image_for_test.py" />
     <Compile Include="langstyle\server.py" />
     <Compile Include="langstyle\webservice\character.py" />
     <Compile Include="langstyle\webservice\image.py" />
@@ -130,15 +129,18 @@
     <Content Include="langstyle\database\schema\0.0.8-CharacterImage.sql" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\ajax.js" />
+    <Content Include="langstyle\ui\resource\fileUploader.js" />
     <Content Include="langstyle\ui\resource\index.js" />
     <Content Include="langstyle\ui\resource\langstyle.css" />
     <Content Include="langstyle\ui\resource\langstyle.js" />
+    <Content Include="langstyle\ui\resource\materialProvider.js" />
     <Content Include="langstyle\ui\resource\promise.js" />
     <Content Include="langstyle\ui\resource\simpleDom.js" />
     <Content Include="langstyle\ui\resource\wordCharacter.js" />
     <Content Include="langstyle\ui\resource\wordImage.js" />
     <Content Include="langstyle\ui\resource\wordSound.js" />
     <Content Include="langstyle\ui\resource\wordStage.js" />
+    <Content Include="langstyle\ui\uploadtest.html" />
     <Content Include="UseCase\ImageToSound_1.txt" />
     <Content Include="UseCase\ImageToVoice_3.txt" />
     <Content Include="usecase\problem.txt" />

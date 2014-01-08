@@ -59,11 +59,15 @@ class RequestHandler:
             return parameter_value[0].decode()
         return None
 
-    def get_request_form():
+    def get_request_form(self):
         if self._request_form is None:
             body_length = self._request.headers.get("content-length")
             self._request_form = urllib.parse.parse_qs(self._request.rfile.read(int(body_length)), keep_blank_values=1)
         return self._request_form
+
+    def get_file(self):
+        body_length = self._request.headers.get("content-length")
+        return self._request.rfile.read(int(body_length))
 
     def get_cookie(self, cookie_name):
         request_cookie = self._request.headers.get("cookie")

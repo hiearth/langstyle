@@ -10,10 +10,13 @@
         <script type="text/javascript" src="resource/wordCharacter.js"></script>
         <script type="text/javascript" src="resource/wordImage.js"></script>
         <script type="text/javascript" src="resource/wordSound.js"></script>
+        <script type="text/javascript" src="resource/fileUploader.js"></script>
+        <script type="text/javascript" src="resource/materialProvider.js"></script>
     </head>
     <body>
         <div class="b-start">
             <button id="start" class="js-start" onclick="wordStage.start();">Start</button>
+            <button id="add" class="js-add">Add</button>
         </div>
         <div id="stage" class="js-wordStage b-stage hidden">
             <div class="js-wordStageTop">
@@ -31,6 +34,28 @@
                 <img id="image" alt="word image" />
             </div>
         </div>
+        <div class="js-add-page">
+            <div>
+                <form method="post" enctype="multipart/form-data" 
+                action="javascript:materialProvider.addImage();">
+                    <input type="file" id="imageFile" name="imageFile" />
+                    <label id="fileSize"></label>
+                    <button type="submit" id="uploadImage">Submit</button>
+                </form>
+                <button type="button" class="js-camera">Camera</button>
+            </div>
+            <div>
+                <label>Character</label>
+                <input type="text" />
+            </div>
+            <div>
+                <button type="button" class="js-complete-add">Add</button>
+            </div>
+        </div>
+        
         <script type="text/javascript" src="resource/index.js"></script>
+        <script type="text/javascript">
+            var materialProvider = new MeterialProvider("imageFile", "/image/");
+        </script>
     </body>
 </html>

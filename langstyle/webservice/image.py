@@ -29,3 +29,8 @@ class ImageHandler(web.RequestHandler):
 
     def get_content_type(self):
         return "image/jpeg"
+
+    def post(self):
+        image_file = self.get_file()
+        self._get_service().add(image_file, self.user_id)
+        self.send_success_headers()
