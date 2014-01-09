@@ -140,7 +140,6 @@
     <Content Include="langstyle\ui\resource\wordImage.js" />
     <Content Include="langstyle\ui\resource\wordSound.js" />
     <Content Include="langstyle\ui\resource\wordStage.js" />
-    <Content Include="langstyle\ui\uploadtest.html" />
     <Content Include="UseCase\ImageToSound_1.txt" />
     <Content Include="UseCase\ImageToVoice_3.txt" />
     <Content Include="usecase\problem.txt" />

@@ -39,7 +39,7 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
 def start():
     protocol = "HTTP/1.0"
     port = 8000
-    serverAddress = "127.0.0.1"
+    serverAddress = "0.0.0.0"
     BaseHTTPRequestHandler.protocol_version = protocol
     server = HTTPServer((serverAddress, port), HTTPRequestHandler)
     print("server start, address: " + serverAddress + ":" + str(port))
