@@ -32,5 +32,5 @@ class ImageHandler(web.RequestHandler):
 
     def post(self):
         image_file = self.get_file()
-        self._get_service().add(image_file, self.user_id)
-        self.send_success_headers()
+        imageId = self._get_service().add(image_file, self.user_id)
+        self.send_headers_and_content(str(imageId))

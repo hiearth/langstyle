@@ -37,7 +37,7 @@
         <div class="js-add-page">
             <div>
                 <form method="post" enctype="multipart/form-data" 
-                action="javascript:materialProvider.addImage();">
+                action="javascript:materialProvider.linkImageToCharacter();">
                     <input type="file" id="imageFile" name="imageFile" />
                     <label id="fileSize"></label>
                     <button type="submit" id="uploadImage">Submit</button>
@@ -46,7 +46,7 @@
             </div>
             <div>
                 <label>Character</label>
-                <input type="text" />
+                <input type="text" id="characterCode"/>
             </div>
             <div>
                 <button type="button" class="js-complete-add">Add</button>
@@ -55,7 +55,7 @@
         
         <script type="text/javascript" src="resource/index.js"></script>
         <script type="text/javascript">
-            var materialProvider = new MeterialProvider("imageFile", "/image/");
+            var materialProvider = new MeterialProvider("imageFile", "characterCode");
         </script>
     </body>
 </html>

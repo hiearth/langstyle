@@ -57,15 +57,23 @@
 
         send: function () {
             var self = this;
+            var promise = new Promise();
             this._fileReader.read().then(function (file) {
                 var requestHeaders = null;
                 if (file.type) {
                     requestHeaders = { "content-type": file.type };
                 }
-                ajax.post(self.uploadUrl, requestHeaders, file.content);
+                ajax.post(self.uploadUrl, requestHeaders, file.content).then(function (imageId) {
+                    promise.fulfill(imageId);
+                },
+                function (erorr) {
+                    promise.reject(erorr);
+                });
             },
             function (error) {
+                promise.reject(error);
             });
+            return promise;
         }
     };
 

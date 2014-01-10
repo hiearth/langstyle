@@ -1,20 +1,40 @@
 
 (function () {
-    var MeterialProvider = function (imageFileId, imageRestUrl) {
+    var MeterialProvider = function (imageFileId, characterCodeId) {
         if (!(this instanceof MeterialProvider)) {
-            return MeterialProvider();
+            return MeterialProvider(imageFileId, characterCodeId);
         }
-        this.imageUploader = new FileUploader(imageFileId, imageRestUrl);
+
+        this.imageUploader = new FileUploader(imageFileId, langstyle.imageUrl);
+        this.characterCodeId = characterCodeId;
+        this.characterImageUrl = langstyle.characterImageUrl;
+        this.characterUrl = langstyle.characterUrl;
+        this.characterCodeUrl = langstyle.characterCodeUrl;
     };
 
     MeterialProvider.prototype = {
 
-        addImage: function () {
-            this.imageUploader.send();
+        linkImageToCharacter: function () {
+            var self = this;
+            this.imageUploader.send().then(function (imageId) {
+                ajax.post(self.characterCodeUrl, null, self.getCharacterCode()).then(function (characterId) {
+                    var characterImageParameters = {
+                        "character": characterId,
+                        "image": imageId
+                    };
+                    var characterImageUrl = langstyle.joinUrl(self.characterImageUrl, characterImageParameters);
+                    ajax.post(characterImageUrl);
+                });
+            },
+            function (error) {
+            });
         },
 
-        linkImageToCharacter: function () {
-
+        getCharacterCode: function () {
+            var characterCodeElement = dom.getById(this.characterCodeId);
+            if (characterCodeElement) {
+                return characterCodeElement.value;
+            }
         }
     };
 
