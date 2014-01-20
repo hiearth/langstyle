@@ -32,5 +32,5 @@ class ImageService:
             image_id = self._image_repository.add(image_md5, user_provider_id)
             return image_id
         except Exception as e:
-            config.service_factory.get_log_service().error(e.args[0])
+            config.service_factory.get_log_service().error(str(e))
         return None

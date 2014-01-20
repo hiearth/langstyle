@@ -17,7 +17,7 @@
         linkImageToCharacter: function () {
             var self = this;
             this.imageUploader.send().then(function (imageId) {
-                ajax.post(self.characterCodeUrl, null, self.getCharacterCode()).then(function (characterId) {
+                ajax.post(self.characterCodeUrl + "/" + self.getCharacterCode()).then(function (characterId) {
                     var characterImageParameters = {
                         "character": characterId,
                         "image": imageId

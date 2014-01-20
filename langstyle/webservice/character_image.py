@@ -27,7 +27,7 @@ class CharacterImagesHandler(web.RequestHandler):
 
     def _join_image_ids(self, image_ids_iter):
         if image_ids_iter:
-            return ", ".join(str(image_id) for image_id in image_ids_iter)
+            return ",".join(str(image_id) for image_id in image_ids_iter)
         return None
 
     def _get_request_character(self):

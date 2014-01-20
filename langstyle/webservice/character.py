@@ -46,9 +46,10 @@ class CharacterCodeHandler(web.RequestHandler):
 
     def post(self):
         character_code = self._get_request_character_code()
+        print(character_code)
         character_id = self._get_service().add(character_code)
         if character_id is None:
-            self.send_error(500, "Fail to add character.")
+            self.send_server_error("Fail to add character.")
             return
         self.send_headers_and_content(str(character_id))
 

@@ -5,6 +5,7 @@
         imageUrl: "/image",
         characterUrl: "/character",
         characterCodeUrl: "/charactercode",
+        characterImagesUrl: "/characterimages",
         characterImageUrl: "/characterimage",
 
         joinUrl: function (rootUrl, parameters) {

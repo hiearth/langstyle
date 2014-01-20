@@ -14,6 +14,20 @@
             return true;
         },
 
+        createElement:function(elementName){
+            return document.createElement(elementName);
+        },
+
+        appendAsChild:function(parentElement, targetElement){
+            parentElement.appendChild(targetElement);
+        },
+
+        emptyElement:function(targetElement){
+            while(targetElement.lastChild){
+                targetElement.removeChild(targetElement.lastChild);
+            }
+        },
+
         getById: function (elementId) {
             return document.getElementById(elementId);
         },

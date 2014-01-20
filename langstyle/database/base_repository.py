@@ -12,6 +12,8 @@ class BaseRepository:
         config.service_factory.get_log_service().error(error.msg)
 
     def _call_proc_query_all(self, proc_name, proc_args):
+        conn = None
+        cursor = None
         try:
             conn = self._create_connection()
             cursor = conn.cursor()
@@ -20,10 +22,14 @@ class BaseRepository:
         except dbconnector.DatabaseError as db_error:
             self._log_error(db_error)
         finally:
-            cursor.close()
-            conn.close()
+            if cursor:
+                cursor.close()
+            if conn:
+                conn.close()
 
     def _call_proc_query_one(self, proc_name, proc_args):
+        conn = None
+        cursor = None
         try:
             conn = self._create_connection()
             cursor = conn.cursor()
@@ -32,11 +38,15 @@ class BaseRepository:
         except dbconnector.DatabaseError as db_error:
             self._log_error(db_error)
         finally:
-            cursor.close()
-            conn.close()
+            if cursor:
+                cursor.close()
+            if conn:
+                conn.close()
         return None
 
     def _call_proc_non_query(self, proc_name, proc_args):
+        conn = None
+        cursor = None
         try:
             conn = self._create_connection()
             cursor = conn.cursor()
@@ -44,11 +54,14 @@ class BaseRepository:
             conn.commit()
             return result
         except dbconnector.DatabaseError as db_error:
-            conn.rollback()
+            if conn:
+                conn.rollback()
             self._log_error(db_error)
         finally:
-            cursor.close()
-            conn.close()
+            if cursor:
+                cursor.close()
+            if conn:
+                conn.close()
         return None
 
     def _fetch_one(self,cursor):

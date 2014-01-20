@@ -12,13 +12,19 @@ def try_index(alist, value):
         return None
 
 def find_first(iter, find_fn):
-    find_generator = (item for item in iter if find_fn(item))
-    return next(find_generator, None)
+    if iter:
+        find_generator = (item for item in iter if find_fn(item))
+        return next(find_generator, None)
+    return None
 
 def list_comprehension_by_index(iter, index):
-    return [item[index] for item in iter]
+    if iter:
+        return [item[index] for item in iter]
+    return []
 
 def get_matched_items(iter, filter_fn, count):
+    if not iter:
+        return []
     matched = []
     for item in iter:
         if len(matched) >= count:

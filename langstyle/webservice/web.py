@@ -122,6 +122,9 @@ class RequestHandler:
     def _write_response_content(self, content_bytes):
         self._request.wfile.write(content_bytes)
 
+    def send_server_error(self, error_message):
+        self._send_error(500, error_message)
+
     def send_not_found(self):
         self._send_error(404, "Not Found")
 
