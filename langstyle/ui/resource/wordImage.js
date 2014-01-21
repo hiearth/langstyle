@@ -7,12 +7,17 @@ langstyle.WordImage = function (options) {
     this._imageNode = dom.getById(options.imageId);
     this._currentImage = "";
     this._restUrl = options.restUrl;
+    this._imageUrl = "/image";
 };
 
 langstyle.WordImage.prototype = {
 
+    getUrlById: function (imageId) {
+        return this._imageUrl + "/" + imageId;
+    },
+
     load: function (character) {
-        var imageUrl= this._getRequestUrl(character);
+        var imageUrl = this._getRequestUrl(character);
         this._imageNode.src = imageUrl;
     },
 

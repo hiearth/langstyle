@@ -5,7 +5,6 @@ langstyle.WordCharacter = function (options) {
     }
 
     this._characterNode = dom.getById(options.characterId);
-    this._currentCharacter = "";
     this._restUrl = options.restUrl;
 };
 

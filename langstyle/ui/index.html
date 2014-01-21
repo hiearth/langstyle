@@ -6,10 +6,11 @@
         <script type="text/javascript" src="resource/ajax.js"></script>
         <script type="text/javascript" src="resource/simpleDom.js"></script>
         <script type="text/javascript" src="resource/langstyle.js"></script>
-        <script type="text/javascript" src="resource/wordStage.js"></script>
+        <script type="text/javascript" src="resource/user.js"></script>
         <script type="text/javascript" src="resource/wordCharacter.js"></script>
         <script type="text/javascript" src="resource/wordImage.js"></script>
         <script type="text/javascript" src="resource/wordSound.js"></script>
+        <script type="text/javascript" src="resource/wordStage.js"></script>
         <script type="text/javascript" src="resource/fileUploader.js"></script>
         <script type="text/javascript" src="resource/materialProvider.js"></script>
     </head>
@@ -21,7 +22,6 @@
         <div id="stage" class="js-wordStage b-stage hidden">
             <div class="js-wordStageTop">
                 <input type="text" id="testCharacterCode" />
-                <button type="button" id="testImages" onclick="javascript:showImages();">Show</button>
                 <div id="images"></div>
                 <div class="js-wordCharacter">
                     <label id="character"></label>
@@ -30,7 +30,7 @@
                     <audio id="sound"></audio>
                 </div>
                 <div class="js-needRemove">
-                    <button type="button" class="js-next" onclick="wordStage.nextWord();">Next</button>
+                    <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
                 </div>
             </div>
             <div class="">
@@ -53,24 +53,6 @@
         <script type="text/javascript" src="resource/index.js"></script>
         <script type="text/javascript">
             var materialProvider = new MeterialProvider("imageFile", "characterCode");
-        </script>
-        <script type="text/javascript">
-            function showImages(){
-                var characterCode = dom.getById("testCharacterCode").value;
-                ajax.get(langstyle.characterCodeUrl + "/" + characterCode).then(function(characterId){
-                        ajax.get(langstyle.characterImagesUrl + "/" + characterId).then(function(imageIds){
-                            var imageIdArray = imageIds.split(",");
-                            var imagesArea = dom.getById("images");
-                            dom.emptyElement(imagesArea);
-                            for(var i= imageIdArray.length-1;i>=0;i--){
-                                var imageView = dom.createElement("image"); 
-                                imageView.alt = imageIdArray[i];
-                                imageView.src = langstyle.imageUrl + "/" + imageIdArray[i];
-                                imagesArea.appendChild(imageView);
-                            }
-                            });
-                });
-            }
         </script>
     </body>
 </html>

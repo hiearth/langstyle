@@ -85,12 +85,14 @@ class UserCharacterCurrentHandler(UserCharacterHandler):
         if character_id is None:
             self.send_not_found()
             return
-        character_service = self._get_character_service()
-        current_character = character_service.get(character_id)
-        if not current_character:
-            self.send_not_found()
-            return
-        self.send_headers_and_content(current_character)
+        #character_service = self._get_character_service()
+        #current_character = character_service.get(character_id)
+        #if not current_character:
+        #    self.send_not_found()
+        #    return
+        #self.send_headers_and_content(current_character)
+        # need to return json data
+        self.send_headers_and_content(str(character_id))
 
 
 class UserCharacterLearningHanlder(UserCharacterHandler):
