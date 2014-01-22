@@ -6,9 +6,14 @@ langstyle.WordCharacter = function (options) {
 
     this._characterNode = dom.getById(options.characterId);
     this._restUrl = options.restUrl;
+    this._characterUrl = "/character";
 };
 
 langstyle.WordCharacter.prototype = {
+
+    getCharacterCode: function (characterId) {
+        return ajax.get(this._characterUrl + "/" + characterId);
+    },
 
     next: function () {
         var characterUrl = this._getRequestUrl();

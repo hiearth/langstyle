@@ -28,6 +28,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/character/(.*)", character.CharacterHandler)
         self._add_handler(r"/charactercode/?(.*)", character.CharacterCodeHandler)
         self._add_handler(r"/image/?(.*)", image.ImageHandler)
+        self._add_handler(r"/usercharacter/next", user_character.UserCharacterNextHandler)
         self._add_handler(r"/usercharacter/grasp", user_character.UserCharacterGraspHandler)
         self._add_handler(r"/usercharacter/current", user_character.UserCharacterCurrentHandler)
         self._add_handler(r"/usercharacter/count/(.*)", user_character.UserCharacterCountHandler)
@@ -37,6 +38,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/sound/?(.*)",sound.SoundHandler)
         self._add_handler(r"(.*)\.js", web.StaticFileHandler)
         self._add_handler(r"(.*)\.css", web.StaticFileHandler)
+        self._add_handler(r"(.*)\.png", web.StaticFileHandler)
 
     def _add_handler(self, pattern, handler_class):
         self._routes.append((re.compile(pattern), handler_class))

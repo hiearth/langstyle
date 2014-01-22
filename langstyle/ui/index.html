@@ -20,17 +20,17 @@
             <button id="add" class="js-add">Add</button>
         </div>
         <div id="stage" class="js-wordStage b-stage hidden">
+            <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
             <div class="js-wordStageTop">
-                <input type="text" id="testCharacterCode" />
-                <div id="images"></div>
                 <div class="js-wordCharacter">
                     <label id="character"></label>
                 </div>
+                <button type="button" id="playSound" class="sound">
+                    <span></span>
+                </button>
+                <div id="images"></div>
                 <div class="js-wordSound">
                     <audio id="sound"></audio>
-                </div>
-                <div class="js-needRemove">
-                    <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
                 </div>
             </div>
             <div class="">

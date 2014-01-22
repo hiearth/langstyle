@@ -26,6 +26,10 @@ class UserCharacterRepository(base_repository.BaseRepository):
             return result[0]
         return None
 
+    def get_unknown_characters(self, user_id):
+        unknown_characters = self._call_proc_query_all("UserProgress_Unknown_S", [user_id])
+        return helper.list_comprehension_by_index(unknown_characters, 0)
+
     def begin_learn(self, user_id, character_id):
         self._call_proc_non_query("UserProgress_I", [user_id, character_id])
 

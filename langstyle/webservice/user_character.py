@@ -95,6 +95,19 @@ class UserCharacterCurrentHandler(UserCharacterHandler):
         self.send_headers_and_content(str(character_id))
 
 
+class UserCharacterNextHandler(UserCharacterHandler):
+
+    def get(self):
+        if not self.has_permission():
+            self.send_access_denied()
+            return
+        nextCharacter = self._get_user_character_service().next(self.user_id)
+        if nextCharacter is None:
+            self.send_not_found()
+            return
+        self.send_headers_and_content(str(nextCharacter))
+
+
 class UserCharacterLearningHanlder(UserCharacterHandler):
 
     def get(self):

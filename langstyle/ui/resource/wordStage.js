@@ -68,16 +68,17 @@ langstyle.WordStage.prototype = {
 
     play: function () {
 
-        this.user.getCurrentCharacter().then(function (characterId) {
+        this.user.getNextCharacter().then(function (characterId) {
+            this.getCharacter(characterId);
             this.getImages(characterId);
             this.getSound(characterId);
         } .bind(this));
     },
 
-    getCharacter: function () {
-        return this.wordCharacter.getCurrent().then(function (character) {
+    getCharacter: function (characterId) {
+        this.wordCharacter.getCharacterCode(characterId).then(function (character) {
             this._character = character;
-            return character.id;
+            this.showCharacter();
         } .bind(this));
     },
 
@@ -87,6 +88,15 @@ langstyle.WordStage.prototype = {
             var imageUrls = this._getImageUrlsByIds(this._imageIds);
             this.imageView.show(imageUrls);
         } .bind(this));
+    },
+
+    getSound: function (characterId) {
+        // add a sign to mark sound ready
+    },
+
+    showCharacter: function () {
+        var characterElement = dom.getById("character");
+        characterElement.textContent = this._character;
     },
 
     _getArrayFromString: function (idsString) {
@@ -103,26 +113,5 @@ langstyle.WordStage.prototype = {
             imageUrls.push(this.wordImage.getUrlById(imageIds[i]));
         }
         return imageUrls.reverse();
-    },
-
-    _getUrlById: function (imageId) {
-
-    },
-
-    getSound: function (characterId) {
-        // add a sign to mark sound ready
-    },
-
-    nextWord: function () {
-        // first get character
-        // then show image of this character
-        // and then play the sound of this character
-        // at last display character
-        this.wordCharacter.next().then(function () {
-            var currentCharacter = this.wordCharacter.getCharacter();
-            this.wordImage.load(currentCharacter);
-            this.wordSound.load(currentCharacter);
-        } .bind(this));
     }
-
 };
