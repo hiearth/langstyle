@@ -7,31 +7,94 @@ langstyle.ImageView = function (imageViewId) {
     }
 
     this._imageViewId = imageViewId;
+    this._imageViewElement = dom.getById(this._imageViewId);
+    this._currentSign = "current";
+    this._hiddenSign = "hidden";
     this._imageUrls = [];
+
+    this.init();
 };
 
 langstyle.ImageView.prototype = {
+
+    init: function () {
+        dom.getById("nextImage").onclick = this._showNext.bind(this);
+        this._imageViewElement.addEventListener("touchMove", this._showNext.bind(this));
+    },
 
     show: function (imageUrls) {
         this._imageUrls = imageUrls;
         this._reset();
         this._loadImages();
+        this._showFirst();
     },
 
     _reset: function () {
-        var viewElement = dom.getById(this._imageViewId);
-        dom.emptyElement(viewElement);
+        dom.emptyElement(this._imageViewElement);
     },
 
     _loadImages: function () {
-        var viewElement = dom.getById(this._imageViewId);
         var length = this._imageUrls.length;
         for (var i = 0; i < length; i++) {
             var imageLink = dom.createElement("img");
             imageLink.alt = this._imageUrls[i];
             imageLink.src = this._imageUrls[i];
-            viewElement.appendChild(imageLink);
+            imageLink.classList.add(this._hiddenSign);
+            this._imageViewElement.appendChild(imageLink);
         }
+    },
+
+    _hasImage: function () {
+        return this._imageViewElement.children.length > 0;
+    },
+
+    _showFirst: function () {
+        var firstImage = this._getFirst();
+        if (firstImage) {
+            this._showImage(firstImage);
+        }
+    },
+
+    _showImage: function (imageElement) {
+        imageElement.classList.remove(this._hiddenSign);
+        imageElement.classList.add(this._currentSign);
+    },
+
+    _showNext: function () {
+        var nextImage = this._getNext();
+        if (nextImage) {
+            this._hideCurrent();
+            this._showImage(nextImage);
+        }
+    },
+
+    _hideCurrent: function () {
+        var currentImage = this._getCurrent();
+        if (currentImage) {
+            currentImage.classList.remove(this._currentSign);
+            currentImage.classList.add(this._hiddenSign);
+        }
+    },
+
+    _getFirst: function () {
+        if (this._hasImage()) {
+            return this._imageViewElement.children[0];
+        }
+    },
+
+    _getCurrent: function () {
+        return dom.getFirstChildByClass(this._imageViewElement, this._currentSign);
+    },
+
+    _getNext: function () {
+        var currentImage = this._getCurrent();
+        if (currentImage) {
+            var nextNode = currentImage.nextSibling;
+            if (nextNode && nextNode.nodeType === Node.ELEMENT_NODE && nextNode.nodeName === "IMG") {
+                return nextNode;
+            }
+        }
+        return this._getFirst();
     }
 };
 

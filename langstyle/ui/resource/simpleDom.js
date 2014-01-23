@@ -14,16 +14,16 @@
             return true;
         },
 
-        createElement:function(elementName){
+        createElement: function (elementName) {
             return document.createElement(elementName);
         },
 
-        appendAsChild:function(parentElement, targetElement){
+        appendAsChild: function (parentElement, targetElement) {
             parentElement.appendChild(targetElement);
         },
 
-        emptyElement:function(targetElement){
-            while(targetElement.lastChild){
+        emptyElement: function (targetElement) {
+            while (targetElement.lastChild) {
                 targetElement.removeChild(targetElement.lastChild);
             }
         },
@@ -40,6 +40,14 @@
             var elements = document.getElementsByClassName(className);
             if (elements && elements.length > 0) {
                 return elements[0];
+            }
+            return null;
+        },
+
+        getFirstChildByClass: function (parentElement, className) {
+            var children = parentElement.getElementsByClassName(className);
+            if (children && children.length > 0) {
+                return children[0];
             }
             return null;
         },
