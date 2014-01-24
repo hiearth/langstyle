@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from mysql import connector as dbconnector
 from .. import helper
 from . import base_repository
 

@@ -7,6 +7,7 @@
         <script type="text/javascript" src="resource/simpleDom.js"></script>
         <script type="text/javascript" src="resource/langstyle.js"></script>
         <script type="text/javascript" src="resource/user.js"></script>
+        <script type="text/javascript" src="resource/userProgress.js"></script>
         <script type="text/javascript" src="resource/wordCharacter.js"></script>
         <script type="text/javascript" src="resource/wordImage.js"></script>
         <script type="text/javascript" src="resource/wordSound.js"></script>
@@ -16,8 +17,9 @@
     </head>
     <body>
         <div class="b-start">
-            <button id="start" class="js-start">Start</button>
-            <button id="add" class="js-add">Add</button>
+            <button class="js-start-menu">Start</button>
+            <button class="js-add-menu">Add</button>
+            <button class="js-register-menu">Register</button>
         </div>
         <div id="stage" class="js-wordStage b-stage hidden">
             <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
@@ -40,22 +42,35 @@
                 <img id="image" alt="word image" />
             </div>
         </div>
+
         <div id="addStage" class="js-add-page hidden">
-                <form method="post" enctype="multipart/form-data" 
-                action="javascript:materialProvider.linkImageToCharacter();">
-                    <input type="file" id="imageFile" name="imageFile" />
-                    <label id="fileSize"></label>
-                    <br />
-                    <label>Character</label>
-                    <input type="text" id="characterCode"/>
-                    <br />
-                    <button type="submit" id="uploadImage">Submit</button>
-                </form>
+            <form method="post" enctype="multipart/form-data" 
+            action="javascript:materialProvider.linkImageToCharacter();">
+                <input type="file" id="imageFile" name="imageFile" />
+                <label id="fileSize"></label>
+                <br />
+                <label>Character</label>
+                <input type="text" id="characterCode"/>
+                <br />
+                <button type="submit" id="uploadImage">Submit</button>
+            </form>
+        </div>
+
+        <div id="registerUser">
+            <label>User Name</label>
+            <input type="text" id="userName"/>
+            <br />
+            <label>Password</label>
+            <input type="text" id="password"/>
+            <br />
+            <label>Confirm Password</label>
+            <input type="text" id="confirmPassword"/>
+            <br />
+            <label class="js-user-validation"></label>
+            <br />
+            <button type="button" id="register">Register</button>
         </div>
         
         <script type="text/javascript" src="resource/index.js"></script>
-        <script type="text/javascript">
-            var materialProvider = new MeterialProvider("imageFile", "characterCode");
-        </script>
     </body>
 </html>

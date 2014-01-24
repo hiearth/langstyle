@@ -1,29 +1,49 @@
 
-langstyle.User = function () {
+langstyle.User = function (options) {
     if (!(this instanceof langstyle.User)) {
-        return new langstyle.User();
+        return new langstyle.User(options);
     }
 
-    this._characterImagesUrl = "/characterimages";
-    this._currentCharacterUrl = "/usercharacter/current";
-    this._nextCharacterUrl = "/usercharacter/next";
+    this.userNameId = options.userNameId;
+    this.passwordId = options.passwordId;
+    this.confirmPasswordId = options.confirmPasswordId;
+    this.emailId = options.emailId;
+    this.userUrl = "/user";
 };
 
 langstyle.User.prototype = {
 
-    getCurrentCharacter:function(){
-        return ajax.get(this._currentCharacterUrl);
+    validate: function () {
+        var userInfo = this._gather();
+        var validationMessage = "";
+        if (!userInfo.userName || userInfo.userName.trim() === "") {
+            validationMessage = "user name is required";
+        }
+        else if (!userInfo.password || userInfo.password.trim() === "") {
+            validationMessage = "password is required";
+        }
+        dom.getFirstByClass("js-user-validation").value = validationMessage;
+        return validationMessage === "";
     },
 
-    getNextCharacter:function(){
-        return ajax.get(this._nextCharacterUrl);
+    register: function () {
+        var userInfo = this._gather();
+        ajax.post(this.userUrl, null, userInfo);
     },
 
-    getCharacterImages: function (characterId) {
-        return ajax.get(this._getCharacterImagesUrl(characterId));
+    _gather: function () {
+        return {
+            "userName": this._getFieldValue(this.userNameId),
+            "password": this._getFieldValue(this.passwordId)
+        };
     },
 
-    _getCharacterImagesUrl: function (characterId) {
-        return this._characterImagesUrl + "/" + characterId;
-    },
+    _getFieldValue: function (fieldId) {
+        var fieldElement = dom.getById(fieldId);
+        if (fieldElement) {
+            return fieldElement.value;
+        }
+        return null;
+    }
+
 };

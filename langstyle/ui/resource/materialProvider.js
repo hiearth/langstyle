@@ -1,15 +1,16 @@
 
 (function () {
-    var MeterialProvider = function (imageFileId, characterCodeId) {
+    var MeterialProvider = function (options) {
         if (!(this instanceof MeterialProvider)) {
-            return MeterialProvider(imageFileId, characterCodeId);
+            return MeterialProvider(options);
         }
 
-        this.imageUploader = new FileUploader(imageFileId, langstyle.imageUrl);
-        this.characterCodeId = characterCodeId;
-        this.characterImageUrl = langstyle.characterImageUrl;
-        this.characterUrl = langstyle.characterUrl;
-        this.characterCodeUrl = langstyle.characterCodeUrl;
+        this.imageUrl = "/image";
+        this.characterUrl = "/character";
+        this.characterCodeUrl = "/charactercode";
+        this.characterImageUrl = "/characterimage";
+        this.characterCodeId = options.characterCodeId;
+        this.imageUploader = new FileUploader(options.imageFileId, this.imageUrl);
     };
 
     MeterialProvider.prototype = {

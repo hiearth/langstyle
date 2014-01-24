@@ -2,6 +2,7 @@
 import re
 from .. import helper
 from . import web
+from . import user
 from . import page
 from . import image
 from . import sound
@@ -25,6 +26,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._routes = []
         self._add_handler(r"/$", page.HTMLHandler)
         self._add_handler(r"/([a-zA-Z]*)(\.html)$", page.HTMLHandler)
+        self._add_handler(r"/user/(.*)", user.UserHandler)
         self._add_handler(r"/character/(.*)", character.CharacterHandler)
         self._add_handler(r"/charactercode/?(.*)", character.CharacterCodeHandler)
         self._add_handler(r"/image/?(.*)", image.ImageHandler)

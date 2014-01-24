@@ -9,6 +9,7 @@ class _RepositoryFactory:
         self._user_character_repository = None
         self._character_image_repository = None
         self._image_repository = None
+        self._user_repository = None
        
     def get_character_repository(self):
         if not self._character_repository:
@@ -34,6 +35,12 @@ class _RepositoryFactory:
             self._image_repository = image_repository.ImageRepository()
         return self._image_repository
 
+    def get_user_repository(self):
+        if not self._user_repository:
+            from .database import user_repository
+            self._user_repository = user_repository.UserRepository()
+        return self._user_repository
+
 
 class _ServiceFactory:
 
@@ -45,6 +52,7 @@ class _ServiceFactory:
         self._log_service = None
         self._image_file_service=None
         self._sound_file_service = None
+        self._user_service = None
 
     def get_log_service(self):
         if not self._log_service:
@@ -91,6 +99,13 @@ class _ServiceFactory:
             from .service import file_service
             self._sound_file_service = file_service.FileService(SOUND_DATA_DIRECTORY)
         return self._sound_file_service
+
+    def get_user_service(self):
+        if not self._user_service:
+            from .service import user_service
+            repository = repository_factory.get_user_repository()
+            self._user_service = user_service.UserService(repository)
+        return self._user_service
 
 
 repository_factory = _RepositoryFactory()

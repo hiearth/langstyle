@@ -108,7 +108,7 @@ langstyle.WordStage = function (options) {
     this._images = [];
     this._sound = null;
 
-    this.user = new langstyle.User();
+    this.userProgress = new langstyle.UserProgress();
 
     this.wordCharacter = new langstyle.WordCharacter({
         "restUrl": "/character/",
@@ -131,7 +131,7 @@ langstyle.WordStage.prototype = {
 
     play: function () {
 
-        this.user.getNextCharacter().then(function (characterId) {
+        this.userProgress.getNextCharacter().then(function (characterId) {
             this.getCharacter(characterId);
             this.getImages(characterId);
             this.getSound(characterId);
@@ -146,7 +146,7 @@ langstyle.WordStage.prototype = {
     },
 
     getImages: function (characterId) {
-        this.user.getCharacterImages(characterId).then(function (imageIds) {
+        this.userProgress.getCharacterImages(characterId).then(function (imageIds) {
             this._imageIds = this._getArrayFromString(imageIds);
             var imageUrls = this._getImageUrlsByIds(this._imageIds);
             this.imageView.show(imageUrls);

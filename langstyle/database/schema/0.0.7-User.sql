@@ -1,10 +1,10 @@
 use Langstyle;
 
 create table User(
-	UserId int primary key,
-	Name varchar(64),
-	Email varchar(256),
-	UserPassword varchar(256)
+	UserId int primary key auto_increment,
+	Name varchar(64) not null,
+	UserPassword varchar(64) not null,
+	Email varchar(256)
 );
 
 create table UserProgress(

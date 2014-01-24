@@ -125,6 +125,10 @@ class RequestHandler:
     def send_server_error(self, error_message):
         self._send_error(500, error_message)
 
+    def send_bad_request(self, error_message):
+        error_message = error_message or "Bad Request"
+        self._send_error(400, error_message)
+
     def send_not_found(self):
         self._send_error(404, "Not Found")
 
