@@ -3,7 +3,7 @@ import os
 import shutil
 import http
 import http.cookies
-import urllib.parse
+import json
 from . import util
 from .. import config
 
@@ -54,15 +54,12 @@ class RequestHandler:
 
     def get_form_parameter(self, parameter_name):
         form = self.get_request_form()
-        parameter_value = form.get(parameter_name.encode(), None)
-        if parameter_value:
-            return parameter_value[0].decode()
-        return None
+        return form.get(parameter_name, None)
 
     def get_request_form(self):
         if self._request_form is None:
             body_length = self._request.headers.get("content-length")
-            self._request_form = urllib.parse.parse_qs(self._request.rfile.read(int(body_length)), keep_blank_values=1)
+            self._request_form = json.loads(self._request.rfile.read(int(body_length)).decode())
         return self._request_form
 
     def get_file(self):

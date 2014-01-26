@@ -28,7 +28,9 @@
     <Compile Include="langstyle\database\character_repository.py" />
     <Compile Include="langstyle\database\image_repository.py" />
     <Compile Include="langstyle\database\user_character_repository.py" />
+    <Compile Include="langstyle\database\user_repository.py" />
     <Compile Include="langstyle\database\__init__.py" />
+    <Compile Include="langstyle\entity\user.py" />
     <Compile Include="langstyle\entity\word_image.py" />
     <Compile Include="langstyle\entity\__init__.py" />
     <Compile Include="langstyle\helper.py" />
@@ -38,6 +40,7 @@
     <Compile Include="langstyle\service\image_service.py" />
     <Compile Include="langstyle\service\log_service.py" />
     <Compile Include="langstyle\service\user_character_service.py" />
+    <Compile Include="langstyle\service\user_service.py" />
     <Compile Include="langstyle\service\__init__.py" />
     <Compile Include="langstyle\tester.py" />
     <Compile Include="langstyle\test\mock\mock_character_image_repository.py" />
@@ -61,6 +64,7 @@
     <Compile Include="langstyle\webservice\page.py" />
     <Compile Include="langstyle\webservice\router.py" />
     <Compile Include="langstyle\webservice\sound.py" />
+    <Compile Include="langstyle\webservice\user.py" />
     <Compile Include="langstyle\webservice\user_character.py" />
     <Compile Include="langstyle\webservice\util.py" />
     <Compile Include="langstyle\webservice\sound_for_test.py" />
@@ -102,6 +106,8 @@
     <Content Include="langstyle\database\procedure\UserProgress_I.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Learning_S.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Unknown_S.sql" />
+    <Content Include="langstyle\database\procedure\User_I.sql" />
+    <Content Include="langstyle\database\procedure\User_S_By_Name.sql" />
     <Content Include="langstyle\database\procedure\WordCharacter_I.sql" />
     <Content Include="langstyle\database\procedure\WordCharacter_S_By_Code.sql" />
     <Content Include="langstyle\database\procedure\WordCharacter_S_By_Id.sql" />
@@ -129,6 +135,7 @@
     <Content Include="langstyle\database\schema\0.0.7-User.sql" />
     <Content Include="langstyle\database\schema\0.0.8-CharacterImage.sql" />
     <Content Include="langstyle\ui\index.html" />
+    <Content Include="langstyle\ui\resource\user.js" />
     <Content Include="langstyle\ui\resource\ajax.js" />
     <Content Include="langstyle\ui\resource\fileUploader.js" />
     <Content Include="langstyle\ui\resource\index.js" />
@@ -137,7 +144,7 @@
     <Content Include="langstyle\ui\resource\materialProvider.js" />
     <Content Include="langstyle\ui\resource\promise.js" />
     <Content Include="langstyle\ui\resource\simpleDom.js" />
-    <Content Include="langstyle\ui\resource\user.js" />
+    <Content Include="langstyle\ui\resource\userProgress.js" />
     <Content Include="langstyle\ui\resource\wordCharacter.js" />
     <Content Include="langstyle\ui\resource\wordImage.js" />
     <Content Include="langstyle\ui\resource\wordSound.js" />

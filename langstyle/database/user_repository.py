@@ -2,6 +2,7 @@
 
 from . import base_repository
 from .. import helper
+from ..entity import user
 
 class UserRepository(base_repository.BaseRepository):
 
@@ -11,5 +12,8 @@ class UserRepository(base_repository.BaseRepository):
             return userInfo[3]
         return None
 
-    def get(self):
-        pass
+    def get(self, user_name):
+        user_info = self._call_proc_query_one("User_S_By_Name", [user_name])
+        if user_info:
+            return user.User(user_info[0], user_info[1],user_info[2])
+        return None

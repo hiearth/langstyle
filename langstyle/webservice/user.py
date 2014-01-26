@@ -18,6 +18,9 @@ class UserHandler(web.RequestHandler):
             self.send_bad_request("password is required")
             return
         user_service = config.service_factory.get_user_service()
+        if user_service.exist(userName):
+            self.send_bad_request("user name already exist")
+            return
         user_id = user_service.add(userName, password, None)
         if user_id is None:
             self.send_server_error("fail to register user")
