@@ -57,6 +57,7 @@
     <Compile Include="langstyle\test\unit\user_character_service_test.py" />
     <Compile Include="langstyle\test\unit\__init__.py" />
     <Compile Include="langstyle\test\__init__.py" />
+    <Compile Include="langstyle\webservice\authentication.py" />
     <Compile Include="langstyle\webservice\character_image.py" />
     <Compile Include="langstyle\server.py" />
     <Compile Include="langstyle\webservice\character.py" />

@@ -1,6 +1,6 @@
 
 (function (dom) {
-    var stages = ["stage", "addStage", "registerUser"];
+    var stages = ["stage", "addStage", "loginPage", "registerPage"];
 
     var hideStages = function () {
         for (var i = stages.length - 1; i >= 0; i--) {
@@ -27,7 +27,7 @@
 
     var registerUserButton = dom.getFirstByClass("js-register-menu");
     registerUserButton.onclick = function (e) {
-        showStage("registerUser");
+        showStage("registerPage");
     };
 
     var wordStage = new langstyle.WordStage({
@@ -46,18 +46,30 @@
 
     window.materialProvider = materialProvider;
 
-    var user = new langstyle.User({
-        "userNameId": "userName",
-        "passwordId": "password",
-        "confirmPasswordId": "confirmPassword"
+    var userRegister = new langstyle.UserRegister({
+        "userNameId": "registerUserName",
+        "passwordId": "registerPassword",
+        "confirmPasswordId": "registerConfirmPassword"
     });
 
-    window.user = user;
+    window.userRegister = userRegister;
+
+    var userLogin = new langstyle.UserLogin({
+        "userNameId": "loginUserName",
+        "passwordId": "loginPassword"
+    });
+
+    var loginButton = dom.getById("login");
+    loginButton.onclick = function (e) {
+        if (userLogin.validate()) {
+            userLogin.login();
+        }
+    };
 
     var registerButton = dom.getById("register");
     registerButton.onclick = function (e) {
-        if (user.validate()) {
-            user.register();
+        if (userRegister.validate()) {
+            userRegister.register();
         }
     };
 } (dom));

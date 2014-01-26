@@ -4,6 +4,11 @@
 	display:none;
 }
 
+.header-right
+{
+	float:right;
+}
+
 .b-stage
 {
 	
@@ -17,4 +22,41 @@
 .sound span
 {
 	/*background-image: url("../image/sound.png");*/
+}
+
+.form
+{
+	width:500px;	
+	margin-top:20px;
+}
+
+.form label
+{
+	display: block;
+	text-align:right;
+	float: left;
+	width: 150px;
+	padding-right:5px;
+}
+
+.form label.validation
+{
+	width:100%;
+	text-align:center;
+}
+
+.form input
+{
+	width:200px;
+}
+
+.formBottom
+{
+	padding-top:10px;
+	padding-left:155px;
+}
+
+.formBottom button
+{
+	width: 100px;
 }

@@ -12,6 +12,7 @@ class RequestHandler:
     def __init__(self, request):
         self._request = request
         self._response_headers = {}
+        self._response_cookies = None
         self._request_form = None
         self.user_id = self._get_user()
 
@@ -88,9 +89,16 @@ class RequestHandler:
     def set_header(self, key, value):
         self._response_headers[key] = value
 
+    def set_cookie(self, key, value):
+        if not self._response_cookies:
+            self._response_cookies = http.cookies.SimpleCookie()
+        self._response_cookies[key] = value
+
     def _send_headers(self):
         for key, value in self._response_headers.items():
             self._request.send_header(key, value)
+        if self._response_cookies:
+            self._request.send_header("Set-Cookie", self._response_cookies.output(header=""))
         self._request.end_headers()
 
     def send_success_headers(self):

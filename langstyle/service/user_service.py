@@ -16,3 +16,9 @@ class UserService:
 
     def get(self, user_name):
         return self._user_repository.get(user_name)
+
+    def authenticate(self, user_name, password):
+        exist_user = self.get(user_name)
+        if exist_user:
+            return exist_user.password == password
+        return False
