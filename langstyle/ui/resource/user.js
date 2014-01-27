@@ -55,7 +55,7 @@
 
         register: function () {
             var userInfo = this._gather();
-            ajax.post(this.userUrl, null, userInfo).then(
+            return ajax.post(this.userUrl, null, userInfo).then(
                 function (userId) {
                     this._showMessage("register success");
                 } .bind(this),
@@ -116,7 +116,7 @@
 
         login: function () {
             var userInfo = this._gather();
-            ajax.post(this.userUrl, null, userInfo).then(
+            return ajax.post(this.userUrl, null, userInfo).then(
                 function (userId) {
                     this._showMessage("login success");
                 } .bind(this),
@@ -124,6 +124,20 @@
                     this._showMessage(errorMessage);
                 } .bind(this)
             );
+        },
+
+        logout: function () {
+            var cookie = langstyle.Cookie();
+            cookie.remove("userName");
+        },
+
+        hasLogin: function () {
+            var cookie = langstyle.Cookie();
+            var userName = cookie.get("userName");
+            if (userName != null && userName.trim() !== "") {
+                return true;
+            }
+            return false;
         },
 
         _gather: function () {

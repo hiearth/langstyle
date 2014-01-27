@@ -6,6 +6,7 @@
         <script type="text/javascript" src="resource/ajax.js"></script>
         <script type="text/javascript" src="resource/simpleDom.js"></script>
         <script type="text/javascript" src="resource/langstyle.js"></script>
+        <script type="text/javascript" src="resource/cookie.js"></script>
         <script type="text/javascript" src="resource/user.js"></script>
         <script type="text/javascript" src="resource/userProgress.js"></script>
         <script type="text/javascript" src="resource/wordCharacter.js"></script>
@@ -21,6 +22,7 @@
             <button class="js-add-menu">Add</button>
             <div class="header-right">
                 <button class="js-login-menu">Log in</button>
+                <button class="js-logout-menu">Log out</button>
                 <button class="js-register-menu">Register</button>
             </div>
         </div>
@@ -31,9 +33,9 @@
                 <div class="js-wordCharacter">
                     <label id="character"></label>
                 </div>
-                <button type="button" id="playSound" class="sound">
+                <!--<button type="button" id="playSound" class="sound">
                     <span></span>
-                </button>
+                </button>-->
                 <p>
                     <button type="button" id="nextImage">Next Image (test)</button>
                 </p>
@@ -60,7 +62,7 @@
             </form>
         </div>
 
-        <div id="loginPage" class="form">
+        <div id="loginPage" class="form hidden">
             <label>User Name</label>
             <input type="text" id="loginUserName"/>
             <br />
@@ -73,7 +75,7 @@
             </div>
         </div>
 
-        <div id="registerPage" class="form">
+        <div id="registerPage" class="form hidden">
             <label>User Name</label>
             <input type="text" id="registerUserName"/>
             <br />
