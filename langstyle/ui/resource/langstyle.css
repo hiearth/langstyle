@@ -4,6 +4,11 @@
 	display:none;
 }
 
+.disabled
+{
+	pointer-events:none;
+}
+
 .header-right
 {
 	float:right;
@@ -11,12 +16,57 @@
 
 .b-stage
 {
-	
+	margin-top: 20px;
 }
 
 .b-stage.start
 {
 	display:block;
+}
+
+.previousArrow, .nextArrow
+{
+	cursor:pointer;
+	position: relative;
+	padding: 0.5em 1.5em;
+}
+.nextArrow
+{
+	text-align: right;
+}
+.previousArrow.disabled:before, .previousArrow.disabled:after, .nextArrow.disabled:before, .nextArrow.disabled:after
+{
+	background:#888;
+}
+.previousArrow:before, .previousArrow:after, .nextArrow:before, .nextArrow:after
+{
+	background: #333;
+	border-radius: 0.5em;
+	content:"";
+	position:absolute;
+	height: 0.5em;
+	width:1em;
+	top: 50%;
+}
+.previousArrow:before, .previousArrow:after
+{
+	left:0;
+}
+.previousArrow:before, .nextArrow:before
+{
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+.previousArrow:after, .nextArrow:after
+{
+	-moz-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+.previousArrow:after, .nextArrow:before
+{
+	margin-top: -0.36em;
 }
 
 .sound span

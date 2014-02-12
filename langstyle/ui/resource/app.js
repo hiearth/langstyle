@@ -5,7 +5,10 @@
         "characterId": "character",
         "soundId": "sound",
         "imageId": "image",
-        "imageViewId": "images"
+        "imageViewId": "images",
+        "imageNavId": "imageNav",
+        "previousImageId": "previousImage",
+        "nextImageId": "nextImage"
     });
     window.wordStage = wordStage;
 
