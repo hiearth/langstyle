@@ -44,6 +44,15 @@
         dom.removeClass(stage, "hidden");
     };
 
+    var showUserName = function () {
+        var userName = userLogin.getUserName();
+        dom.getById("userName").textContent = userName;
+    };
+
+    var hideUserName = function () {
+        dom.getById("userName").textContent = "";
+    };
+
     var startButton = dom.getFirstByClass("js-start-menu");
     startButton.onclick = function (e) {
         showStage("stage");
@@ -64,11 +73,12 @@
         showStage("loginPage");
     };
 
-    var logoutButton = dom.getFirstByClass("js-logout-menu");
-    logoutButton.onclick = function () {
+    var logoutMenu = dom.getFirstByClass("js-logout-menu");
+    logoutMenu.onclick = function () {
         userLogin.logout();
-        hideLogout();
         disableMenus();
+        hideUserName();
+        hideLogout();
         showStage("loginPage");
     };
 
@@ -77,7 +87,8 @@
         if (userLogin.validate()) {
             userLogin.login().then(function () {
                 enableMenus();
-                displayLogout();
+                showUserName();
+                showLogout();
                 showStage("stage");
             });
         }
@@ -88,19 +99,22 @@
         if (userRegister.validate()) {
             userRegister.register().then(function () {
                 enableMenus();
-                displayLogout();
+                showUserName();
+                showLogout();
                 showStage("stage");
             });
         }
     };
-    var displayLogout = function () {
-        logoutButton.classList.remove("hidden");
+    var showLogout = function () {
+        logoutMenu.classList.remove("hidden");
         loginMenu.classList.add("hidden");
+        registerUserMenu.classList.add("hidden");
     };
 
     var hideLogout = function () {
-        logoutButton.classList.add("hidden");
+        logoutMenu.classList.add("hidden");
         loginMenu.classList.remove("hidden");
+        registerUserMenu.classList.remove("hidden");
     };
 
     var disableMenus = function () {
@@ -115,10 +129,12 @@
 
     if (userLogin.hasLogin()) {
         enableMenus();
-        displayLogout();
+        showUserName();
+        showLogout();
     }
     else {
         disableMenus();
+        hideUserName();
         hideLogout();
     }
 

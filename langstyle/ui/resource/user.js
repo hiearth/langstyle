@@ -96,6 +96,7 @@
         }
         this.userNameId = options.userNameId;
         this.passwordId = options.passwordId;
+        this._cookieName = "userName";
         this.userUrl = "/authentication";
     };
 
@@ -127,17 +128,25 @@
         },
 
         logout: function () {
-            var cookie = langstyle.Cookie();
-            cookie.remove("userName");
+            var cookie = new langstyle.Cookie();
+            cookie.remove(this._cookieName);
         },
 
         hasLogin: function () {
-            var cookie = langstyle.Cookie();
-            var userName = cookie.get("userName");
-            if (userName != null && userName.trim() !== "") {
+            var userName = this.getUserName();
+            if (userName != null && userName !== "") {
                 return true;
             }
             return false;
+        },
+
+        getUserName: function () {
+            var cookie = new langstyle.Cookie();
+            var userName = cookie.get(this._cookieName);
+            if (userName != null) {
+                return userName.trim();
+            }
+            return userName;
         },
 
         _gather: function () {
