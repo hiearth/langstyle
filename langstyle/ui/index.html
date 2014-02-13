@@ -28,27 +28,29 @@
             </div>
         </div>
 
-        <div id="stage" class="js-wordStage b-stage hidden">
-            <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
+        <div id="stage" class="js-wordStage stage hidden">
+            <div class="stageButton">
+                <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
+            </div>
             <div class="js-wordStageTop">
-                <div class="js-wordCharacter">
+                <div class="js-wordCharacter characterView">
                     <label id="character"></label>
                 </div>
                 <!--<button type="button" id="playSound" class="sound">
                     <span></span>
                 </button>-->
-                <div id="imageNav" class="hidden">
+                <div id="imageNav" class="imageNavigation hidden">
                     <a id="previousImage" class="previousArrow"></a>
                     <a id="nextImage" class="nextArrow"></a>
                 </div>
-                <div id="images"></div>
+                <div id="images" class="imageView"></div>
                 <div class="js-wordSound">
                     <audio id="sound"></audio>
                 </div>
             </div>
         </div>
 
-        <div id="addStage" class="js-add-page hidden">
+        <div id="addStage" class="js-add-page stage hidden">
             <form method="post" enctype="multipart/form-data" 
             action="javascript:materialProvider.linkImageToCharacter();">
                 <input type="file" id="imageFile" name="imageFile" />

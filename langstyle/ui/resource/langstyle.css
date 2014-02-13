@@ -14,25 +14,60 @@
 	float:right;
 }
 
-.b-stage
+.stage
 {
 	margin-top: 20px;
+	margin-left:10px;
+	margin-right:10px;
 }
 
-.b-stage.start
+.stage.start
 {
 	display:block;
 }
 
+.stageButton
+{
+	text-align:right;
+	margin-top:5px;
+	margin-bottom:5px;
+	padding-right:5px;
+}
+
+.characterView
+{
+	text-align: center;
+	margin-top:15px;
+	margin-bottom:5px;
+	font-size:x-large;
+}
+
+.imageNavigation 
+{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.imageView
+{
+	margin-top:10px;
+}
+.imageView img
+{
+	width:100%;
+	height:100%;
+}
 .previousArrow, .nextArrow
 {
 	cursor:pointer;
 	position: relative;
 	padding: 0.5em 1.5em;
+	width:30%;
 }
 .nextArrow
 {
 	text-align: right;
+	float:right;
 }
 .previousArrow.disabled:before, .previousArrow.disabled:after, .nextArrow.disabled:before, .nextArrow.disabled:after
 {
