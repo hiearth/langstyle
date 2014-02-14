@@ -58,7 +58,7 @@ a
 }.menu-list-item.logo-menu
 {
 	margin-left:5px;
-	margin-right:50px;
+	margin-right:60px;
 	margin-top:0px;
 }
 .menu-item:hover, .menu-item:focus
@@ -179,8 +179,12 @@ a
 	width: 150px;
 	padding-right:5px;
 }
+.form .fieldLabel:after
+{
+	content: ":";
+}
 
-.form label.validation
+.form .validation
 {
 	width:100%;
 	text-align:center;

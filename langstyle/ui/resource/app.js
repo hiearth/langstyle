@@ -1,5 +1,7 @@
 
 (function (dom) {
+
+    var hiddenSign = "hidden";
     var wordStage = new langstyle.WordStage({
         "stageId": "stage",
         "characterId": "character",
@@ -37,14 +39,14 @@
     var hideStages = function () {
         for (var i = stages.length - 1; i >= 0; i--) {
             var stage = dom.getById(stages[i]);
-            dom.addClass(stage, "hidden");
+            dom.addClass(stage, hiddenSign);
         }
     };
 
     var showStage = function (stageId) {
         hideStages();
         var stage = dom.getById(stageId);
-        dom.removeClass(stage, "hidden");
+        dom.removeClass(stage, hiddenSign);
     };
 
     var showUserName = function () {
@@ -79,7 +81,7 @@
     var logoutMenu = dom.getFirstByClass("js-logout-menu");
     logoutMenu.onclick = function () {
         userLogin.logout();
-        disableMenus();
+        hideMenus();
         hideUserName();
         hideLogout();
         showStage("loginPage");
@@ -89,7 +91,7 @@
     loginButton.onclick = function (e) {
         if (userLogin.validate()) {
             userLogin.login().then(function () {
-                enableMenus();
+                showMenus();
                 showUserName();
                 showLogout();
                 showStage("stage");
@@ -101,7 +103,7 @@
     registerButton.onclick = function (e) {
         if (userRegister.validate()) {
             userRegister.register().then(function () {
-                enableMenus();
+                showMenus();
                 showUserName();
                 showLogout();
                 showStage("stage");
@@ -109,34 +111,34 @@
         }
     };
     var showLogout = function () {
-        logoutMenu.classList.remove("hidden");
-        loginMenu.classList.add("hidden");
-        registerUserMenu.classList.add("hidden");
+        logoutMenu.classList.remove(hiddenSign);
+        loginMenu.classList.add(hiddenSign);
+        registerUserMenu.classList.add(hiddenSign);
     };
 
     var hideLogout = function () {
-        logoutMenu.classList.add("hidden");
-        loginMenu.classList.remove("hidden");
-        registerUserMenu.classList.remove("hidden");
+        logoutMenu.classList.add(hiddenSign);
+        loginMenu.classList.remove(hiddenSign);
+        registerUserMenu.classList.remove(hiddenSign);
     };
 
-    var disableMenus = function () {
-        startButton.disabled = true;
-        addButton.disabled = true;
+    var hideMenus = function () {
+        startButton.classList.add(hiddenSign);
+        addButton.classList.add(hiddenSign);
     };
 
-    var enableMenus = function () {
-        startButton.disabled = false;
-        addButton.disabled = false;
+    var showMenus = function () {
+        startButton.classList.remove(hiddenSign);
+        addButton.classList.remove(hiddenSign);
     };
 
     if (userLogin.hasLogin()) {
-        enableMenus();
+        showMenus();
         showUserName();
         showLogout();
     }
     else {
-        disableMenus();
+        hideMenus();
         hideUserName();
         hideLogout();
     }
