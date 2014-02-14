@@ -1,4 +1,16 @@
 
+body
+{
+	margin:0;
+}
+
+a
+{
+	cursor:pointer;
+	color:#245dc1;
+	text-decoration:none;
+}
+
 .hidden
 {
 	display:none;
@@ -9,9 +21,54 @@
 	pointer-events:none;
 }
 
+
+.logo-text
+{
+	font-size:2.0em;
+}
+.header
+{
+	height: 60px;
+	background:#f5f5f5;
+}
+.header-left
+{
+	position:absolute;
+	white-space:nowrap;
+	padding-left: 5px;
+}
 .header-right
 {
-	float:right;
+	position:absolute;
+	right:0;
+	white-space:nowrap;
+	padding-right: 5px;
+}
+
+.menu-list
+{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.menu-list-item
+{
+	display:inline-block;
+	margin-top:20px;
+}.menu-list-item.logo-menu
+{
+	margin-left:5px;
+	margin-right:50px;
+	margin-top:0px;
+}
+.menu-item:hover, .menu-item:focus
+{
+	background-color: #ddd;
+}
+.menu-item-span
+{
+	border-left:2px solid transparent;
+	border-right:2px solid transparent;
 }
 
 .stage
@@ -20,7 +77,6 @@
 	margin-left:10px;
 	margin-right:10px;
 }
-
 .stage.start
 {
 	display:block;

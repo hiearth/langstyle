@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
-    <head title="language style">
+    <head>
+        <title>language style</title>
         <link rel="Stylesheet" href="resource/langstyle.css" />
         <script type="text/javascript" src="resource/promise.js"></script>
         <script type="text/javascript" src="resource/ajax.js"></script>
@@ -17,81 +18,104 @@
         <script type="text/javascript" src="resource/materialProvider.js"></script>
     </head>
     <body>
-        <div id="header">
-            <button class="js-start-menu">Start</button>
-            <button class="js-add-menu">Add</button>
+        <div id="header" class="header">            <div class="logo">
+            </div>
+            <div class="header-left">                <ol class="menu-list">
+                    <li class="menu-list-item logo-menu">
+                        <a href class="logo-text">Langstyle</a>
+                    </li>
+                    <li class="menu-list-item">
+                        <a class="js-start-menu menu-item"><span class="menu-item-span">Start</span></a>
+                    </li>
+                    <li class="menu-list-item">
+                        <a class="js-add-menu menu-item"><span class="menu-item-span">Add</span></a>
+                    </li>
+                </ol>
+            </div>
             <div class="header-right">
-                <label id="userName"></label>
-                <button class="js-login-menu">Log in</button>
-                <button class="js-logout-menu">Log out</button>
-                <button class="js-register-menu">Register</button>
+                <ol class="menu-list">
+                    <li class="menu-list-item">
+                        <label id="userName"></label>
+                    </li>
+                    <li class="menu-list-item">
+                        <a class="js-login-menu menu-item"><span class="menu-item-span">Log in</span></a>
+                    </li>
+                    <li class="menu-list-item">
+                        <a class="js-logout-menu menu-item"><span class="menu-item-span">Log out</span></a>
+                    </li>
+                    <li class="menu-list-item">
+                        <a class="js-register-menu menu-item"><span class="menu-item-span">Register</span></a>
+                    </li>
+                </ol>
             </div>
         </div>
 
-        <div id="stage" class="js-wordStage stage hidden">
-            <div class="stageButton">
-                <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
+        <div id="main" class="content">
+            <div id="stage" class="js-wordStage stage hidden">
+                <div class="stageButton">
+                    <button type="button" class="js-next" onclick="javascript:wordStage.play();">Next</button>
+                </div>
+                <div class="js-wordStageTop">
+                    <div class="js-wordCharacter characterView">
+                        <label id="character"></label>
+                    </div>
+                    <!--<button type="button" id="playSound" class="sound">
+                        <span></span>
+                    </button>-->
+                    <div id="imageNav" class="imageNavigation hidden">
+                        <a id="previousImage" class="previousArrow"></a>
+                        <a id="nextImage" class="nextArrow"></a>
+                    </div>
+                    <div id="images" class="imageView"></div>
+                    <div class="js-wordSound">
+                        <audio id="sound"></audio>
+                    </div>
+                </div>
             </div>
-            <div class="js-wordStageTop">
-                <div class="js-wordCharacter characterView">
-                    <label id="character"></label>
-                </div>
-                <!--<button type="button" id="playSound" class="sound">
-                    <span></span>
-                </button>-->
-                <div id="imageNav" class="imageNavigation hidden">
-                    <a id="previousImage" class="previousArrow"></a>
-                    <a id="nextImage" class="nextArrow"></a>
-                </div>
-                <div id="images" class="imageView"></div>
-                <div class="js-wordSound">
-                    <audio id="sound"></audio>
-                </div>
-            </div>
-        </div>
 
-        <div id="addStage" class="js-add-page stage hidden">
-            <form method="post" enctype="multipart/form-data" 
-            action="javascript:materialProvider.linkImageToCharacter();">
-                <input type="file" id="imageFile" name="imageFile" />
-                <label id="fileSize"></label>
+            <div id="addStage" class="js-add-page stage hidden">
+                <form method="post" enctype="multipart/form-data" 
+                action="javascript:materialProvider.linkImageToCharacter();">
+                    <input type="file" id="imageFile" name="imageFile" />
+                    <label id="fileSize"></label>
+                    <br />
+                    <label>Character</label>
+                    <input type="text" id="characterCode"/>
+                    <br />
+                    <button type="submit" id="uploadImage">Submit</button>
+                </form>
+            </div>
+
+            <div id="loginPage" class="form hidden">
+                <label>User Name</label>
+                <input type="text" id="loginUserName"/>
                 <br />
-                <label>Character</label>
-                <input type="text" id="characterCode"/>
+                <label>Password</label>
+                <input type="password" id="loginPassword"/>
                 <br />
-                <button type="submit" id="uploadImage">Submit</button>
-            </form>
-        </div>
-
-        <div id="loginPage" class="form hidden">
-            <label>User Name</label>
-            <input type="text" id="loginUserName"/>
-            <br />
-            <label>Password</label>
-            <input type="password" id="loginPassword"/>
-            <br />
-            <label class="js-login-validation validation"></label>
-            <div class="formBottom">
-                <button type="button" id="login">Log in</button>
+                <label class="js-login-validation validation"></label>
+                <div class="formBottom">
+                    <button type="button" id="login">Log in</button>
+                </div>
             </div>
-        </div>
 
-        <div id="registerPage" class="form hidden">
-            <label>User Name</label>
-            <input type="text" id="registerUserName"/>
-            <br />
-            <label>Password</label>
-            <input type="password" id="registerPassword"/>
-            <br />
-            <label>Confirm Password</label>
-            <input type="password" id="registerConfirmPassword"/>
-            <br />
-            <label class="js-register-validation validation"></label>
-            <div class="formBottom">
-                <button type="button" id="register">Register</button>
+            <div id="registerPage" class="form hidden">
+                <label>User Name</label>
+                <input type="text" id="registerUserName"/>
+                <br />
+                <label>Password</label>
+                <input type="password" id="registerPassword"/>
+                <br />
+                <label>Confirm Password</label>
+                <input type="password" id="registerConfirmPassword"/>
+                <br />
+                <label class="js-register-validation validation"></label>
+                <div class="formBottom">
+                    <button type="button" id="register">Register</button>
+                </div>
             </div>
-        </div>
         
+        </div>
         <script type="text/javascript" src="resource/app.js"></script>
     </body>
 </html>
