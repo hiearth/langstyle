@@ -54,15 +54,19 @@
         },
 
         register: function () {
+            var promise = new Promise();
             var userInfo = this._gather();
-            return ajax.post(this.userUrl, null, userInfo).then(
+            ajax.post(this.userUrl, null, userInfo).then(
                 function (userId) {
                     this._showMessage("register success");
+                    promise.fulfill(userId);
                 } .bind(this),
                 function (errorMessage) {
                     this._showMessage(errorMessage);
+                    promise.reject(errorMessage);
                 } .bind(this)
             );
+            return promise;
         },
 
         _gather: function () {
@@ -116,15 +120,19 @@
         },
 
         login: function () {
+            var promise = new Promise();
             var userInfo = this._gather();
-            return ajax.post(this.userUrl, null, userInfo).then(
+            ajax.post(this.userUrl, null, userInfo).then(
                 function (userId) {
                     this._showMessage("login success");
+                    promise.fulfill(userId);
                 } .bind(this),
                 function (errorMessage) {
                     this._showMessage(errorMessage);
+                    promise.reject(errorMessage);
                 } .bind(this)
             );
+            return promise;
         },
 
         logout: function () {
