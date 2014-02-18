@@ -1,36 +1,37 @@
+#!/usr/bin/env python
 
 import shutil
 from . import util
 from . import web
-from . import sound_for_test
+from .. import config
 
 class SoundHandler(web.RequestHandler):
 
     def __init__(self, request):
         super().__init__(request)
-        self._character = None
+        self.character = None
 
     def get(self):
-        self._character = self._get_character()
-        if sound_for_test.exists(self._character):
-            self._send_headers()
-            sound_stream = sound_for_test.get(self._character)
-            shutil.copyfileobj(sound_stream, self._request.wfile)
-            sound_stream.close()
-        else:
-            self.send_error(404)
+        sound_id = self._get_request_sound()
+        sound_content = self._get_service().get(sound_id)
+        if sound_content is None:
+            self.send_not_found()
+            return
+        self.send_headers_and_content(sound_content)
 
-    def _get_character(self):
-        return util.get_path_tail(self.get_path())
+    def post(self):
+        sound_file = self.get_file()
+        sound_id = self._get_service().add(sound_file, self.user_id)
+        self.send_headers_and_content(str(sound_id))
 
     def get_content_type(self):
-        return sound_for_test.get_content_type(self._character)
+        return "audio/mpeg"
 
-    def get_content_length(self):
-        return sound_for_test.get_sound_size(self._character)
+    def _get_request_sound(self):
+        sound_ids = self._get_regex().findall(self.get_path())
+        if sound_ids:
+            return sound_ids[0]
+        return None
 
-    def _send_headers(self):
-        self.set_response_code(200)
-        self.set_header("Content-Type", self.get_content_type())
-        self.set_header("Content-Length", self.get_content_length())
-        self.send_headers()
+    def _get_service(self):
+        return config.service_factory.get_sound_service()

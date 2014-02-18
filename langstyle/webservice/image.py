@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 import shutil
 from . import util

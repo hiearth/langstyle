@@ -10,6 +10,7 @@ from . import sound
 from . import character
 from . import user_character
 from . import character_image
+from . import character_sound
 
 # meta class
 class Singleton(type):
@@ -40,6 +41,8 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/usercharacter/learning", user_character.UserCharacterCountHandler)
         self._add_handler(r"/characterimages/(.*)", character_image.CharacterImagesHandler)
         self._add_handler(r"/characterimage/character/([0-9a-zA-Z]*)/image/(.*)", character_image.CharacterImageHandler)
+        self._add_handler(r"/charactersounds/(.*)", character_sound.CharacterSoundsHandler)
+        self._add_handler(r"/charactersound/character/([0-9a-zA-Z]*)/sound/(.*)", character_sound.CharacterSoundHandler)
         self._add_handler(r"/sound/?(.*)",sound.SoundHandler)
         self._add_handler(r"(.*)\.js", web.StaticFileHandler)
         self._add_handler(r"(.*)\.css", web.StaticFileHandler)

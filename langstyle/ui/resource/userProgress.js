@@ -1,29 +1,42 @@
 
-langstyle.UserProgress = function () {
-    if (!(this instanceof langstyle.UserProgress)) {
-        return new langstyle.UserProgress();
-    }
+(function (langstyle, ajax) {
 
-    this._characterImagesUrl = "/characterimages";
-    this._currentCharacterUrl = "/usercharacter/current";
-    this._nextCharacterUrl = "/usercharacter/next";
-};
+    langstyle.UserProgress = function () {
+        if (!(this instanceof langstyle.UserProgress)) {
+            return new langstyle.UserProgress();
+        }
 
-langstyle.UserProgress.prototype = {
+        this._characterImagesUrl = "/characterimages";
+        this._characterSoundsUrl = "/characterSounds";
+        this._currentCharacterUrl = "/usercharacter/current";
+        this._nextCharacterUrl = "/usercharacter/next";
+    };
 
-    getCurrentCharacter:function(){
-        return ajax.get(this._currentCharacterUrl);
-    },
+    langstyle.UserProgress.prototype = {
 
-    getNextCharacter:function(){
-        return ajax.get(this._nextCharacterUrl);
-    },
+        getCurrentCharacter: function () {
+            return ajax.get(this._currentCharacterUrl);
+        },
 
-    getCharacterImages: function (characterId) {
-        return ajax.get(this._getCharacterImagesUrl(characterId));
-    },
+        getNextCharacter: function () {
+            return ajax.get(this._nextCharacterUrl);
+        },
 
-    _getCharacterImagesUrl: function (characterId) {
-        return this._characterImagesUrl + "/" + characterId;
-    }
-};
+        getCharacterImages: function (characterId) {
+            return ajax.get(this._getCharacterImagesUrl(characterId));
+        },
+
+        _getCharacterImagesUrl: function (characterId) {
+            return this._characterImagesUrl + "/" + characterId;
+        },
+
+        getCharacterSounds: function (characterId) {
+            return ajax.get(this._getCharacterSoundsUrl(characterId));
+        },
+
+        _getCharacterSoundsUrl: function (characterId) {
+            return this._characterSoundsUrl + "/" + characterId;
+        }
+    };
+
+} (langstyle, ajax));

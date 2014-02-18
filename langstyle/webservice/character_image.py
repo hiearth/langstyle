@@ -63,7 +63,7 @@ class CharacterImageHandler(web.RequestHandler):
             return
         self._get_request_character_image()
         if (self.character_id is None) or (self.image_id is None):
-            self.send_not_found()
+            self.send_bad_request()
             return
         character_image_service = config.service_factory.get_character_image_service()
         character_image_service.link(self.user_id, self.character_id, self.image_id)
@@ -75,7 +75,7 @@ class CharacterImageHandler(web.RequestHandler):
             return
         self._get_request_character_image()
         if (self.character_id is None) or (self.image_id is None):
-            self.send_not_found()
+            self.send_bad_request()
             return
         character_image_service = config.service_factory.get_character_image_service()
         character_image_service.unlink(self.user_id, self.character_id, self.image_id)

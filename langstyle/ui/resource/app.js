@@ -10,7 +10,8 @@
         "imageViewId": "images",
         "imageNavId": "imageNav",
         "previousImageId": "previousImage",
-        "nextImageId": "nextImage"
+        "nextImageId": "nextImage",
+        "soundSpeakId": "sounds"
     });
     window.wordStage = wordStage;
 

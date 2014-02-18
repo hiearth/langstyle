@@ -1,4 +1,4 @@
-(function (langstyle) {
+(function (langstyle, dom) {
 
     langstyle.ImageNavigation = function (options) {
         if (!(this instanceof langstyle.ImageNavigation)) {
@@ -104,7 +104,7 @@
             this._imageViewElement.addEventListener("touchMove", this.showNext.bind(this));
         },
 
-        show: function (imageUrls) {
+        load: function (imageUrls) {
             this._imageUrls = imageUrls;
             this._reset();
             this._loadImages();
@@ -215,6 +215,76 @@
         }
     };
 
+    langstyle.SoundSpeak = function (options) {
+        if (!(this instanceof langstyle.SoundSpeak)) {
+            return langstyle.SoundSpeak(options);
+        }
+
+        this._soundSpeakId = options.soundSpeakId;
+        this._soundSpeakElement = dom.getById(this._soundSpeakId);
+        this._soundUrls = [];
+        //        this._imageViewId = options.imageViewId;
+        //        this._imageNav = new langstyle.ImageNavigation({
+        //            "imageNavId": options.imageNavId,
+        //            "previousImageId": options.previousImageId,
+        //            "nextImageId": options.nextImageId,
+        //            "imageView": this
+        //        });
+        //        this._imageViewElement = dom.getById(this._imageViewId);
+        //        this._currentSign = "current";
+        //        this._hiddenSign = "hidden";
+        //        this._imageUrls = [];
+
+        this.init();
+    };
+
+    langstyle.SoundSpeak.prototype = {
+
+        init: function () {
+        },
+
+        load: function (soundUrls) {
+            this._soundUrls = soundUrls;
+            this._reset();
+            this._loadSounds();
+            this.playFirst();
+        },
+
+        _reset: function () {
+            dom.emptyElement(this._soundSpeakElement);
+        },
+
+        _loadSounds: function () {
+            var length = this._soundUrls.length;
+            for (var i = 0; i < length; i++) {
+                var soundLink = document.createElement("audio");
+                soundLink.src = this._soundUrls[i];
+                this._soundSpeakElement.appendChild(soundLink);
+            }
+        },
+
+        playFirst: function () {
+            var firstSound = this._getFirst();
+            if (firstSound) {
+                this._playSound(firstSound);
+            }
+        },
+
+        hasSound: function () {
+            this._soundSpeakElement.children.length > 0;
+        },
+
+        _playSound: function (soundElement) {
+            soundElement.play();
+        },
+
+        _getFirst: function () {
+            if (this.hasSound()) {
+                return this._soundSpeakElement.children[0];
+            }
+        }
+    };
+
     langstyle.WordStage = function (options) {
         if (!(this instanceof langstyle.WordStage)) {
             return new langstyle.WordStage(options);
@@ -247,6 +317,10 @@
             "nextImageId": options.nextImageId
         });
 
+        this.soundSpeak = new langstyle.SoundSpeak({
+            "soundSpeakId": options.soundSpeakId
+        });
+
     };
 
     langstyle.WordStage.prototype = {
@@ -271,12 +345,17 @@
             this.userProgress.getCharacterImages(characterId).then(function (imageIds) {
                 this._imageIds = this._getArrayFromString(imageIds);
                 var imageUrls = this._getImageUrlsByIds(this._imageIds);
-                this.imageView.show(imageUrls);
+                this.imageView.load(imageUrls);
             } .bind(this));
         },
 
         getSound: function (characterId) {
             // add a sign to mark sound ready
+            this.userProgress.getCharacterSounds(characterId).then(function (soundIds) {
+                this._soundIds = this._getArrayFromString(soundIds);
+                var soundUrls = this._getSoundUrlsByIds(this._soundIds);
+
+            } .bind(this));
         },
 
         showCharacter: function () {
@@ -298,7 +377,16 @@
                 imageUrls.push(this.wordImage.getUrlById(imageIds[i]));
             }
             return imageUrls.reverse();
+        },
+
+        _getSoundUrlsByIds: function (soundIds) {
+            soundIds = soundIds || [];
+            var soundUrls = [];
+            for (var i = soundIds.length - 1; i >= 0; i--) {
+                soundUrls.push(this.wordSound.getUrlById(soundIds[i]));
+            }
+            return soundUrls.reverse();
         }
     };
 
-} (langstyle));
+} (langstyle, dom));

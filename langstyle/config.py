@@ -9,6 +9,7 @@ class _RepositoryFactory:
         self._user_character_repository = None
         self._character_image_repository = None
         self._image_repository = None
+        self._sound_repository = None
         self._user_repository = None
        
     def get_character_repository(self):
@@ -29,11 +30,23 @@ class _RepositoryFactory:
             self._character_image_repository = character_image_repository.CharacterImageRepository()
         return self._character_image_repository
 
+    def get_character_sound_repository(self):
+        if not self._character_sound_repository:
+            from .database import character_sound_repository
+            self._character_sound_repository = character_sound_repository.CharacterSoundRepository()
+        return self._character_sound_repository
+
     def get_image_repository(self):
         if not self._image_repository:
             from .database import image_repository
             self._image_repository = image_repository.ImageRepository()
         return self._image_repository
+
+    def get_sound_repository(self):
+        if not self._sound_repository:
+            from .database import sound_repository
+            self._sound_repository = sound_repository.SoundRepository()
+        return self._sound_repository
 
     def get_user_repository(self):
         if not self._user_repository:
@@ -48,7 +61,9 @@ class _ServiceFactory:
         self._character_service = None
         self._user_character_service = None
         self._character_image_service = None
+        self._character_sound_service = None
         self._image_service = None
+        self._sound_service = None
         self._log_service = None
         self._image_file_service=None
         self._sound_file_service = None
@@ -81,12 +96,27 @@ class _ServiceFactory:
             self._character_image_service = character_image_service.CharacterImageService(repository)
         return self._character_image_service
 
+    def get_character_sound_service(self):
+        if not self._character_sound_service:
+            from .service import character_sound_service
+            repository = repository_factory.get_character_sound_repository()
+            self._character_sound_service = character_sound_service.CharacterSoundService(repository)
+        return self._character_sound_service
+
     def get_image_service(self):
         if not self._image_service:
             from .service import image_service
             repository = repository_factory.get_image_repository()
             self._image_service = image_service.ImageService(repository, self.get_image_file_service())
         return self._image_service
+
+    def get_sound_service(self):
+        if not self._sound_service:
+            from .service import sound_service
+            respository = repository_factory.get_sound_repository()
+            self._sound_service = sound_service.SoundService(repository)
+        return self._sound_service
+
 
     def get_image_file_service(self):
         if not self._image_file_service:
@@ -117,6 +147,7 @@ IMAGE_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "image")
 SOUND_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "sound")
 MAX_IN_LEARNING_COUNT = 50 # need to customize to fit each user
 IMAGES_COUNT_PER_CHARACTER = 20
+SOUNDS_COUNT_PRE_CHARACTER = 5
 
 database_connection = {"user": "hiearth", 
                        "password":"hu1987jie", 
