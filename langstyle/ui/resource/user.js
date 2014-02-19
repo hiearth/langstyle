@@ -56,7 +56,7 @@
         register: function () {
             var promise = new Promise();
             var userInfo = this._gather();
-            ajax.post(this.userUrl, null, userInfo).then(
+            ajax.post(this.userUrl, null, JSON.stringify(userInfo)).then(
                 function (userId) {
                     this._showMessage("register success");
                     promise.fulfill(userId);
@@ -122,7 +122,7 @@
         login: function () {
             var promise = new Promise();
             var userInfo = this._gather();
-            ajax.post(this.userUrl, null, userInfo).then(
+            ajax.post(this.userUrl, null, JSON.stringify(userInfo)).then(
                 function (userId) {
                     this._showMessage("login success");
                     promise.fulfill(userId);

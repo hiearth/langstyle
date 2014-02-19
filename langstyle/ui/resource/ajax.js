@@ -25,7 +25,7 @@
                 }
             }
         }
-        httpRequest.send(JSON.stringify(data));
+        httpRequest.send(data);
 
         return promise;
     };

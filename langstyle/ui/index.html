@@ -72,10 +72,13 @@
 
             <div id="addStage" class="js-add-page form stage hidden">
                 <form method="post" enctype="multipart/form-data" 
-                action="javascript:materialProvider.linkImageToCharacter();">
+                action="javascript:materialProvider.upload();">
                     <label class="fieldLabel">Image</label>
                     <input type="file" id="imageFile" name="imageFile" />
                     <label id="fileSize"></label>
+                    <br />
+                    <label class="fieldLabel">Sound</label>
+                    <input type="file" id="soundFile" name="soundFile" />
                     <br />
                     <label class="fieldLabel">Character</label>
                     <input type="text" id="characterCode"/>

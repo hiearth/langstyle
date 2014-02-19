@@ -8,6 +8,7 @@ class _RepositoryFactory:
         self._character_repository = None
         self._user_character_repository = None
         self._character_image_repository = None
+        self._character_sound_repository = None
         self._image_repository = None
         self._sound_repository = None
         self._user_repository = None
@@ -113,8 +114,8 @@ class _ServiceFactory:
     def get_sound_service(self):
         if not self._sound_service:
             from .service import sound_service
-            respository = repository_factory.get_sound_repository()
-            self._sound_service = sound_service.SoundService(repository)
+            repository = repository_factory.get_sound_repository()
+            self._sound_service = sound_service.SoundService(repository, self.get_sound_file_service())
         return self._sound_service
 
 

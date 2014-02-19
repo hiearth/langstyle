@@ -223,17 +223,6 @@
         this._soundSpeakId = options.soundSpeakId;
         this._soundSpeakElement = dom.getById(this._soundSpeakId);
         this._soundUrls = [];
-        //        this._imageViewId = options.imageViewId;
-        //        this._imageNav = new langstyle.ImageNavigation({
-        //            "imageNavId": options.imageNavId,
-        //            "previousImageId": options.previousImageId,
-        //            "nextImageId": options.nextImageId,
-        //            "imageView": this
-        //        });
-        //        this._imageViewElement = dom.getById(this._imageViewId);
-        //        this._currentSign = "current";
-        //        this._hiddenSign = "hidden";
-        //        this._imageUrls = [];
 
         this.init();
     };
@@ -271,7 +260,7 @@
         },
 
         hasSound: function () {
-            this._soundSpeakElement.children.length > 0;
+            return this._soundSpeakElement.children.length > 0;
         },
 
         _playSound: function (soundElement) {
@@ -326,11 +315,10 @@
     langstyle.WordStage.prototype = {
 
         play: function () {
-
             this.userProgress.getNextCharacter().then(function (characterId) {
                 this.getCharacter(characterId);
                 this.getImages(characterId);
-                this.getSound(characterId);
+                this.getSounds(characterId);
             } .bind(this));
         },
 
@@ -349,12 +337,12 @@
             } .bind(this));
         },
 
-        getSound: function (characterId) {
+        getSounds: function (characterId) {
             // add a sign to mark sound ready
             this.userProgress.getCharacterSounds(characterId).then(function (soundIds) {
                 this._soundIds = this._getArrayFromString(soundIds);
                 var soundUrls = this._getSoundUrlsByIds(this._soundIds);
-
+                this.soundSpeak.load(soundUrls);
             } .bind(this));
         },
 

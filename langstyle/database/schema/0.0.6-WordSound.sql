@@ -1,6 +1,7 @@
 use Langstyle;
 
 create table WordSound(
-	SoundId int primary key,
-	SoundPath varchar(1024)
+	SoundId int primary key auto_increment,
+	SoundMd5 varchar(32),
+	UserProviderId int
 );

@@ -17,7 +17,8 @@
 
     var materialProvider = new langstyle.MeterialProvider({
         "imageFileId": "imageFile",
-        "characterCodeId": "characterCode"
+        "characterCodeId": "characterCode",
+        "soundFileId": "soundFile"
     });
 
     window.materialProvider = materialProvider;

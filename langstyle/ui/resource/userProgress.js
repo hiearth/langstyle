@@ -7,7 +7,7 @@
         }
 
         this._characterImagesUrl = "/characterimages";
-        this._characterSoundsUrl = "/characterSounds";
+        this._characterSoundsUrl = "/charactersounds";
         this._currentCharacterUrl = "/usercharacter/current";
         this._nextCharacterUrl = "/usercharacter/next";
     };

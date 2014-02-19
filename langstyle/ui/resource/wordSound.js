@@ -1,4 +1,6 @@
 
+/* example, desert sound: http://translate.google.com.hk/translate_tts?ie=UTF-8&q=desert&tl=en */
+
 langstyle.WordSound = function (options) {
     if (!(this instanceof langstyle.WordSound)) {
         return new langstyle.WordSound(options);

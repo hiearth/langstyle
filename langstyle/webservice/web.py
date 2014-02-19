@@ -127,10 +127,11 @@ class RequestHandler:
     def _write_response_content(self, content_bytes):
         self._request.wfile.write(content_bytes)
 
-    def send_server_error(self, error_message):
+    def send_server_error(self, error_message=None):
+        error_message = error_message or "Internal Server Error"
         self._send_error(500, error_message)
 
-    def send_bad_request(self, error_message):
+    def send_bad_request(self, error_message=None):
         error_message = error_message or "Bad Request"
         self._send_error(400, error_message)
 

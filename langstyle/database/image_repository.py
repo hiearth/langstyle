@@ -19,5 +19,3 @@ class ImageRepository(base_repository.BaseRepository):
         if result:
             return result[2]
         return None
-
-

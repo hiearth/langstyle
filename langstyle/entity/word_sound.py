@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-class WordImage:
+class WordSound:
 
     def __init__(self, id=None, md5=None, user_provider_id=None):
         self.id = id
