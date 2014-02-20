@@ -34,6 +34,7 @@
     <Compile Include="langstyle\database\__init__.py" />
     <Compile Include="langstyle\entity\user.py" />
     <Compile Include="langstyle\entity\word_image.py" />
+    <Compile Include="langstyle\entity\word_sound.py" />
     <Compile Include="langstyle\entity\__init__.py" />
     <Compile Include="langstyle\helper.py" />
     <Compile Include="langstyle\service\character_image_service.py" />
@@ -103,6 +104,9 @@
     <Content Include="langstyle\database\procedure\CharacterImage_I.sql" />
     <Content Include="langstyle\database\procedure\CharacterImage_Statistic_S.sql" />
     <Content Include="langstyle\database\procedure\CharacterImage_Images_S.sql" />
+    <Content Include="langstyle\database\procedure\CharacterSound_D.sql" />
+    <Content Include="langstyle\database\procedure\CharacterSound_I.sql" />
+    <Content Include="langstyle\database\procedure\CharacterSound_Sounds_S.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Count_S.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Count_U.sql" />
     <Content Include="langstyle\database\procedure\UserProgress_Current_S.sql" />
@@ -119,6 +123,8 @@
     <Content Include="langstyle\database\procedure\WordCharacter_S_By_Id.sql" />
     <Content Include="langstyle\database\procedure\WordImage_I.sql" />
     <Content Include="langstyle\database\procedure\WordImage_S_By_Id.sql" />
+    <Content Include="langstyle\database\procedure\WordSound_I.sql" />
+    <Content Include="langstyle\database\procedure\WordSound_S_By_Id.sql" />
     <Content Include="langstyle\database\schema\0.0.1-Langstyle.sql" />
     <Content Include="langstyle\database\schema\0.0.4-SchemaChange.sql" />
     <Content Include="langstyle\database\schema\0.0.3-Character.sql" />
@@ -140,8 +146,10 @@
     <Content Include="data\sound\vogtland.mp3" />
     <Content Include="langstyle\database\schema\0.0.7-User.sql" />
     <Content Include="langstyle\database\schema\0.0.8-CharacterImage.sql" />
+    <Content Include="langstyle\database\schema\0.0.9-CharacterSound.sql" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\cookie.js" />
+    <Content Include="langstyle\ui\resource\customEvent.js" />
     <Content Include="langstyle\ui\resource\user.js" />
     <Content Include="langstyle\ui\resource\ajax.js" />
     <Content Include="langstyle\ui\resource\fileUploader.js" />

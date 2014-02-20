@@ -8,10 +8,10 @@
         "soundId": "sound",
         "imageId": "image",
         "imageViewId": "images",
-        "imageNavId": "imageNav",
-        "previousImageId": "previousImage",
-        "nextImageId": "nextImage",
-        "soundSpeakId": "sounds"
+        "soundSpeakId": "sounds",
+        "stageFrameId": "stageFrame",
+        "previousFrameId": "previousFrame",
+        "nextFrameId": "nextFrame"
     });
     window.wordStage = wordStage;
 
