@@ -123,7 +123,7 @@
         this.userNameId = options.userNameId;
         this.passwordId = options.passwordId;
         this._cookieName = "userName";
-        this.userUrl = "/authentication";
+        this.authUrl = "/authentication";
     };
 
     UserLogin.prototype = {
@@ -144,7 +144,7 @@
         login: function () {
             var promise = new Promise();
             var userInfo = this._gather();
-            ajax.post(this.userUrl, null, JSON.stringify(userInfo)).then(
+            ajax.post(this.authUrl, null, JSON.stringify(userInfo)).then(
                 function (userId) {
                     this._showMessage("login success");
                     promise.fulfill(userId);
@@ -158,8 +158,7 @@
         },
 
         logout: function () {
-            var cookie = new langstyle.Cookie();
-            cookie.remove(this._cookieName);
+            return ajax.delete_(this.authUrl);
         },
 
         hasLogin: function () {

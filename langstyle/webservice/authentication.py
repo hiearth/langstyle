@@ -18,5 +18,12 @@ class AuthenticationHandler(web.RequestHandler):
         if not user_service.authenticate(user_name, password):
             self.send_server_error("user name or password is wrong")
             return
-        self.set_cookie("userName", user_name, 2592000)
+        user_info = user_service.get(user_name)
+        self.set_cookie("userName", user_info.name, 2592000)
+        self.set_cookie("userId", user_info.id, 2592000, True)
+        self.send_success_headers()
+
+    def delete(self):
+        self.delete_cookie("userName")
+        self.delete_cookie("userId")
         self.send_success_headers()

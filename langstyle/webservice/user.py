@@ -26,4 +26,5 @@ class UserHandler(web.RequestHandler):
             self.send_server_error("fail to register user")
             return
         self.set_cookie("userName", user_name, 2592000)
+        self.set_cookie("userId", user_id, 2592000, True)
         self.send_headers_and_content(str(user_id))

@@ -447,27 +447,44 @@
         },
 
         getCharacter: function (characterId) {
-            this.wordCharacter.getCharacterCode(characterId).then(function (character) {
+            this.wordCharacter.getCharacterCode(characterId)
+            .then(function (character) {
                 this._character = character;
+            } .bind(this),
+                function (erorrMessage) {
+                    this._character = "";
+                } .bind(this)
+            ).then(function () {
                 this.showCharacter();
-            } .bind(this));
+            }.bind(this));
         },
 
         getImages: function (characterId) {
-            this.userProgress.getCharacterImages(characterId).then(function (imageIds) {
+            this.userProgress.getCharacterImages(characterId)
+            .then(function (imageIds) {
                 this._imageIds = this._getArrayFromString(imageIds);
+            } .bind(this),
+                function (errorMessage) {
+                    this._imageIds = [];
+                } .bind(this)
+            ).then(function () {
                 var imageUrls = this._getImageUrlsByIds(this._imageIds);
                 this.imageView.load(imageUrls);
-            } .bind(this));
+            }.bind(this));
         },
 
         getSounds: function (characterId) {
-            // add a sign to mark sound ready
-            this.userProgress.getCharacterSounds(characterId).then(function (soundIds) {
+            this.userProgress.getCharacterSounds(characterId)
+            .then(function (soundIds) {
                 this._soundIds = this._getArrayFromString(soundIds);
+            } .bind(this),
+                function (errorMessage) {
+                    this._soundIds = [];
+                } .bind(this)
+            ).then(function () {
                 var soundUrls = this._getSoundUrlsByIds(this._soundIds);
                 this.soundSpeak.load(soundUrls);
-            } .bind(this));
+            }.bind(this));
         },
 
         showCharacter: function () {

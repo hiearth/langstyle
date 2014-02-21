@@ -5,6 +5,7 @@ import http
 import http.cookies
 import json
 import urllib.parse
+import datetime
 from . import util
 from .. import config
 
@@ -18,14 +19,13 @@ class RequestHandler:
         self.user_id = self._get_user()
 
     def _get_user(self):
-        user_value = self.get_cookie("user")
-        if user_value is not None:
+        user_id= self.get_cookie("userId")
+        if user_id:
             try:
-                return int(user_value)
+                return int(user_id)
             except ValueError as e:
                 self._log_error(str(e))
-        # to do need return None
-        return 1
+        return None
 
     def _get_regex(self):
         from . import router
@@ -118,11 +118,18 @@ class RequestHandler:
         if http_only:
             self._response_cookies[key]["httponly"] = "httponly"
 
+    def delete_cookie(self, key):
+        if not self._response_cookies:
+            self._response_cookies = http.cookies.SimpleCookie()
+        self._response_cookies[key]=""
+        self._response_cookies[key]["expires"] = datetime.date(1970,1,1).strftime("%a, %d %b %Y %H:%M:%S")
+
     def _send_headers(self):
         for key, value in self._response_headers.items():
             self._request.send_header(key, value)
         if self._response_cookies:
-            self._request.send_header("Set-Cookie", self._response_cookies.output(header=""))
+            for cookie in self._response_cookies.values():
+                self._request.send_header("Set-Cookie", cookie.output(header=""))
         self._request.end_headers()
 
     def send_success_headers(self):

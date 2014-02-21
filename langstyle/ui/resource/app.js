@@ -82,11 +82,12 @@
 
     var logoutMenu = dom.getFirstByClass("js-logout-menu");
     logoutMenu.onclick = function () {
-        userLogin.logout();
-        hideMenus();
-        hideUserName();
-        hideLogout();
-        showStage("loginPage");
+        userLogin.logout().then(function () {
+            hideMenus();
+            hideUserName();
+            hideLogout();
+            showStage("loginPage");
+        });
     };
 
     var loginButton = dom.getById("login");
