@@ -73,6 +73,7 @@
     <Compile Include="langstyle\webservice\sound.py" />
     <Compile Include="langstyle\webservice\user.py" />
     <Compile Include="langstyle\webservice\user_character.py" />
+    <Compile Include="langstyle\webservice\user_validation.py" />
     <Compile Include="langstyle\webservice\util.py" />
     <Compile Include="langstyle\webservice\sound_for_test.py" />
     <Compile Include="langstyle\webservice\web.py" />
@@ -149,7 +150,7 @@
     <Content Include="langstyle\database\schema\0.0.9-CharacterSound.sql" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\cookie.js" />
-    <Content Include="langstyle\ui\resource\customEvent.js" />
+    <Content Include="langstyle\ui\resource\observableEvent.js" />
     <Content Include="langstyle\ui\resource\user.js" />
     <Content Include="langstyle\ui\resource\ajax.js" />
     <Content Include="langstyle\ui\resource\fileUploader.js" />

@@ -4,6 +4,7 @@ import shutil
 import http
 import http.cookies
 import json
+import urllib.parse
 from . import util
 from .. import config
 
@@ -63,6 +64,24 @@ class RequestHandler:
             self._request_form = json.loads(self._request.rfile.read(int(body_length)).decode())
         return self._request_form
 
+    def get_query_parameter(self, parameter_name):
+        if not parameter_name:
+            return None
+        query_string = self.get_query_string()
+        if not query_string:
+            return None
+        queries = urllib.parse.parse_qs(query_string)
+        parameter_value = queries.get(parameter_name, None)
+        if parameter_value:
+            return parameter_value[0]
+        return None
+
+    def get_query_string(self):
+        path_result = urllib.parse.urlparse(self.get_path())
+        if path_result:
+            return path_result.query
+        return None
+
     def get_file(self):
         body_length = self._request.headers.get("content-length")
         return self._request.rfile.read(int(body_length))
@@ -89,10 +108,15 @@ class RequestHandler:
     def set_header(self, key, value):
         self._response_headers[key] = value
 
-    def set_cookie(self, key, value):
+    def set_cookie(self, key, value, max_age=None, http_only=False):
+        '''max age unit is second'''
         if not self._response_cookies:
             self._response_cookies = http.cookies.SimpleCookie()
         self._response_cookies[key] = value
+        if max_age:
+            self._response_cookies[key]["max-age"] = max_age
+        if http_only:
+            self._response_cookies[key]["httponly"] = "httponly"
 
     def _send_headers(self):
         for key, value in self._response_headers.items():

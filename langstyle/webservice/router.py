@@ -11,6 +11,7 @@ from . import character
 from . import user_character
 from . import character_image
 from . import character_sound
+from . import user_validation
 
 # meta class
 class Singleton(type):
@@ -30,6 +31,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/([a-zA-Z]*)(\.html)$", page.HTMLHandler)
         self._add_handler(r"/user/(.*)", user.UserHandler)
         self._add_handler(r"/user$", user.UserHandler)
+        self._add_handler(r"/uservalidation\?(.*)", user_validation.UserValidationHandler)
         self._add_handler(r"/authentication/?(.*)", authentication.AuthenticationHandler)
         self._add_handler(r"/character/(.*)", character.CharacterHandler)
         self._add_handler(r"/charactercode/?(.*)", character.CharacterCodeHandler)

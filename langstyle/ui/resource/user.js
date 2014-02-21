@@ -33,9 +33,31 @@
         this.confirmPasswordId = options.confirmPasswordId;
         this.emailId = options.emailId;
         this.userUrl = "/user";
+        this.userValidationUrl = "/uservalidation";
+
+        this.init();
     };
 
     UserRegister.prototype = {
+
+        init: function () {
+            var self = this;
+            var userNameField = dom.getById(this.userNameId);
+            userNameField.onblur = function (e) {
+                var userName = e.target.value;
+                if (userName && userName.trim() !== "") {
+                    var userNameValidationUrl = self.userValidationUrl + "?userName=" + userNameField.value;
+                    ajax.get(userNameValidationUrl).then(
+                        function () {
+                            self._showMessage("");
+                        },
+                        function (errorMessage) {
+                            self._showMessage(errorMessage);
+                        } .bind(this)
+                    );
+                }
+            };
+        },
 
         validate: function () {
             var userInfo = this._gather();
