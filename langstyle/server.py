@@ -40,7 +40,7 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
 def start():
     protocol = "HTTP/1.0"
     port = 16000
-    serverAddress = os.getenv("OPENSHIFT_INTERNAL_IP")
+    serverAddress = os.getenv("OPENSHIFT_PYTHON_IP")
     if not serverAddress:
         serverAddress = "0.0.0.0"
     BaseHTTPRequestHandler.protocol_version = protocol
