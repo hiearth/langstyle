@@ -43,7 +43,7 @@ def start():
     if port:
         port = int(port)
     else:
-        port = 8080
+        port = 8000
     serverAddress = os.getenv("OPENSHIFT_PYTHON_IP")
     if not serverAddress:
         serverAddress = "0.0.0.0"
