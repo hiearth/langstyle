@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 from http.server import HTTPServer
 from http.server import BaseHTTPRequestHandler
 from .webservice import router
@@ -38,8 +39,10 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
 
 def start():
     protocol = "HTTP/1.0"
-    port = 8000
-    serverAddress = "0.0.0.0"
+    port = 16000
+    serverAddress = os.getenv("OPENSHIFT_INTERNAL_IP")
+    if not serverAddress:
+        serverAddress = "0.0.0.0"
     BaseHTTPRequestHandler.protocol_version = protocol
     server = HTTPServer((serverAddress, port), HTTPRequestHandler)
     print("server start, address: " + serverAddress + ":" + str(port))
