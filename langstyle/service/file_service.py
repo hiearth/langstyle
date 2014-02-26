@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+from .. import config
 from .. import helper
 
 class FileService:
@@ -18,8 +19,12 @@ class FileService:
 
     def read(self, file_md5):
         file_path = self.get_file_path(file_md5)
-        with open(file_path, "rb") as f:
-            return f.read()
+        try:
+            with open(file_path, "rb") as f:
+                return f.read()
+        except FileNotFoundError as e:
+            config.service_factory.get_log_service().error(str(e))
+        return None
 
     def write(self, file_md5, file_data):
         file_path = self.get_file_path(file_md5)
