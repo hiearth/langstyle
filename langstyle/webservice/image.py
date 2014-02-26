@@ -17,10 +17,10 @@ class ImageHandler(web.RequestHandler):
     def get(self):
         image_id = self._get_request_image()
         image_content = self._get_service().get(image_id)
-        if image_content is None:
+        if image_content:
+            self.send_headers_and_content(image_content)
+        else:
             self.send_not_found()
-            return
-        self.send_headers_and_content(image_content)
 
     def _get_request_image(self):
         image_ids = self._get_regex().findall(self.get_path())

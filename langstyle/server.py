@@ -38,16 +38,10 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
         self._call_handle_method("head")
 
 def start():
-    protocol = "HTTP/1.0"
-    port = os.getenv("OPENSHIFT_PYTHON_PORT")
-    if port:
-        port = int(port)
-    else:
-        port = 8000
-    serverAddress = os.getenv("OPENSHIFT_PYTHON_IP")
-    if not serverAddress:
-        serverAddress = "0.0.0.0"
-    BaseHTTPRequestHandler.protocol_version = protocol
+    port = os.getenv("OPENSHIFT_PYTHON_PORT", default=8000)
+    port = int(port)
+    serverAddress = os.getenv("OPENSHIFT_PYTHON_IP", default="127.0.0.1")
+    BaseHTTPRequestHandler.protocol_version = "HTTP/1.0"
     server = HTTPServer((serverAddress, port), HTTPRequestHandler)
     print("server start, address: " + serverAddress + ":" + str(port))
     server.serve_forever()

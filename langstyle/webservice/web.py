@@ -202,10 +202,18 @@ class StaticFileHandler(RequestHandler):
     def get(self):
         self._file_path = self.get_full_path()
         if os.path.exists(self._file_path):
-            self.send_success_headers()
-            self.send_content()
+            file_content = self._read(self._file_path)
+            self.send_headers_and_content(file_content)
         else:
             self.send_not_found()
+
+    def _read(self, file_path):
+        try:
+            with open(file_path, "rb") as f:
+                return f.read()
+        except FileNotFoundError as e:
+            self._log_error(str(e))
+        return None
 
     def get_content_type(self):
         file_suffix = util.get_file_suffix(self._file_path)
