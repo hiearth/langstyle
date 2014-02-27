@@ -20,27 +20,30 @@
     MeterialProvider.prototype = {
 
         upload: function () {
-            this.linkImageToCharacter();
-            this.linkSoundToCharacter();
+            this.addCharacter().then(function (characterId) {
+                this.linkImageToCharacter(characterId);
+                this.linkSoundToCharacter(characterId);
+            } .bind(this));
         },
 
-        linkImageToCharacter: function () {
-            var self = this;
+        addCharacter: function () {
+            return ajax.post(this.characterCodeUrl + "/" + this.getCharacterCode());
+        },
+
+        linkImageToCharacter: function (characterId) {
             this.imageUploader.send().then(function (imageId) {
-                this.addCharacter().then(function (characterId) {
-                    var characterImageParameters = {
-                        "character": characterId,
-                        "image": imageId
-                    };
-                    var characterImageUrl = langstyle.joinUrl(self.characterImageUrl, characterImageParameters);
-                    ajax.post(characterImageUrl);
-                });
+                var characterImageParameters = {
+                    "character": characterId,
+                    "image": imageId
+                };
+                var characterImageUrl = langstyle.joinUrl(this.characterImageUrl, characterImageParameters);
+                ajax.post(characterImageUrl);
             } .bind(this),
             function (error) {
-            });
+            } .bind(this));
         },
 
-        linkSoundToCharacter: function () {
+        linkSoundToCharacter: function (characterId) {
             this.soundUploader.send().then(function (soundId) {
                 this.addCharacter().then(function (characterId) {
                     var characterSoundParameters = {
@@ -60,10 +63,6 @@
             if (characterCodeElement) {
                 return characterCodeElement.value;
             }
-        },
-
-        addCharacter: function () {
-            return ajax.post(this.characterCodeUrl + "/" + this.getCharacterCode());
         }
     };
 
