@@ -23,7 +23,10 @@
 
         hasFile: function () {
             var fileElement = this._getFileElement();
-            return fileElement.files && fileElement.files.length > 0;
+            if (fileElement) {
+                return fileElement.files && fileElement.files.length > 0;
+            }
+            return false;
         },
 
         read: function () {
