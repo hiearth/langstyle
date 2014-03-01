@@ -8,5 +8,4 @@ begin
 	select CharacterId, RepeatCount, LastLearningTime, GraspTime
 	from UserProgress
 	where UserId = p_userId and GraspTime is not null;
-end //
-delimiter ; //
+end

@@ -8,5 +8,4 @@ begin
 	insert into WordSound(SoundMd5, UserProviderId)
 	values (p_soundMd5, p_userProviderId);
 	set p_soundId = last_insert_id();
-end //
-delimiter ; //
+end

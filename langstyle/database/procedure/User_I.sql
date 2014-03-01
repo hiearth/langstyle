@@ -9,5 +9,4 @@ begin
 	values (p_name, p_password, p_email);
 
 	set p_userId = last_insert_id();
-end //
-delimiter ; //
+end

@@ -9,5 +9,4 @@ begin
 	(UserId, CharacterId, RepeatCount, IsCurrent, LastLearningTime, GraspTime)	
 	values
 	(p_userId, p_characterId, 0, 0, null, null);
-end //
-delimiter ; //
+end

@@ -8,5 +8,4 @@ begin
 	select SoundId
 	from CharacterSound
 	where UserId = p_userId and CharacterId = p_characterId;
-end //
-delimiter ; //
+end

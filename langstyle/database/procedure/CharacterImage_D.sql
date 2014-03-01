@@ -7,5 +7,4 @@ create procedure CharacterImage_D(in p_userId int, in p_characterId int, in p_im
 begin
 	delete from CharacterImage
 	where UserId = p_userId and CharacterId = p_characterId and ImageId = p_imageId;
-end //
-delimiter ; //
+end

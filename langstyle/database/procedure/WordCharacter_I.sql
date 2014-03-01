@@ -8,5 +8,4 @@ begin
 	insert into WordCharacter (CharacterId,CharacterCode) 
 	values (0, p_characterCode);
 	set p_characterId = last_insert_id();
-end //
-delimiter ; //
+end

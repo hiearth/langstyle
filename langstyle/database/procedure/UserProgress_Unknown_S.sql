@@ -12,5 +12,4 @@ begin
 		from UserProgress 
 		where UserId = p_userId
 	);
-end //
-delimiter ; //
+end

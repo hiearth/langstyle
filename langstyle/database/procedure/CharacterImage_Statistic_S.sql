@@ -11,5 +11,4 @@ begin
 	group by ImageId
 	order by UserCount
 	limit p_imageCount;
-end //
-delimiter ; //
+end

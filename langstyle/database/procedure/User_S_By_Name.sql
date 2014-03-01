@@ -8,5 +8,4 @@ begin
 	select UserId, Name, UserPassword, Email
 	from User
 	where Name = p_userName;
-end //
-delimiter ; //
+end

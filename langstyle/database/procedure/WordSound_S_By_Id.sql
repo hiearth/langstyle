@@ -8,5 +8,4 @@ begin
 	select SoundMd5, UserProviderId
 	from WordSound
 	where SoundId = p_soundId;
-end //
-delimiter ; //
+end

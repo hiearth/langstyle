@@ -21,7 +21,8 @@ def _execute_command(cmd_text):
         conn = _create_connection()
         cursor = conn.cursor()
         for statement in cmd_text.split(";"):
-            cursor.execute(statement)
+            if statement.strip():
+                cursor.execute(statement)
         conn.commit()
         return True
     except dbconnector.DatabaseError as db_error:
@@ -87,7 +88,7 @@ def _create_schema():
     schema_files = _get_schema_files(config.DATABASE_SCHEMA_DIR)
     for file in schema_files:
         schema_content = _read_file(file)
-        print(schema_content)
+        print(file)
         _execute_command(schema_content)
 
 def _get_procedure_files():
@@ -99,6 +100,7 @@ def _create_procedure():
     procedure_files = _get_procedure_files()
     for file in procedure_files:
         procedure_content = _read_file(file)
+        print(file)
         _execute_command(procedure_content)
 
 def create():

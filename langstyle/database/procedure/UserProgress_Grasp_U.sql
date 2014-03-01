@@ -8,5 +8,4 @@ begin
 	update UserProgress
 	set GraspTime = now()
 	where UserId = p_userId and CharacterId = p_characterId;
-end //
-delimiter ; //
+end

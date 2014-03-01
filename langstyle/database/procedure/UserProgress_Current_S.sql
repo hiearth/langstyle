@@ -8,5 +8,4 @@ begin
 	select CharacterId, RepeatCount, LastLearningTime
 	from UserProgress
 	where UserId = p_userId and IsCurrent is true;
-end //
-delimiter ; //
+end

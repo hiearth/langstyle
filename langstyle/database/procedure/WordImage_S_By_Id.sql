@@ -8,5 +8,4 @@ begin
 	select ImageMd5, UserProviderId 
 	from WordImage
 	where ImageId = p_imageId;
-end //
-delimiter ; //
+end
