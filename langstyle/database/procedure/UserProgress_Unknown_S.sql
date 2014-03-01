@@ -2,7 +2,7 @@ use langstyle;
 
 drop procedure if exists UserProgress_Unknown_S;
 
-delimiter //
+delimiter //;
 create procedure UserProgress_Unknown_S(in p_userId int)
 begin
 	select CharacterId 
@@ -13,3 +13,4 @@ begin
 		where UserId = p_userId
 	);
 end //
+delimiter ; //

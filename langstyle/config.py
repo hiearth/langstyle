@@ -139,6 +139,27 @@ class _ServiceFactory:
         return self._user_service
 
 
+def _is_openshift():
+    openshift_db = os.getenv("OPENSHIFT_MYSQL_DB_HOST")
+    if openshift_db:
+        return True
+    return False
+
+if _is_openshift():
+    mysql_host = os.getenv("OPENSHIFT_MYSQL_DB_HOST")
+    database_connection = {"user":"admindG4Vp4G",
+                           "password":"R2fF-1y2teRd",
+                           "host":mysql_host,
+                           "database": "langstyle",
+                           "raise_on_warnings": True}
+else:
+    database_connection = {"user":"hiearth", 
+                           "password":"hu1987jie", 
+                           "host":"localhost", 
+                           "database": "langstyle", 
+                           "raise_on_warnings": False}
+
+
 repository_factory = _RepositoryFactory()
 service_factory = _ServiceFactory()
 
@@ -150,9 +171,6 @@ MAX_IN_LEARNING_COUNT = 50 # need to customize to fit each user
 IMAGES_COUNT_PER_CHARACTER = 20
 SOUNDS_COUNT_PRE_CHARACTER = 5
 
-database_connection = {"user": "hiearth", 
-                       "password":"hu1987jie", 
-                       "host":"localhost", 
-                       "database": "langstyle", 
-                       "raise_on_warnings": True}
-
+_DATABASE_DEFINITION_DIR = os.path.abspath(os.path.join(ROOT_DIRECTORY, "database"))
+DATABASE_SCHEMA_DIR = os.path.join(_DATABASE_DEFINITION_DIR, "schema")
+DATABASE_PROCEDURE_DIR = os.path.join(_DATABASE_DEFINITION_DIR,"procedure")

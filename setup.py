@@ -1,4 +1,8 @@
 from setuptools import setup
+import langstyle.install.database
+
+# upgrade database
+langstyle.install.database.drop_and_create()
 
 setup(name='langstyle',
       version='1.0',

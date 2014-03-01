@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app.py</StartupFile>
+    <StartupFile>setup.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="langstyle\install\database.py" />
+    <Compile Include="langstyle\install\__init__.py" />
     <Compile Include="langstyle\config.py" />
     <Compile Include="langstyle\database\base_repository.py" />
     <Compile Include="langstyle\database\character_image_repository.py" />
@@ -91,6 +93,7 @@
     <Folder Include="langstyle\database\procedure\" />
     <Folder Include="langstyle\database\schema\" />
     <Folder Include="langstyle\entity\" />
+    <Folder Include="langstyle\install\" />
     <Folder Include="langstyle\service\" />
     <Folder Include="langstyle\test\" />
     <Folder Include="langstyle\test\mock\" />
@@ -128,27 +131,13 @@
     <Content Include="langstyle\database\procedure\WordSound_I.sql" />
     <Content Include="langstyle\database\procedure\WordSound_S_By_Id.sql" />
     <Content Include="langstyle\database\schema\0.0.1-Langstyle.sql" />
-    <Content Include="langstyle\database\schema\0.0.4-SchemaChange.sql" />
     <Content Include="langstyle\database\schema\0.0.3-Character.sql" />
     <Content Include="langstyle\database\schema\0.0.2-Language.sql" />
-    <Content Include="langstyle\database\schema\0.0.5-WordImage.sql" />
-    <Content Include="langstyle\database\schema\0.0.6-WordSound.sql" />
-    <Content Include="data\image\Desert.jpg" />
-    <Content Include="data\image\Hydrangeas.jpg" />
-    <Content Include="data\image\Jellyfish.jpg" />
-    <Content Include="data\image\Koala.jpg" />
-    <Content Include="data\image\Lighthouse.jpg" />
-    <Content Include="data\image\Penguins.jpg" />
-    <Content Include="data\sound\desert.mp3" />
-    <Content Include="data\sound\hydrangeas.mp3" />
-    <Content Include="data\sound\jellyfish.mp3" />
-    <Content Include="data\sound\koala.mp3" />
-    <Content Include="data\sound\lighthouse.mp3" />
-    <Content Include="data\sound\penguins.mp3" />
-    <Content Include="data\sound\vogtland.mp3" />
-    <Content Include="langstyle\database\schema\0.0.7-User.sql" />
-    <Content Include="langstyle\database\schema\0.0.8-CharacterImage.sql" />
-    <Content Include="langstyle\database\schema\0.0.9-CharacterSound.sql" />
+    <Content Include="langstyle\database\schema\0.0.4-WordImage.sql" />
+    <Content Include="langstyle\database\schema\0.0.5-WordSound.sql" />
+    <Content Include="langstyle\database\schema\0.0.6-User.sql" />
+    <Content Include="langstyle\database\schema\0.0.7-CharacterImage.sql" />
+    <Content Include="langstyle\database\schema\0.0.8-CharacterSound.sql" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\cookie.js" />
     <Content Include="langstyle\ui\resource\observableEvent.js" />
