@@ -2,6 +2,7 @@
 
 import os
 import re
+from subprocess import Popen, PIPE
 from mysql import connector as dbconnector
 from .. import config
 
@@ -98,14 +99,15 @@ def _get_procedure_files():
 
 def _create_procedure():
     procedure_files = _get_procedure_files()
+    db_conn = config.database_connection.copy()
     for file in procedure_files:
-        procedure_content = _read_file(file)
         print(file)
-        _execute_command(procedure_content)
+        mysql_process = Popen("mysql -u%s -p%s -D%s < %s" % (db_conn["user"], db_conn["password"], db_conn["database"], file), stdout=PIPE, stdin=PIPE, shell=True)
+        mysql_process.communicate()
 
 def create():
     _create_schema()
-    #_create_procedure()
+    _create_procedure()
 
 def drop():
     db_name = config.database_connection.get("database")
