@@ -1,4 +1,4 @@
-use Langstyle;
+use langstyle;
 
 create table WordImage(
 	ImageId int primary key auto_increment,

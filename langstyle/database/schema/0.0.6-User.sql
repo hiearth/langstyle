@@ -1,4 +1,4 @@
-use Langstyle;
+use langstyle;
 
 create table User(
 	UserId int primary key auto_increment,

@@ -1,4 +1,4 @@
-use Langstyle;
+use langstyle;
 
 create table WordSound(
 	SoundId int primary key auto_increment,

@@ -1,4 +1,4 @@
-use Langstyle;
+use langstyle;
 
 create table WordCharacter(
 	CharacterId int primary key auto_increment, 

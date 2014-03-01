@@ -1,4 +1,4 @@
-use Langstyle;
+use langstyle;
 
 create table CharacterSound(
     UserId int,
