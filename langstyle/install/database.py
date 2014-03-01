@@ -20,7 +20,9 @@ def _execute_command(cmd_text):
     try:
         conn = _create_connection()
         cursor = conn.cursor()
-        cursor.execute(cmd_text, multi=True)
+        for statement in cmd_text.split(";"):
+            cursor.execute(statement)
+        conn.commit()
         return True
     except dbconnector.DatabaseError as db_error:
         _log_error(db_error.msg)
@@ -79,12 +81,13 @@ def _get_schema_files(dir):
 
 def _read_file(full_file_path):
     with open(full_file_path, "r") as f:
-        return f.read()
+        return " ".join(f.readlines())
 
 def _create_schema():
     schema_files = _get_schema_files(config.DATABASE_SCHEMA_DIR)
     for file in schema_files:
         schema_content = _read_file(file)
+        print(schema_content)
         _execute_command(schema_content)
 
 def _get_procedure_files():
@@ -100,7 +103,7 @@ def _create_procedure():
 
 def create():
     _create_schema()
-    _create_procedure()
+    #_create_procedure()
 
 def drop():
     db_name = config.database_connection.get("database")
