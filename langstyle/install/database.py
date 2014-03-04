@@ -105,7 +105,7 @@ def _create_procedure():
     db_conn = config.database_connection.copy()
     for file in procedure_files:
         _log_debug(file)
-        mysql_process = Popen("mysql -u%s -p%s -D%s < %s" % (db_conn["user"], db_conn["password"], db_conn["database"], file), stdout=PIPE, stdin=PIPE, shell=True)
+        mysql_process = Popen("mysql -h%s -u%s -p%s -D%s < %s" % (db_conn["host"], db_conn["user"], db_conn["password"], db_conn["database"], file), stdout=PIPE, stdin=PIPE, shell=True)
         std_out, std_error = mysql_process.communicate()
         if std_error:
             _log_error(std_error)
