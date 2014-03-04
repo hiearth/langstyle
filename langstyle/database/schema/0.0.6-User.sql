@@ -21,3 +21,6 @@ create table UserCharacterAudit(
 	CharacterId int,
 	AuditTime datetime
 );
+
+insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)
+values ('0.0.6-User.sql', 0, 0, 6, now());

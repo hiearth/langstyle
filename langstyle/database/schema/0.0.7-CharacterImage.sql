@@ -17,3 +17,7 @@ create table CharacterImage(
 -- if some user does not have enough images for one character, 
 -- first get custom images for this character of this user,
 -- then use the aggregate algrithom to get the additional images.
+
+
+insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)
+values ('0.0.7-CharacterImage.sql', 0, 0, 7, now());

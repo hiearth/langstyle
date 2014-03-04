@@ -5,3 +5,6 @@ create table WordSound(
 	SoundMd5 varchar(32),
 	UserProviderId int
 );
+
+insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)
+values ('0.0.5-WordSound.sql', 0, 0, 5, now());

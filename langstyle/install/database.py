@@ -15,6 +15,9 @@ def _create_connection():
 def _log_error(error_msg):
     config.service_factory.get_log_service().error(error_msg)
 
+def _log_debug(msg):
+    config.service_factory.get_log_service().debug(msg)
+
 def _execute_command(cmd_text):
     conn = None
     cursor = None
@@ -89,7 +92,7 @@ def _create_schema():
     schema_files = _get_schema_files(config.DATABASE_SCHEMA_DIR)
     for file in schema_files:
         schema_content = _read_file(file)
-        print(file)
+        _log_debug(file)
         _execute_command(schema_content)
 
 def _get_procedure_files():
@@ -101,9 +104,11 @@ def _create_procedure():
     procedure_files = _get_procedure_files()
     db_conn = config.database_connection.copy()
     for file in procedure_files:
-        print(file)
+        _log_debug(file)
         mysql_process = Popen("mysql -u%s -p%s -D%s < %s" % (db_conn["user"], db_conn["password"], db_conn["database"], file), stdout=PIPE, stdin=PIPE, shell=True)
-        mysql_process.communicate()
+        std_out, std_error = mysql_process.communicate()
+        if std_error:
+            _log_error(std_error)
 
 def create():
     _create_schema()

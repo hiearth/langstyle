@@ -3,19 +3,19 @@
 class LogService:
 
     def info(self, msg):
-        pass
+        self._print("INFO", msg)
 
     def debug(self, msg):
-        pass
+        self._print("DEBUG", msg)
     
     def warn(self, msg):
-        pass
+        self._print("WARN", msg)
 
     def error(self, msg):
         self._print("ERROR", msg)
 
     def fatal(self, msg):
-        pass
+        self._print("FATAL", msg)
 
     def _print(self, log_level, msg):
         print(log_level + ": " + msg)
