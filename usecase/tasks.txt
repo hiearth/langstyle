@@ -54,3 +54,7 @@
 11. support taking photo from Phone and Pad
 
 12. support cache because wireless is very slow
+
+13. mobile web style
+
+14. improve network performance, i.e. network connection times
