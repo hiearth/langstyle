@@ -28,6 +28,13 @@ input[type='submit'], input[type='button']
 	cursor:pointer;
 }
 
+ol
+{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
 .hidden
 {
 	display:none;
@@ -66,13 +73,12 @@ input[type='submit'], input[type='button']
 .user-name
 {
 	cursor:pointer;
+	color:#245dc1;
 }
 
 .menu-list
 {
-	list-style:none;
-	margin:0;
-	padding:0;
+
 }
 .menu-list-item
 {
@@ -221,8 +227,7 @@ input[type='submit'], input[type='button']
 
 .formBottom
 {
-	padding-top:10px;
-	padding-left:155px;
+	padding: 10px 0 0 155px;
 	width:200px;
 	text-align:center;
 }
@@ -235,4 +240,32 @@ input[type='submit'], input[type='button']
 .register-in-login, .login-in-register
 {
 	margin-top:30px;
+}
+
+.userStage
+{
+	text-align:center;
+	padding: 30px 15px 5px 15px;
+}
+.userMenu li
+{
+	color: #FFF;
+	margin: 0 0 5px 0;
+	padding: 2px 0 2px 0;
+	border-radius: 5px;
+	-webkit-appearance: none;/* for iphone */
+	border-style:solid;
+	background-color: #8bd426;
+	border-color: #8bd426 #7C0 #67ae05;
+	vertical-align:middle;
+	cursor:pointer;
+}
+.userMenu li span
+{
+	color: #FFF;
+}
+
+.logoutMenu
+{
+	margin:30px 0 10px 0;
 }
