@@ -1,125 +1,138 @@
 
-(function (dom) {
+(function (langstyle, dom) {
 
-    var hiddenSign = "hidden";
-    var wordStage = new langstyle.WordStage({
-        "stageId": "wordStage",
-        "characterId": "character",
-        "soundId": "sound",
-        "imageId": "image",
-        "imageViewId": "images",
-        "soundSpeakId": "sounds",
-        "stageFrameId": "stageFrame",
-        "previousFrameId": "previousFrame",
-        "nextFrameId": "nextFrame"
-    });
-    window.wordStage = wordStage;
+    var Application = function () {
+        if (!(this instanceof Application)) {
+            return new Application();
+        }
 
-    var materialProvider = new langstyle.MeterialProvider({
-        "imageFileId": "imageFile",
-        "characterCodeId": "characterCode",
-        "soundFileId": "soundFile"
-    });
-
-    window.materialProvider = materialProvider;
-
-    var userRegister = new langstyle.UserRegister({
-        "userNameId": "registerUserName",
-        "passwordId": "registerPassword",
-        "confirmPasswordId": "registerConfirmPassword"
-    });
-
-    window.userRegister = userRegister;
-
-    var userLogin = new langstyle.UserLogin({
-        "userNameId": "loginUserName",
-        "passwordId": "loginPassword"
-    });
-
-    var stageSwitch = new langstyle.StageSwitch();
-
-    var userNameLink = dom.getById("userName");
-    userNameLink.onclick = null;
-
-    var showUserName = function () {
-        var userName = userLogin.getUserName();
-        userNameLink.textContent = userName;
-        userNameLink.onclick = function () {
-            stageSwitch.showUser();
-        };
-    };
-
-    var hideUserName = function () {
-        userNameLink.textContent = "";
-    };
-
-    var startMenu = dom.getById("startMenu");
-    startMenu.onclick = function (e) {
-        stageSwitch.showWord();
-    };
-
-    var addMenu = dom.getById("addMenu");
-    addMenu.onclick = function (e) {
-        stageSwitch.showAdd();
-    };
-
-    var registerUserMenu = dom.getById("registerMenu");
-    registerUserMenu.onclick = function (e) {
-        stageSwitch.showRegister();
-    };
-
-    var loginMenu = dom.getById("loginMenu");
-    loginMenu.onclick = function () {
-        stageSwitch.showLogin();
-    };
-
-    var logoutButton = dom.getById("logout");
-    logoutButton.onclick = function () {
-        userLogin.logout().then(function () {
-            hideMenus();
-            hideUserName();
-            stageSwitch.showLogin();
+        this.hiddenSign = "hidden";
+        this.wordStage = new langstyle.WordStage({
+            "stageId": "wordStage",
+            "characterId": "character",
+            "soundId": "sound",
+            "imageId": "image",
+            "imageViewId": "images",
+            "soundSpeakId": "sounds",
+            "stageFrameId": "stageFrame",
+            "previousFrameId": "previousFrame",
+            "nextFrameId": "nextFrame"
         });
+
+        this.materialProvider = new langstyle.MeterialProvider({
+            "imageFileId": "imageFile",
+            "characterCodeId": "characterCode",
+            "soundFileId": "soundFile"
+        });
+
+        this.userRegister = new langstyle.UserRegister({
+            "userNameId": "registerUserName",
+            "passwordId": "registerPassword",
+            "confirmPasswordId": "registerConfirmPassword"
+        });
+
+        this.userLogin = new langstyle.UserLogin({
+            "userNameId": "loginUserName",
+            "passwordId": "loginPassword"
+        });
+
+        this.stageSwitch = new langstyle.StageSwitch();
+
+        this.userNameLink = dom.getById("userName");
+        this.startMenu = dom.getById("startMenu");
+        this.addMenu = dom.getById("addMenu");
+        this.registerUserMenu = dom.getById("registerMenu");
+        this.loginMenu = dom.getById("loginMenu");
+        this.logoutButton = dom.getById("logout");
+        this.loginButton = dom.getById("login");
+        this.registerButton = dom.getById("register");
+        this.nextWordButton = dom.getById("nextWord");
+        this.addForm = dom.getById("addForm");
+
+        this.init();
     };
 
-    var loginButton = dom.getById("login");
-    loginButton.onclick = function (e) {
-        if (userLogin.validate()) {
-            userLogin.login().then(function () {
-                showMenus();
-                showUserName();
-                stageSwitch.showWord();
-            });
+    Application.prototype = {
+
+        init: function () {
+            if (this.userLogin.hasLogin()) {
+                this.showUserName();
+            }
+            else {
+                this.hideUserName();
+                this.stageSwitch.showLogin();
+            }
+
+            this.startMenu.onclick = function (e) {
+                this.stageSwitch.showWord();
+            } .bind(this);
+
+            this.addMenu.onclick = function (e) {
+                this.stageSwitch.showAdd();
+            } .bind(this);
+
+            this.registerUserMenu.onclick = function (e) {
+                this.stageSwitch.showRegister();
+            } .bind(this);
+
+            this.loginMenu.onclick = function () {
+                this.stageSwitch.showLogin();
+            } .bind(this);
+
+            this.logoutButton.onclick = function () {
+                this.userLogin.logout().then(function () {
+                    this.hideMenus();
+                    this.hideUserName();
+                    this.stageSwitch.showLogin();
+                } .bind(this));
+            } .bind(this);
+
+            this.loginButton.onclick = function (e) {
+                if (this.userLogin.validate()) {
+                    this.userLogin.login().then(function () {
+                        this.showMenus();
+                        this.showUserName();
+                        this.stageSwitch.showWord();
+                    } .bind(this));
+                }
+            } .bind(this);
+
+            this.registerButton.onclick = function (e) {
+                if (this.userRegister.validate()) {
+                    this.userRegister.register().then(function () {
+                        this.showMenus();
+                        this.showUserName();
+                        this.stageSwitch.showWord();
+                    } .bind(this));
+                }
+            } .bind(this);
+        },
+
+        showUserName: function () {
+            var userName = this.userLogin.getUserName();
+            this.userNameLink.textContent = userName;
+            this.userNameLink.onclick = function () {
+                this.stageSwitch.showUser();
+            } .bind(this);
+        },
+
+        hideUserName: function () {
+            this.userNameLink.textContent = "";
+            this.userNameLink.onclick = null;
+        },
+
+        hideMenus: function () {
+            this.startMenu.classList.add(this.hiddenSign);
+            this.addMenu.classList.add(this.hiddenSign);
+        },
+
+        showMenus: function () {
+            this.startMenu.classList.remove(this.hiddenSign);
+            this.addMenu.classList.remove(this.hiddenSign);
         }
+
     };
 
-    var registerButton = dom.getById("register");
-    registerButton.onclick = function (e) {
-        if (userRegister.validate()) {
-            userRegister.register().then(function () {
-                showMenus();
-                showUserName();
-                stageSwitch.showWord();
-            });
-        }
-    };
+    langstyle.Application = Application;
 
-    var hideMenus = function () {
-        startMenu.classList.add(hiddenSign);
-        addMenu.classList.add(hiddenSign);
-    };
-
-    var showMenus = function () {
-        startMenu.classList.remove(hiddenSign);
-        addMenu.classList.remove(hiddenSign);
-    };
-
-    if (userLogin.hasLogin()) {
-        showUserName();
-    }
-    else {
-        hideUserName();
-        stageSwitch.showLogin();
-    }
-
-} (dom));
+} (langstyle, dom));

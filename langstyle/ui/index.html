@@ -26,12 +26,6 @@
                     <li class="menu-list-item logo-menu">
                         <a href="" class="logo-text">Langstyle</a>
                     </li>
-                    <!--<li class="menu-list-item">
-                        <a class="js-start-menu menu-item"><span class="menu-item-span">Start</span></a>
-                    </li>
-                    <li class="menu-list-item">
-                        <a class="js-add-menu menu-item"><span class="menu-item-span">Add</span></a>
-                    </li>-->
                 </ol>
             </div>
             <div class="header-right">
@@ -39,15 +33,6 @@
                     <li class="menu-list-item">
                         <label id="userName" class="user-name"></label>
                     </li>
-                    <!--<li class="menu-list-item">
-                        <a class="js-login-menu menu-item"><span class="menu-item-span">Log in</span></a>
-                    </li>
-                    <li class="menu-list-item">
-                        <a class="js-logout-menu menu-item"><span class="menu-item-span">Log out</span></a>
-                    </li>
-                    <li class="menu-list-item">
-                        <a class="js-register-menu menu-item"><span class="menu-item-span">Register</span></a>
-                    </li>-->
                 </ol>
             </div>
         </div>
@@ -60,7 +45,7 @@
 
             <div id="wordStage" class="js-wordStage stage hidden">
                 <div class="stageButton">
-                    <input type="button" class="js-next" onclick="javascript:wordStage.play();" value="Next" />
+                    <input type="button" id="nextWord" class="js-next" onclick="javascript:app.wordStage.play()" value="Next" />
                 </div>
                 <div class="js-wordStageTop">
                     <div class="js-wordCharacter characterView">
@@ -79,8 +64,8 @@
             </div>
 
             <div id="addStage" class="js-add-page form stage hidden">
-                <form method="post" enctype="multipart/form-data" 
-                action="javascript:materialProvider.upload();">
+                <form method="post" id="addForm" enctype="multipart/form-data" 
+                action="javascript:app.materialProvider.upload();">
                     <label class="fieldLabel">Image</label>
                     <input type="file" id="imageFile" name="imageFile" />
                     <label id="fileSize"></label>
@@ -140,5 +125,10 @@
         
         </div>
         <script type="text/javascript" src="resource/app.js"></script>
+        <script type="text/javascript">
+            (function (window, langstyle) {
+                window.app = new langstyle.Application();
+            } (window,langstyle));
+        </script>
     </body>
 </html>
