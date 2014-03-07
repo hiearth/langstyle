@@ -3,7 +3,7 @@
 
     var hiddenSign = "hidden";
     var wordStage = new langstyle.WordStage({
-        "stageId": "stage",
+        "stageId": "wordStage",
         "characterId": "character",
         "soundId": "sound",
         "imageId": "image",
@@ -36,57 +36,49 @@
         "passwordId": "loginPassword"
     });
 
-    var stages = ["stage", "addStage", "loginPage", "registerPage"];
+    var stageSwitch = new langstyle.StageSwitch();
 
-    var hideStages = function () {
-        for (var i = stages.length - 1; i >= 0; i--) {
-            var stage = dom.getById(stages[i]);
-            dom.addClass(stage, hiddenSign);
-        }
-    };
-
-    var showStage = function (stageId) {
-        hideStages();
-        var stage = dom.getById(stageId);
-        dom.removeClass(stage, hiddenSign);
-    };
+    var userNameLink = dom.getById("userName");
+    userNameLink.onclick = null;
 
     var showUserName = function () {
         var userName = userLogin.getUserName();
-        dom.getById("userName").textContent = userName;
+        userNameLink.textContent = userName;
+        userNameLink.onclick = function () {
+            stageSwitch.showUser();
+        };
     };
 
     var hideUserName = function () {
-        dom.getById("userName").textContent = "";
+        userNameLink.textContent = "";
     };
 
-    var startButton = dom.getFirstByClass("js-start-menu");
-    startButton.onclick = function (e) {
-        showStage("stage");
+    var startMenu = dom.getById("startMenu");
+    startMenu.onclick = function (e) {
+        stageSwitch.showWord();
     };
 
-    var addButton = dom.getFirstByClass("js-add-menu");
-    addButton.onclick = function (e) {
-        showStage("addStage");
+    var addMenu = dom.getById("addMenu");
+    addMenu.onclick = function (e) {
+        stageSwitch.showAdd();
     };
 
-    var registerUserMenu = dom.getFirstByClass("js-register-menu");
+    var registerUserMenu = dom.getById("registerMenu");
     registerUserMenu.onclick = function (e) {
-        showStage("registerPage");
+        stageSwitch.showRegister();
     };
 
-    var loginMenu = dom.getFirstByClass("js-login-menu");
+    var loginMenu = dom.getById("loginMenu");
     loginMenu.onclick = function () {
-        showStage("loginPage");
+        stageSwitch.showLogin();
     };
 
-    var logoutMenu = dom.getFirstByClass("js-logout-menu");
-    logoutMenu.onclick = function () {
+    var logoutButton = dom.getById("logout");
+    logoutButton.onclick = function () {
         userLogin.logout().then(function () {
             hideMenus();
             hideUserName();
-            hideLogout();
-            showStage("loginPage");
+            stageSwitch.showLogin();
         });
     };
 
@@ -96,8 +88,7 @@
             userLogin.login().then(function () {
                 showMenus();
                 showUserName();
-                showLogout();
-                showStage("stage");
+                stageSwitch.showWord();
             });
         }
     };
@@ -108,42 +99,27 @@
             userRegister.register().then(function () {
                 showMenus();
                 showUserName();
-                showLogout();
-                showStage("stage");
+                stageSwitch.showWord();
             });
         }
     };
-    var showLogout = function () {
-        logoutMenu.classList.remove(hiddenSign);
-        loginMenu.classList.add(hiddenSign);
-        registerUserMenu.classList.add(hiddenSign);
-    };
-
-    var hideLogout = function () {
-        logoutMenu.classList.add(hiddenSign);
-        loginMenu.classList.remove(hiddenSign);
-        registerUserMenu.classList.remove(hiddenSign);
-    };
 
     var hideMenus = function () {
-        startButton.classList.add(hiddenSign);
-        addButton.classList.add(hiddenSign);
+        startMenu.classList.add(hiddenSign);
+        addMenu.classList.add(hiddenSign);
     };
 
     var showMenus = function () {
-        startButton.classList.remove(hiddenSign);
-        addButton.classList.remove(hiddenSign);
+        startMenu.classList.remove(hiddenSign);
+        addMenu.classList.remove(hiddenSign);
     };
 
     if (userLogin.hasLogin()) {
-        showMenus();
         showUserName();
-        showLogout();
     }
     else {
-        hideMenus();
         hideUserName();
-        hideLogout();
+        stageSwitch.showLogin();
     }
 
 } (dom));

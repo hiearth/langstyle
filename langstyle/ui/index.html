@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width; initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>langstyle</title>
         <link rel="Stylesheet" href="resource/langstyle.css" />
         <script type="text/javascript" src="resource/promise.js"></script>
@@ -10,6 +10,7 @@
         <script type="text/javascript" src="resource/observableEvent.js"></script>
         <script type="text/javascript" src="resource/langstyle.js"></script>
         <script type="text/javascript" src="resource/cookie.js"></script>
+        <script type="text/javascript" src="resource/stageSwitch.js"></script>
         <script type="text/javascript" src="resource/user.js"></script>
         <script type="text/javascript" src="resource/userProgress.js"></script>
         <script type="text/javascript" src="resource/wordCharacter.js"></script>
@@ -25,20 +26,20 @@
                     <li class="menu-list-item logo-menu">
                         <a href="" class="logo-text">Langstyle</a>
                     </li>
-                    <li class="menu-list-item">
+                    <!--<li class="menu-list-item">
                         <a class="js-start-menu menu-item"><span class="menu-item-span">Start</span></a>
                     </li>
                     <li class="menu-list-item">
                         <a class="js-add-menu menu-item"><span class="menu-item-span">Add</span></a>
-                    </li>
+                    </li>-->
                 </ol>
             </div>
             <div class="header-right">
                 <ol class="menu-list">
                     <li class="menu-list-item">
-                        <label id="userName"></label>
+                        <label id="userName" class="user-name"></label>
                     </li>
-                    <li class="menu-list-item">
+                    <!--<li class="menu-list-item">
                         <a class="js-login-menu menu-item"><span class="menu-item-span">Log in</span></a>
                     </li>
                     <li class="menu-list-item">
@@ -46,13 +47,18 @@
                     </li>
                     <li class="menu-list-item">
                         <a class="js-register-menu menu-item"><span class="menu-item-span">Register</span></a>
-                    </li>
+                    </li>-->
                 </ol>
             </div>
         </div>
 
         <div id="main" class="content">
-            <div id="stage" class="js-wordStage stage hidden">
+
+            <div id="startStage">
+                <input type="button" id="startMenu" value="Start" />
+            </div>
+
+            <div id="wordStage" class="js-wordStage stage hidden">
                 <div class="stageButton">
                     <input type="button" class="js-next" onclick="javascript:wordStage.play();" value="Next" />
                 </div>
@@ -92,7 +98,7 @@
                 </form>
             </div>
 
-            <div id="loginPage" class="form hidden">
+            <div id="loginStage" class="form hidden">
                 <label class="fieldLabel">User Name</label>
                 <input type="text" id="loginUserName"/>
                 <br />
@@ -102,10 +108,13 @@
                 <label class="js-login-validation validation"></label>
                 <div class="formBottom">
                     <input type="button" id="login" value="Log in" />
+                    <div class="register-in-login">
+                        <a id="registerMenu">Register</a>
+                    </div>
                 </div>
             </div>
 
-            <div id="registerPage" class="form hidden">
+            <div id="registerStage" class="form hidden">
                 <label class="fieldLabel">User Name</label>
                 <input type="text" id="registerUserName"/>
                 <br />
@@ -118,7 +127,15 @@
                 <label class="js-register-validation validation"></label>
                 <div class="formBottom">
                     <input type="button" id="register" value="Register" />
+                    <div class="login-in-register">
+                        <a id="loginMenu">Already have account</a>
+                    </div>
                 </div>
+            </div>
+
+            <div id="userStage" class="hidden">
+                <a id="addMenu">Add</a>
+                <a id="logout">Log out</a>
             </div>
         
         </div>

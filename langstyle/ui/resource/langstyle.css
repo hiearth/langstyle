@@ -20,6 +20,7 @@ input[type='submit'], input[type='button']
 	height:30px;
 	padding: 0 10px 0 10px;
 	border-radius: 5px;
+	-webkit-appearance: none;/* for iphone */
 	border-style:solid;
 	background-color: #7C0;
 	border-color: #8bd426 #67ae05 #508800;
@@ -61,6 +62,10 @@ input[type='submit'], input[type='button']
 	right:0;
 	white-space:nowrap;
 	padding-right: 5px;
+}
+.user-name
+{
+	cursor:pointer;
 }
 
 .menu-list
@@ -218,9 +223,16 @@ input[type='submit'], input[type='button']
 {
 	padding-top:10px;
 	padding-left:155px;
+	width:200px;
+	text-align:center;
 }
 
 .formBottom button
 {
 	width: 100px;
+}
+
+.register-in-login, .login-in-register
+{
+	margin-top:30px;
 }

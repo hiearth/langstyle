@@ -210,6 +210,10 @@
             return this._soundSpeakElement.children.length > 0;
         },
 
+        hasNext: function () {
+            this._getNext() != null;
+        },
+
         _playSound: function (soundElement) {
             this._unmarkCurrent();
             soundElement.classList.add(this._currentSign);
@@ -456,7 +460,7 @@
                 } .bind(this)
             ).then(function () {
                 this.showCharacter();
-            }.bind(this));
+            } .bind(this));
         },
 
         getImages: function (characterId) {
@@ -470,7 +474,7 @@
             ).then(function () {
                 var imageUrls = this._getImageUrlsByIds(this._imageIds);
                 this.imageView.load(imageUrls);
-            }.bind(this));
+            } .bind(this));
         },
 
         getSounds: function (characterId) {
@@ -484,7 +488,7 @@
             ).then(function () {
                 var soundUrls = this._getSoundUrlsByIds(this._soundIds);
                 this.soundSpeak.load(soundUrls);
-            }.bind(this));
+            } .bind(this));
         },
 
         showCharacter: function () {
