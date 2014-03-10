@@ -66,33 +66,31 @@
             <div id="addStage" class="js-add-page form stage hidden">
                 <form method="post" id="addForm" enctype="multipart/form-data" 
                 action="javascript:app.materialProvider.upload();">
-                    <label class="fieldLabel">Image</label>
-                    <input type="file" id="imageFile" name="imageFile" />
-                    <label id="fileSize"></label>
+                    <div class="fileWrapper">
+                        <input type="button" class="fileButton" value="Upload Image File"/>
+                        <input type="file" id="imageFile" name="imageFile" />
+                    </div>
                     <br />
                     <!--<label class="fieldLabel">Sound</label>
                     <input type="file" id="soundFile" name="soundFile" />
                     <br />-->
-                    <label class="fieldLabel">Character</label>
-                    <input type="text" id="characterCode"/>
+                    <input type="text" id="characterCode" class="filedInput" placeholder="Character"/>
                     <br />
                     <label class="js-add-validation validation"></label>
                     <div class="formBottom">
-                        <input type="submit" id="uploadImage" value="Submit" />
+                        <input type="submit" id="uploadImage" class="formButton" value="Submit" />
                     </div>
                 </form>
             </div>
 
             <div id="loginStage" class="form hidden">
-                <label class="fieldLabel">User Name</label>
-                <input type="text" id="loginUserName"/>
+                <input type="text" id="loginUserName" class="filedInput" placeholder="User Name" />
                 <br />
-                <label class="fieldLabel">Password</label>
-                <input type="password" id="loginPassword"/>
+                <input type="password" id="loginPassword" class="filedInput" placeholder="Password" />
                 <br />
                 <label class="js-login-validation validation"></label>
                 <div class="formBottom">
-                    <input type="button" id="login" value="Log in" />
+                    <input type="button" id="login" class="formButton" value="Log in" />
                     <div class="register-in-login">
                         <a id="registerMenu">Register</a>
                     </div>
@@ -100,18 +98,15 @@
             </div>
 
             <div id="registerStage" class="form hidden">
-                <label class="fieldLabel">User Name</label>
-                <input type="text" id="registerUserName"/>
+                <input type="text" id="registerUserName" class="filedInput" placeholder="User Name"/>
                 <br />
-                <label class="fieldLabel">Password</label>
-                <input type="password" id="registerPassword"/>
+                <input type="password" id="registerPassword" class="filedInput" placeholder="Password"/>
                 <br />
-                <label class="fieldLabel">Confirm Password</label>
-                <input type="password" id="registerConfirmPassword"/>
+                <input type="password" id="registerConfirmPassword" class="filedInput" placeholder="Confirm Password"/>
                 <br />
                 <label class="js-register-validation validation"></label>
                 <div class="formBottom">
-                    <input type="button" id="register" value="Register" />
+                    <input type="button" id="register" class="formButton" value="Register" />
                     <div class="login-in-register">
                         <a id="loginMenu">Already have account</a>
                     </div>
