@@ -54,8 +54,9 @@ ol
 }
 .header
 {
-	height: 60px;
+	height: 30px;
 	background:#f5f5f5;
+	padding:10px 0 0 0;
 }
 .header-left
 {
@@ -74,16 +75,12 @@ ol
 {
 	cursor:pointer;
 	color:#245dc1;
+	font-size:large;
 }
 
-.menu-list
-{
-
-}
 .menu-list-item
 {
 	display:inline-block;
-	margin-top:20px;
 }.menu-list-item.logo-menu
 {
 	margin-left:5px;
@@ -102,13 +99,17 @@ ol
 
 .stage
 {
-	margin-top: 20px;
-	margin-left:10px;
-	margin-right:10px;
+	margin:20px 10px 10px 10px;
 }
-.stage.start
+.startStage 
 {
-	display:block;
+	text-align:center;}
+.startStage .startButton
+{
+	width: 90%;
+	height: 40px;
+	font-size: 18px;
+	line-height:18px;
 }
 
 .stageButton
@@ -117,6 +118,21 @@ ol
 	margin-top:5px;
 	margin-bottom:5px;
 	padding-right:5px;
+}
+.navigateBar
+{
+	background-color: #CCC;
+	height: 22px;
+	padding: 5px 0 2px 5px;
+}
+.navigateBar .navigateButton
+{
+	font-size: 12px;
+	line-height: 12px;
+	height: 20px;
+	padding: 0 5px 0 5px;
+	background-color: #CCC;
+	border-color: #BBB;
 }
 
 .characterView
@@ -272,6 +288,11 @@ ol
 {
 	text-align:center;
 	padding: 30px 15px 5px 15px;
+}
+
+.userMenu
+{
+	line-height:20px;
 }
 .userMenu li
 {

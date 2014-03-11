@@ -37,13 +37,20 @@
             </div>
         </div>
 
+        <div id="navigation" class="navigateBar hidden">
+            <input type="button" id="homeNavigation" class="navigateButton" value="Home" />
+        </div>
+
         <div id="main" class="content">
 
-            <div id="startStage">
-                <input type="button" id="startMenu" value="Start" />
+            <div id="startStage" class="startStage stage">
+                <input type="button" id="startMenu" class="startButton" value="Start" />
             </div>
 
             <div id="wordStage" class="js-wordStage stage hidden">
+                <!--<div class="navigateBar">
+                    <input type="button" class="navigateButton" value="Home" />
+                </div>-->
                 <div class="stageButton">
                     <input type="button" id="nextWord" class="js-next" onclick="javascript:app.wordStage.play()" value="Next" />
                 </div>
@@ -63,11 +70,13 @@
                 </div>
             </div>
 
-            <div id="addStage" class="js-add-page form stage hidden">
+            <div id="addStage" class="js-add-page form stage hidden">                <!--<div class="navigateBar">
+                    <input type="button" class="navigateButton" value="Home" />
+                </div>-->
                 <form method="post" id="addForm" enctype="multipart/form-data" 
                 action="javascript:app.materialProvider.upload();">
                     <div class="fileWrapper">
-                        <input type="button" class="fileButton" value="Upload Image File"/>
+                        <input type="button" class="fileButton" value="Select Image File"/>
                         <input type="file" id="imageFile" name="imageFile" />
                     </div>
                     <br />
@@ -113,9 +122,11 @@
                 </div>
             </div>
 
-            <div id="userStage" class="hidden userStage">
+            <div id="userStage" class="hidden userStage">                <!--<div class="navigateBar">
+                    <input type="button" class="navigateButton" value="Home" />
+                </div>-->
                 <ol class="userMenu">
-                    <li id="addMenu"><span>Add</span></li>
+                    <li id="addMenu"><span>Add Image</span></li>
                 </ol>
                 <div class="logoutMenu">
                     <a id="logout">Log out</a>

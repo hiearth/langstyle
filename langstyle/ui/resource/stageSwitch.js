@@ -13,6 +13,9 @@
             "registerStage",
             "userStage"
         ];
+        this.stagesWithHeader = ["startStage", "loginStage", "registerStage"];
+        this.headerElement = dom.getById("header");
+        this.navigationBar = dom.getById("navigation");
         this.hiddenSign = "hidden";
     };
 
@@ -46,6 +49,39 @@
             this._hideStages();
             var stage = dom.getById(stageId);
             dom.removeClass(stage, this.hiddenSign)
+            if (this._isStageWithHeader(stageId)) {
+                this._showHeader();
+                this._hideNavigation();
+            }
+            else {
+                this._hideHeader();
+                this._showNavigation();
+            }
+        },
+
+        _isStageWithHeader: function (stageId) {
+            for (var i = this.stagesWithHeader.length - 1; i >= 0; i--) {
+                if (this.stagesWithHeader[i] === stageId) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
+        _hideHeader: function () {
+            dom.addClass(this.headerElement, this.hiddenSign);
+        },
+
+        _showHeader: function () {
+            dom.removeClass(this.headerElement, this.hiddenSign);
+        },
+
+        _showNavigation: function () {
+            dom.removeClass(this.navigationBar, this.hiddenSign);
+        },
+
+        _hideNavigation: function () {
+            dom.addClass(this.navigationBar, this.hiddenSign);
         },
 
         _hideStages: function () {

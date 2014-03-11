@@ -38,6 +38,7 @@
 
         this.stageSwitch = new langstyle.StageSwitch();
 
+        this.homeNavigationButton = dom.getById("homeNavigation");
         this.userNameLink = dom.getById("userName");
         this.startMenu = dom.getById("startMenu");
         this.addMenu = dom.getById("addMenu");
@@ -62,6 +63,10 @@
                 this.hideUserName();
                 this.stageSwitch.showLogin();
             }
+
+            this.homeNavigationButton.onclick = function (e) {
+                this.stageSwitch.showStart();
+            } .bind(this);
 
             this.startMenu.onclick = function (e) {
                 this.stageSwitch.showWord();

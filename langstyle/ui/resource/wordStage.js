@@ -211,7 +211,11 @@
         },
 
         hasNext: function () {
-            this._getNext() != null;
+            return this._getNext() != null;
+        },
+
+        hasPrevious: function () {
+            return this._getPrevious() != null;
         },
 
         _playSound: function (soundElement) {
