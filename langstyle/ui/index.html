@@ -16,6 +16,9 @@
         <script type="text/javascript" src="resource/wordCharacter.js"></script>
         <script type="text/javascript" src="resource/wordImage.js"></script>
         <script type="text/javascript" src="resource/wordSound.js"></script>
+        <script type="text/javascript" src="resource/imageView.js"></script>
+        <script type="text/javascript" src="resource/soundSpeak.js"></script>
+        <script type="text/javascript" src="resource/stageFrame.js"></script>
         <script type="text/javascript" src="resource/wordStage.js"></script>
         <script type="text/javascript" src="resource/fileUploader.js"></script>
         <script type="text/javascript" src="resource/materialProvider.js"></script>
@@ -48,9 +51,6 @@
             </div>
 
             <div id="wordStage" class="js-wordStage stage hidden">
-                <!--<div class="navigateBar">
-                    <input type="button" class="navigateButton" value="Home" />
-                </div>-->
                 <div class="stageButton">
                     <input type="button" id="nextWord" class="js-next" onclick="javascript:app.wordStage.play()" value="Next" />
                 </div>
@@ -70,9 +70,7 @@
                 </div>
             </div>
 
-            <div id="addStage" class="js-add-page form stage hidden">                <!--<div class="navigateBar">
-                    <input type="button" class="navigateButton" value="Home" />
-                </div>-->
+            <div id="addStage" class="js-add-page form stage hidden">
                 <form method="post" id="addForm" enctype="multipart/form-data" 
                 action="javascript:app.materialProvider.upload();">
                     <div class="fileWrapper">
@@ -122,9 +120,7 @@
                 </div>
             </div>
 
-            <div id="userStage" class="hidden userStage">                <!--<div class="navigateBar">
-                    <input type="button" class="navigateButton" value="Home" />
-                </div>-->
+            <div id="userStage" class="hidden userStage">
                 <ol class="userMenu">
                     <li id="addMenu"><span>Add Image</span></li>
                 </ol>

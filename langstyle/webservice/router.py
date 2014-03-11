@@ -12,6 +12,7 @@ from . import user_character
 from . import character_image
 from . import character_sound
 from . import user_validation
+from . import user_progress
 
 # meta class
 class Singleton(type):
@@ -46,6 +47,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/charactersounds/(.*)", character_sound.CharacterSoundsHandler)
         self._add_handler(r"/charactersound/character/([0-9a-zA-Z]*)/sound/(.*)", character_sound.CharacterSoundHandler)
         self._add_handler(r"/sound/?(.*)",sound.SoundHandler)
+        self._add_handler(r"/userprogress/next", user_progress.UserProgressNextHandler)
         self._add_handler(r"(.*)\.js", web.StaticFileHandler)
         self._add_handler(r"(.*)\.css", web.StaticFileHandler)
         self._add_handler(r"(.*)\.png", web.StaticFileHandler)

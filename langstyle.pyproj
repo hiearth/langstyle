@@ -76,6 +76,7 @@
     <Compile Include="langstyle\webservice\sound.py" />
     <Compile Include="langstyle\webservice\user.py" />
     <Compile Include="langstyle\webservice\user_character.py" />
+    <Compile Include="langstyle\webservice\user_progress.py" />
     <Compile Include="langstyle\webservice\user_validation.py" />
     <Compile Include="langstyle\webservice\util.py" />
     <Compile Include="langstyle\webservice\sound_for_test.py" />
@@ -141,7 +142,10 @@
     <Content Include="langstyle\database\schema\0.0.8-CharacterSound.sql" />
     <Content Include="langstyle\ui\index.html" />
     <Content Include="langstyle\ui\resource\cookie.js" />
+    <Content Include="langstyle\ui\resource\imageView.js" />
     <Content Include="langstyle\ui\resource\observableEvent.js" />
+    <Content Include="langstyle\ui\resource\soundSpeak.js" />
+    <Content Include="langstyle\ui\resource\stageFrame.js" />
     <Content Include="langstyle\ui\resource\stageSwitch.js" />
     <Content Include="langstyle\ui\resource\user.js" />
     <Content Include="langstyle\ui\resource\ajax.js" />

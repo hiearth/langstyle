@@ -10,9 +10,14 @@
         this._characterSoundsUrl = "/charactersounds";
         this._currentCharacterUrl = "/usercharacter/current";
         this._nextCharacterUrl = "/usercharacter/next";
+        this._nextWordUrl = "/userprogress/next";
     };
 
     langstyle.UserProgress.prototype = {
+
+        getNext: function () {
+            return ajax.get(this._nextWordUrl);
+        },
 
         getCurrentCharacter: function () {
             return ajax.get(this._currentCharacterUrl);
