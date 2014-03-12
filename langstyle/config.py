@@ -167,6 +167,7 @@ ROOT_DIRECTORY = os.path.dirname(__file__)
 DATA_DIRECTORY = os.path.abspath(os.path.join(ROOT_DIRECTORY,"..","data"))
 IMAGE_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "image")
 SOUND_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "sound")
+ENGLISH_CHARACTER_FILE_PATH = os.path.join(DATA_DIRECTORY, "CET4.txt")
 MAX_IN_LEARNING_COUNT = 50 # need to customize to fit each user
 IMAGES_COUNT_PER_CHARACTER = 20
 SOUNDS_COUNT_PRE_CHARACTER = 5

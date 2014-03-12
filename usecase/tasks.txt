@@ -1,8 +1,8 @@
 
 
-1. write a js promise library 
+1. write a js promise library (done)
 
-2. use database to store character, image and sound
+2. use database to store character, image and sound (done)
 	1) use database to store character(utf8)
 	2) use file system to store image and sound (relational database is not a good place to store file)
 	3) use database to store character, image and sound relationship
@@ -23,7 +23,7 @@
 
 3. write unit test
 
-4. compute md5 of image/sound file, then store the md5 in database
+4. compute md5 of image/sound file, then store the md5 in database (done)
    file data is stored in file system, if md5 is j4k0k306jw99j6h0jhhm2nb46bvuyo5qe, 
    the file path is root_dir/j4/k0/j4k0k306jw99j6h0jhhm2nb46bvuyo5qe
 
@@ -47,14 +47,19 @@
 
 8. compute best in-learning count for each user according the user's learning history
 
-9. get sound for each character
+9. get sound for each character (done)
 
 10. generate different sizes of photos automatically
 
-11. support taking photo from Phone and Pad
+11. support taking photo from Phone and Pad (done)
 
 12. support cache because wireless is very slow
 
-13. mobile web style
+13. mobile web style (done)
 
-14. improve network performance, i.e. network connection times
+14. improve network performance, i.e. network connection times (done)
+
+15. insert english dictionary
+	1) most frequent used characters
+	2) common used characters
+	3) related images for each character
