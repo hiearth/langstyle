@@ -164,10 +164,14 @@ repository_factory = _RepositoryFactory()
 service_factory = _ServiceFactory()
 
 ROOT_DIRECTORY = os.path.dirname(__file__)
+
 DATA_DIRECTORY = os.path.abspath(os.path.join(ROOT_DIRECTORY,"..","data"))
 IMAGE_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "image")
 SOUND_DATA_DIRECTORY = os.path.join(DATA_DIRECTORY, "sound")
-ENGLISH_CHARACTER_FILE_PATH = os.path.join(DATA_DIRECTORY, "CET4.txt")
+
+POPULATION_DIRECTORY = os.path.abspath(os.path.join(ROOT_DIRECTORY, "..", "population"))
+ENGLISH_POPULATION_DIRECTORY = os.path.join(POPULATION_DIRECTORY, "english")
+
 MAX_IN_LEARNING_COUNT = 50 # need to customize to fit each user
 IMAGES_COUNT_PER_CHARACTER = 20
 SOUNDS_COUNT_PRE_CHARACTER = 5
@@ -175,3 +179,5 @@ SOUNDS_COUNT_PRE_CHARACTER = 5
 _DATABASE_DEFINITION_DIR = os.path.abspath(os.path.join(ROOT_DIRECTORY, "database"))
 DATABASE_SCHEMA_DIR = os.path.join(_DATABASE_DEFINITION_DIR, "schema")
 DATABASE_PROCEDURE_DIR = os.path.join(_DATABASE_DEFINITION_DIR,"procedure")
+
+ADMINISTRATOR_ID = 1

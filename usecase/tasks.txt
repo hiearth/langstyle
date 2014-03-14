@@ -63,3 +63,19 @@
 	1) most frequent used characters
 	2) common used characters
 	3) related images for each character
+	4) related sounds for each character
+
+16. click "next" button 
+	1) if current character has more image to display or more sound to play, display or play it.
+	2) if current stage is last image and last sound of character, let user speak and then compare user's and system's (just play them)
+	3) after user speak, get next character, images and sounds
+
+17. click "previous" button
+	1) the same logic as "next" button
+	2) the same logic as "next" button
+
+18. support mobile guesture
+	1) slide right -> next
+	2) slide left  -> previous
+
+19. record user's speak to improve pronounce and memory

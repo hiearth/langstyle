@@ -7,6 +7,7 @@
 
         this._soundSpeakId = options.soundSpeakId;
         this._soundSpeakElement = dom.getById(this._soundSpeakId);
+        this._playedSign = "played"
         this._currentSign = "current";
         this._soundUrls = [];
         this.onplayed = new ObservableEvent();
@@ -85,10 +86,22 @@
             return this._getPrevious() != null;
         },
 
+        isFinished: function () {
+            if (this.hasSound()) {
+                for (var i = this._soundSpeakElement.children.length - 1; i >= 0; i--) {
+                    if (!this._soundSpeakElement.children[i].classList.contains(this._playedSign)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        },
+
         _playSound: function (soundElement) {
             this._unmarkCurrent();
             soundElement.classList.add(this._currentSign);
             soundElement.play();
+            soundElement.classList.add(this._playedSign);
             this.onplayed.notify();
         },
 

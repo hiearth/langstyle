@@ -49,6 +49,15 @@
     WordStage.prototype = {
 
         play: function () {
+            if (this.stageFrame.isFinished()) {
+                this._getNextWord();
+            }
+            else {
+                this.stageFrame.next();
+            }
+        },
+
+        _getNextWord: function () {
             this.userProgress.getNext().then(function (nextWord) {
                 var nextWordObj = JSON.parse(nextWord);
                 this._character = nextWordObj.characterCode;

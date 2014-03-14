@@ -13,8 +13,9 @@ def try_index(alist, value):
 
 def find_first(iter, find_fn):
     if iter:
-        find_generator = (item for item in iter if find_fn(item))
-        return next(find_generator, None)
+        for item in iter:
+            if find_fn(item):
+                return item
     return None
 
 def list_comprehension_by_index(iter, index):

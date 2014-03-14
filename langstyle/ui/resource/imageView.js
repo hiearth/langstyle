@@ -2,7 +2,7 @@
 (function (langstyle, dom) {
 
     // display image one by one
-    // can load all images once, and control their visibility
+    // load all images once, and control their visibility
     var ImageView = function (options) {
         if (!(this instanceof ImageView)) {
             return new ImageView(options);
@@ -10,6 +10,7 @@
 
         this._imageViewId = options.imageViewId;
         this._imageViewElement = dom.getById(this._imageViewId);
+        this._showedSign = "showed";
         this._currentSign = "current";
         this._hiddenSign = "hidden";
         this._imageUrls = [];
@@ -79,10 +80,22 @@
             }
         },
 
+        isFinished: function () {
+            if (this.hasImage()) {
+                for (var i = this._imageViewElement.children.length - 1; i >= 0; i--) {
+                    if (!this._imageViewElement.children[i].classList.contains(this._showedSign)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        },
+
         _showImage: function (imageElement) {
             this._hideCurrent();
             imageElement.classList.remove(this._hiddenSign);
             imageElement.classList.add(this._currentSign);
+            imageElement.classList.add(this._showedSign);
             this.onshowed.notify();
         },
 

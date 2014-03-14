@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8dbdb41c-c225-4d9b-85af-5a6f7a03b589}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>install.py</StartupFile>
+    <StartupFile>app.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,7 +24,7 @@
   <ItemGroup>
     <Compile Include="install.py" />
     <Compile Include="langstyle\install\database.py" />
-    <Compile Include="langstyle\install\english_character.py" />
+    <Compile Include="langstyle\install\english_word.py" />
     <Compile Include="langstyle\install\__init__.py" />
     <Compile Include="langstyle\config.py" />
     <Compile Include="langstyle\database\base_repository.py" />
@@ -105,6 +105,10 @@
     <Folder Include="langstyle\ui\resource\" />
     <Folder Include="langstyle\webservice\" />
     <Folder Include="data\" />
+    <Folder Include="population\" />
+    <Folder Include="population\english\" />
+    <Folder Include="population\english\character\" />
+    <Folder Include="population\english\sound\" />
     <Folder Include="usecase\" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +166,9 @@
     <Content Include="langstyle\ui\resource\wordImage.js" />
     <Content Include="langstyle\ui\resource\wordSound.js" />
     <Content Include="langstyle\ui\resource\wordStage.js" />
+    <Content Include="population\english\character\CET4_all.txt" />
+    <Content Include="population\english\character\CET4_more_frequent.txt" />
+    <Content Include="population\english\character\CET6_more_frequent.txt" />
     <Content Include="UseCase\ImageToSound_1.txt" />
     <Content Include="UseCase\ImageToVoice_3.txt" />
     <Content Include="usecase\problem.txt" />
