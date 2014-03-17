@@ -162,6 +162,7 @@
     <Content Include="langstyle\ui\resource\promise.js" />
     <Content Include="langstyle\ui\resource\simpleDom.js" />
     <Content Include="langstyle\ui\resource\userProgress.js" />
+    <Content Include="langstyle\ui\resource\voiceRecord.js" />
     <Content Include="langstyle\ui\resource\wordCharacter.js" />
     <Content Include="langstyle\ui\resource\wordImage.js" />
     <Content Include="langstyle\ui\resource\wordSound.js" />

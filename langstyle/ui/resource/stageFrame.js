@@ -7,6 +7,7 @@
 
         this._imageView = options.imageView;
         this._soundSpeak = options.soundSpeak;
+        this._voiceRecord = options.voiceRecord;
 
         this.init();
     };
@@ -18,10 +19,28 @@
         },
 
         isFinished: function () {
+            //            if (this._imageView != null && !this._imageView.isFinished()) {
+            //                return false;
+            //            }
+            //            if (this._soundSpeak != null && !this._soundSpeak.isFinished()) {
+            //                return false;
+            //            }
+            //            return true;
+            return this._isImageAndSoundFinished() && this._isVoiceFinished();
+        },
+
+        _isImageAndSoundFinished: function () {
             if (this._imageView != null && !this._imageView.isFinished()) {
                 return false;
             }
             if (this._soundSpeak != null && !this._soundSpeak.isFinished()) {
+                return false;
+            }
+            return true;
+        },
+
+        _isVoiceFinished: function () {
+            if (this._voiceRecord != null && !this._voiceRecord.isFinished()) {
                 return false;
             }
             return true;
@@ -33,8 +52,13 @@
         },
 
         next: function () {
-            this._imageView.showNext();
-            this._soundSpeak.playNext();
+            if (!this._isImageAndSoundFinished()) {
+                this._imageView.showNext();
+                this._soundSpeak.playNext();
+            }
+            else {
+                this._voiceRecord.record();
+            }
         }
 
     };

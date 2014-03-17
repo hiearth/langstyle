@@ -36,12 +36,17 @@
             "soundSpeakId": options.soundSpeakId
         });
 
+        this.voiceRecord = new langstyle.VoiceRecord({
+            "voiceRecordId": options.voiceRecordId
+        });
+
         this.stageFrame = new langstyle.StageFrame({
             "nextFrameId": options.nextFrameId,
             "previousFrameId": options.previousFrameId,
             "stageFrameId": options.stageFrameId,
             "imageView": this.imageView,
-            "soundSpeak": this.soundSpeak
+            "soundSpeak": this.soundSpeak,
+            "voiceRecord": this.voiceRecord
         });
 
     };
@@ -75,6 +80,7 @@
                 this.imageView.load(imageUrls);
                 var soundUrls = this._getSoundUrlsByIds(this._soundIds);
                 this.soundSpeak.load(soundUrls);
+                this.voiceRecord.reset();
             } .bind(this));
         },
 

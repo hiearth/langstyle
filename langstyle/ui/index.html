@@ -18,6 +18,7 @@
         <script type="text/javascript" src="resource/wordSound.js"></script>
         <script type="text/javascript" src="resource/imageView.js"></script>
         <script type="text/javascript" src="resource/soundSpeak.js"></script>
+        <script type="text/javascript" src="resource/voiceRecord.js"></script>
         <script type="text/javascript" src="resource/stageFrame.js"></script>
         <script type="text/javascript" src="resource/wordStage.js"></script>
         <script type="text/javascript" src="resource/fileUploader.js"></script>
@@ -25,7 +26,8 @@
     </head>
     <body>
         <div id="header" class="header">
-            <div class="header-left">                <ol class="menu-list">
+            <div class="header-left">
+                <ol class="menu-list">
                     <li class="menu-list-item logo-menu">
                         <a href="" class="logo-text">Langstyle</a>
                     </li>
@@ -57,6 +59,9 @@
                 <div class="js-wordStageTop">
                     <div class="js-wordCharacter characterView">
                         <label id="character"></label>
+                    </div>
+                    <div class="voiceRecord">
+                        <audio id="voice" autoplay="autoplay"></audio>
                     </div>
                     <!--<button type="button" id="playSound" class="sound">
                         <span></span>
