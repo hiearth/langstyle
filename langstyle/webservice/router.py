@@ -51,6 +51,7 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"(.*)\.js", web.StaticFileHandler)
         self._add_handler(r"(.*)\.css", web.StaticFileHandler)
         self._add_handler(r"(.*)\.png", web.StaticFileHandler)
+        self._add_handler(r"(.*)\.html", web.StaticFileHandler)
 
     def _add_handler(self, pattern, handler_class):
         self._routes.append((re.compile(pattern), handler_class))

@@ -18,6 +18,7 @@
         <script type="text/javascript" src="resource/wordSound.js"></script>
         <script type="text/javascript" src="resource/imageView.js"></script>
         <script type="text/javascript" src="resource/soundSpeak.js"></script>
+        <script type="text/javascript" src="resource/recorder.js"></script>
         <script type="text/javascript" src="resource/voiceRecord.js"></script>
         <script type="text/javascript" src="resource/stageFrame.js"></script>
         <script type="text/javascript" src="resource/wordStage.js"></script>
@@ -50,6 +51,7 @@
 
             <div id="startStage" class="startStage stage">
                 <input type="button" id="startMenu" class="startButton" value="Start" />
+                <input type="file" accept=""/>
             </div>
 
             <div id="wordStage" class="js-wordStage stage hidden">
@@ -61,7 +63,7 @@
                         <label id="character"></label>
                     </div>
                     <div class="voiceRecord">
-                        <audio id="voice" autoplay="autoplay"></audio>
+                        <audio id="voice" controls="controls"></audio>
                     </div>
                     <!--<button type="button" id="playSound" class="sound">
                         <span></span>

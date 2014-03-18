@@ -5,6 +5,8 @@
                             || navigator.mozGetUserMedia
                             || navigator.msGetUserMedia);
 
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
     var VoiceRecord = function (options) {
         if (!(this instanceof VoiceRecord)) {
             return new VoiceRecord(options);
@@ -13,21 +15,41 @@
         this.voiceRecordElement = dom.getById(options.voiceRecordId);
         this.recordedSign = "recorded";
         this._voiceStream = null;
+        this._audioContext = new AudioContext();
+        this._audioRecorder = null;
     };
 
     VoiceRecord.prototype = {
 
         record: function () {
-            navigator.getUserMedia({ audio: true },
-                function (stream) {
-                    this._voiceStream = stream;
-                    this.voiceRecordElement.src = URL.createObjectURL(stream);
-                    this.voiceRecordElement.classList.add(this.recordedSign);
-                    setTimeout(this.stop.bind(this), 2000);
-                } .bind(this),
+            navigator.getUserMedia({ audio: true }, 
+                this._getStream.bind(this),
                 function (error) {
+                    console.log(error);
                 } .bind(this)
             );
+        },
+
+        _getStream: function (stream) {
+            var inputPoint = this._audioContext.createGain();
+            var audioInput = this._audioContext.createMediaStreamSource(stream);
+            audioInput.connect(inputPoint);
+            this._audioRecorder = new Recorder(inputPoint);
+            this._audioRecorder.record();
+            setTimeout(this._stopRecord.bind(this), 3000);
+        },
+
+        _stopRecord: function () {
+            this._audioRecorder.stop();
+            this._audioRecorder.exportWAV(this._exportWav.bind(this));
+        },
+
+        _getAudioBuffer: function (buffers) {
+            this.voiceRecordElement.src = URL.createObjectURL(buffers);
+        },
+
+        _exportWav: function (blob) {
+            this.voiceRecordElement.src = URL.createObjectURL(blob);
         },
 
         reset: function () {

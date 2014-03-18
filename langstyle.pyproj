@@ -149,6 +149,8 @@
     <Content Include="langstyle\ui\resource\cookie.js" />
     <Content Include="langstyle\ui\resource\imageView.js" />
     <Content Include="langstyle\ui\resource\observableEvent.js" />
+    <Content Include="langstyle\ui\resource\recorder.js" />
+    <Content Include="langstyle\ui\resource\recorderWorker.js" />
     <Content Include="langstyle\ui\resource\soundSpeak.js" />
     <Content Include="langstyle\ui\resource\stageFrame.js" />
     <Content Include="langstyle\ui\resource\stageSwitch.js" />
