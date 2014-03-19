@@ -25,6 +25,11 @@
             "soundId": options.soundId
         });
 
+        this.characterView = new langstyle.CharacterView({
+            "characterViewId": options.characterViewId,
+            "characterId": options.characterId
+        });
+
         this.imageView = new langstyle.ImageView({
             "imageViewId": options.imageViewId,
             "imageNavId": options.imageNavId,
@@ -36,17 +41,19 @@
             "soundSpeakId": options.soundSpeakId
         });
 
-        this.voiceRecord = new langstyle.VoiceRecord({
-            "voiceRecordId": options.voiceRecordId
+        this.characterTest = new langstyle.CharacterTest({
+            "characterTestId": options.characterTestId,
+            "userCharacterInputId": options.userCharacterInputId
         });
 
         this.stageFrame = new langstyle.StageFrame({
             "nextFrameId": options.nextFrameId,
             "previousFrameId": options.previousFrameId,
             "stageFrameId": options.stageFrameId,
+            "characterView": this.characterView,
             "imageView": this.imageView,
             "soundSpeak": this.soundSpeak,
-            "voiceRecord": this.voiceRecord
+            "characterTest": this.characterTest
         });
 
     };
@@ -75,12 +82,9 @@
                     this._soundIds = [];
                 } .bind(this)
             ).then(function () {
-                this.showCharacter();
                 var imageUrls = this._getImageUrlsByIds(this._imageIds);
-                this.imageView.load(imageUrls);
                 var soundUrls = this._getSoundUrlsByIds(this._soundIds);
-                this.soundSpeak.load(soundUrls);
-                this.voiceRecord.reset();
+                this.stageFrame.load(this._character, imageUrls, soundUrls);
             } .bind(this));
         },
 
@@ -93,7 +97,7 @@
                     this._character = "";
                 } .bind(this)
             ).then(function () {
-                this.showCharacter();
+                this.characterView.load(this._character);
             } .bind(this));
         },
 
@@ -123,11 +127,6 @@
                 var soundUrls = this._getSoundUrlsByIds(this._soundIds);
                 this.soundSpeak.load(soundUrls);
             } .bind(this));
-        },
-
-        showCharacter: function () {
-            var characterElement = dom.getById("character");
-            characterElement.textContent = this._character;
         },
 
         _getArrayFromString: function (idsString) {

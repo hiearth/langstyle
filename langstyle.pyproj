@@ -146,6 +146,8 @@
     <Content Include="langstyle\database\schema\0.0.7-CharacterImage.sql" />
     <Content Include="langstyle\database\schema\0.0.8-CharacterSound.sql" />
     <Content Include="langstyle\ui\index.html" />
+    <Content Include="langstyle\ui\resource\characterTest.js" />
+    <Content Include="langstyle\ui\resource\characterView.js" />
     <Content Include="langstyle\ui\resource\cookie.js" />
     <Content Include="langstyle\ui\resource\imageView.js" />
     <Content Include="langstyle\ui\resource\observableEvent.js" />

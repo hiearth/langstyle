@@ -16,8 +16,10 @@
         <script type="text/javascript" src="resource/wordCharacter.js"></script>
         <script type="text/javascript" src="resource/wordImage.js"></script>
         <script type="text/javascript" src="resource/wordSound.js"></script>
+        <script type="text/javascript" src="resource/characterView.js"></script>
         <script type="text/javascript" src="resource/imageView.js"></script>
         <script type="text/javascript" src="resource/soundSpeak.js"></script>
+        <script type="text/javascript" src="resource/characterTest.js"></script>
         <script type="text/javascript" src="resource/recorder.js"></script>
         <script type="text/javascript" src="resource/voiceRecord.js"></script>
         <script type="text/javascript" src="resource/stageFrame.js"></script>
@@ -57,11 +59,14 @@
                 <div class="stageButton">
                     <input type="button" id="nextWord" class="js-next" onclick="javascript:app.wordStage.play()" value="Next" />
                 </div>
-                <div class="js-wordStageTop">
-                    <div class="js-wordCharacter characterView">
+                <div>
+                    <div id="characterTest" class="characterTest hidden">
+                        <input type="text" id="userCharacterInput" />
+                    </div>
+                    <div id="characterView" class="js-wordCharacter characterView">
                         <label id="character"></label>
                     </div>
-                    <div class="voiceRecord">
+                    <div class="voiceRecord hidden">
                         <audio id="voice"></audio>
                     </div>
                     <!--<button type="button" id="playSound" class="sound">

@@ -54,10 +54,6 @@
             this.voiceRecordElement.classList.remove(this.recordedSign);
         },
 
-        play: function () {
-            this.voiceRecordElement.play();
-        },
-
         isFinished: function () {
             return this.voiceRecordElement.classList.contains(this.recordedSign);
         }

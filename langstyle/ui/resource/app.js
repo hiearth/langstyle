@@ -9,12 +9,16 @@
         this.hiddenSign = "hidden";
         this.wordStage = new langstyle.WordStage({
             "stageId": "wordStage",
+            "characterViewId":"characterView",
             "characterId": "character",
+            "characterTestId": "characterTest",
+            "userCharacterInputId":"userCharacterInput",
             "soundId": "sound",
             "imageId": "image",
             "imageViewId": "images",
             "soundSpeakId": "sounds",
-            "voiceRecordId":"voice",
+            "voiceRecordId": "voice",
+            "userCharacterInputId": "userCharacterInput",
             "stageFrameId": "stageFrame",
             "previousFrameId": "previousFrame",
             "nextFrameId": "nextFrame"

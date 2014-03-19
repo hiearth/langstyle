@@ -5,21 +5,24 @@
             return new StageFrame(options);
         }
 
+        this._characterView = options.characterView;
         this._imageView = options.imageView;
         this._soundSpeak = options.soundSpeak;
-        this._voiceRecord = options.voiceRecord;
-
-        this.init();
+        this._characterTest = options.characterTest;
     };
 
     StageFrame.prototype = {
 
-        init: function () {
-
+        load: function (characterCode, imageUrls, soundUrls) {
+            this._showCharacterView();
+            this._characterView.load(characterCode);
+            this._imageView.load(imageUrls);
+            this._soundSpeak.load(soundUrls);
+            this._characterTest.load(characterCode);
         },
 
         isFinished: function () {
-            return this._isImageAndSoundFinished() && this._isVoiceFinished();
+            return this._isImageAndSoundFinished() && this._isTestFinished();
         },
 
         _isImageAndSoundFinished: function () {
@@ -32,8 +35,8 @@
             return true;
         },
 
-        _isVoiceFinished: function () {
-            if (this._voiceRecord != null && !this._voiceRecord.isFinished()) {
+        _isTestFinished: function () {
+            if (this._characterTest != null && !this._characterTest.isFinished()) {
                 return false;
             }
             return true;
@@ -50,10 +53,20 @@
                 this._soundSpeak.playNext();
             }
             else {
-                this._voiceRecord.record();
+                this._showCharacterTest();
+                this._characterTest.test();
             }
-        }
+        },
 
+        _showCharacterView: function () {
+            this._characterTest.hide();
+            this._characterView.show();
+        },
+
+        _showCharacterTest: function () {
+            this._characterView.hide();
+            this._characterTest.show();
+        }
     };
 
     langstyle.StageFrame = StageFrame;
