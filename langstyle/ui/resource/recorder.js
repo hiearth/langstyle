@@ -17,7 +17,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 DEALINGS IN THE SOFTWARE.
 */
 
-(function (window) {
+(function (langstyle) {
 
     var WORKER_PATH = "resource/recorderWorker.js";
 
@@ -113,6 +113,6 @@ DEALINGS IN THE SOFTWARE.
         link.download = filename || 'output.wav';
     }
 
-    window.Recorder = Recorder;
+    langstyle.Recorder = Recorder;
 
-} (window));
+} (langstyle));

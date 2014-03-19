@@ -14,7 +14,6 @@
         this.voiceRecordId = options.voiceRecordId;
         this.voiceRecordElement = dom.getById(options.voiceRecordId);
         this.recordedSign = "recorded";
-        this._voiceStream = null;
         this._audioContext = new AudioContext();
         this._audioRecorder = null;
     };
@@ -22,7 +21,7 @@
     VoiceRecord.prototype = {
 
         record: function () {
-            navigator.getUserMedia({ audio: true }, 
+            navigator.getUserMedia({ audio: true },
                 this._getStream.bind(this),
                 function (error) {
                     console.log(error);
@@ -34,7 +33,7 @@
             var inputPoint = this._audioContext.createGain();
             var audioInput = this._audioContext.createMediaStreamSource(stream);
             audioInput.connect(inputPoint);
-            this._audioRecorder = new Recorder(inputPoint);
+            this._audioRecorder = new langstyle.Recorder(inputPoint);
             this._audioRecorder.record();
             setTimeout(this._stopRecord.bind(this), 3000);
         },
@@ -44,12 +43,10 @@
             this._audioRecorder.exportWAV(this._exportWav.bind(this));
         },
 
-        _getAudioBuffer: function (buffers) {
-            this.voiceRecordElement.src = URL.createObjectURL(buffers);
-        },
-
         _exportWav: function (blob) {
             this.voiceRecordElement.src = URL.createObjectURL(blob);
+            this.voiceRecordElement.load();
+            this.voiceRecordElement.play();
         },
 
         reset: function () {
@@ -59,12 +56,6 @@
 
         play: function () {
             this.voiceRecordElement.play();
-        },
-
-        stop: function () {
-            if (this._voiceStream) {
-                this._voiceStream.stop();
-            }
         },
 
         isFinished: function () {

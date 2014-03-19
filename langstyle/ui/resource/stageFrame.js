@@ -19,13 +19,6 @@
         },
 
         isFinished: function () {
-            //            if (this._imageView != null && !this._imageView.isFinished()) {
-            //                return false;
-            //            }
-            //            if (this._soundSpeak != null && !this._soundSpeak.isFinished()) {
-            //                return false;
-            //            }
-            //            return true;
             return this._isImageAndSoundFinished() && this._isVoiceFinished();
         },
 
