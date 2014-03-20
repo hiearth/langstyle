@@ -11,14 +11,9 @@
         this._currentSign = "current";
         this._soundUrls = [];
         this.onplayed = new ObservableEvent();
-
-        this.init();
     };
 
     SoundSpeak.prototype = {
-
-        init: function () {
-        },
 
         load: function (soundUrls) {
             this._soundUrls = soundUrls;

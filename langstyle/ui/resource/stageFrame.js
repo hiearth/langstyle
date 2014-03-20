@@ -21,6 +21,24 @@
             this._characterTest.load(characterCode);
         },
 
+        next: function () {
+            if (this._isImageAndSoundFinished()) {
+                if (this._characterTest.isWaitingTest()) {
+                    this._characterTest.test();
+                }
+                else {
+                    this._showCharacterTest();
+                }
+            }
+            this._imageView.showNext();
+            this._soundSpeak.playNext();
+        },
+
+        previous: function () {
+            this._imageView.showPrevious();
+            this._soundSpeak.playPrevious();
+        },
+
         isFinished: function () {
             return this._isImageAndSoundFinished() && this._isTestFinished();
         },
@@ -40,22 +58,6 @@
                 return false;
             }
             return true;
-        },
-
-        previous: function () {
-            this._imageView.showPrevious();
-            this._soundSpeak.playPrevious();
-        },
-
-        next: function () {
-            if (!this._isImageAndSoundFinished()) {
-                this._imageView.showNext();
-                this._soundSpeak.playNext();
-            }
-            else {
-                this._showCharacterTest();
-                this._characterTest.test();
-            }
         },
 
         _showCharacterView: function () {

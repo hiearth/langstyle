@@ -13,6 +13,7 @@
             "characterId": "character",
             "characterTestId": "characterTest",
             "userCharacterInputId":"userCharacterInput",
+            "characterHintId":"characterHint",
             "soundId": "sound",
             "imageId": "image",
             "imageViewId": "images",

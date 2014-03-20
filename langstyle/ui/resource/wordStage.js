@@ -43,7 +43,9 @@
 
         this.characterTest = new langstyle.CharacterTest({
             "characterTestId": options.characterTestId,
-            "userCharacterInputId": options.userCharacterInputId
+            "userCharacterInputId": options.userCharacterInputId,
+            "characterHintId": options.characterHintId,
+            "characterView": this.characterView
         });
 
         this.stageFrame = new langstyle.StageFrame({

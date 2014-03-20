@@ -45,7 +45,6 @@ ol
 	pointer-events:none;
 }
 
-
 .logo-text
 {
 	font-size:larger;
@@ -81,11 +80,10 @@ ol
 .menu-list-item
 {
 	display:inline-block;
-}.menu-list-item.logo-menu
+}
+.menu-list-item.logo-menu
 {
-	margin-left:5px;
-	margin-right:5px;
-	margin-top:0px;
+    margin: 0 5px 0 5px;
 }
 .menu-item:hover, .menu-item:focus
 {
@@ -101,9 +99,10 @@ ol
 {
 	margin:20px 10px 10px 10px;
 }
-.startStage 
+.startStage
 {
-	text-align:center;}
+	text-align:center;
+}
 .startStage .startButton
 {
 	width: 90%;
@@ -115,8 +114,7 @@ ol
 .stageButton
 {
 	text-align:right;
-	margin-top:5px;
-	margin-bottom:5px;
+    margin: 5px 0 5px 0;
 	padding-right:5px;
 }
 .navigateBar
@@ -135,18 +133,45 @@ ol
 	border-color: #BBB;
 }
 
+.characterTest
+{
+	text-align: center;
+    margin: 15px 0 5px 0;
+}
+.characterTest input[type="text"]
+{
+	height: 30px;
+	font-size: 16px;
+	padding-left: 1%;
+	margin-bottom: 5px;
+}
+.characterTest .correct
+{
+	color:Green;
+	border-color: Green Green;
+	border-style:solid;
+}
+.characterTest .wrong
+{
+	color:Red;
+	border-color: Red Red;
+	border-style:solid;
+}
+.characterTest .characterHint 
+{
+	font-size:small;
+}
+
 .characterView
 {
 	text-align: center;
-	margin-top:15px;
-	margin-bottom:5px;
+    margin: 15px 0 5px 0;
 	font-size:x-large;
 }
 
-.imageNavigation 
+.imageNavigation
 {
-	margin-top:10px;
-	margin-bottom:10px;
+    margin: 10px 0 10px 0;
 }
 
 .imageView
