@@ -29,12 +29,12 @@
                 this._testRealTime(e.target);
             } .bind(this);
 
-            this.characterInputElement.onkeypress = function (e) {
-                this._clearTimer();
-                if (!this._isHintShown()) {
-                    this._hintTimer = setTimeout(this._showHint.bind(this), 4000);
-                }
-            } .bind(this);
+//            this.characterInputElement.onkeypress = function (e) {
+//                this._clearTimer();
+//                if (!this._isHintShown()) {
+//                    this._hintTimer = setTimeout(this._showHint.bind(this), 4000);
+//                }
+//            } .bind(this);
 
             this.characterHintElement.onclick = function () {
                 this.characterView.show();
@@ -48,25 +48,46 @@
 
         _testRealTime: function (inputElement) {
             var userInput = inputElement.value.trim();
-            if (userInput.length > this._characterCode.length) {
-                this._showWrongSign();
-                return;
-            }
+            var correct = false;
             if (userInput.length < this._characterCode.length) {
-                var leftPartCharacter = this._characterCode.slice(0, userInput.length);
-                if (userInput !== leftPartCharacter) {
-                    this._showWrongSign();
-                }
-                else {
-                    this._resetSign();
-                }
-                return;
+                correct = this._partialCorrect(userInput);
             }
+            else {
+                correct = this._totalCorrect(userInput);
+            }
+
+            this._manageTimer(!correct);
+        },
+
+        _manageTimer: function (startTimer) {
+            this._clearTimer();
+            if (startTimer) {
+                if (!this._isHintShown()) {
+                    this._hintTimer = setTimeout(this._showHint.bind(this), 4000);
+                }
+            }
+        },
+
+        _partialCorrect: function (userInput) {
+            var leftPartCharacter = this._characterCode.slice(0, userInput.length);
+            if (userInput !== leftPartCharacter) {
+                this._showWrongSign();
+                return false;
+            }
+            else {
+                this._resetSign();
+                return true;
+            }
+        },
+
+        _totalCorrect: function (userInput) {
             if (userInput !== this._characterCode) {
                 this._showWrongSign();
+                return false;
             }
             else {
                 this._showCorrectSign();
+                return true;
             }
         },
 
