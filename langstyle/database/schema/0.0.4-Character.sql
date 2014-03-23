@@ -7,4 +7,4 @@ create table WordCharacter(
 
 
 insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)
-values ('0.0.3-Character.sql', 0, 0, 3, now());
+values ('0.0.4-Character.sql', 0, 0, 4, now());

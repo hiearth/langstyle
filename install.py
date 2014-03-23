@@ -14,13 +14,13 @@ log_service.debug("finish create database")
 # populate english characters
 log_service.debug("begin populate english characters")
 start_time = time.time()
-english_word.populate_cet_characters()
+#english_word.populate_cet_characters()
 log_service.debug(str(time.time()-start_time) + " seconds")
 log_service.debug("finish populate english characters")
 
 # populate english sounds
 log_service.debug("begin populate english sounds")
 start_time = time.time()
-english_word.populate_sounds()
+#english_word.populate_sounds()
 log_service.debug(str(time.time()-start_time) + " seconds")
 log_service.debug("finish populate english sounds")

@@ -8,7 +8,6 @@ from . import page
 from . import image
 from . import sound
 from . import character
-from . import user_character
 from . import character_image
 from . import character_sound
 from . import user_validation
@@ -37,11 +36,6 @@ class RequestHandlerRouter(metaclass=Singleton):
         self._add_handler(r"/character/(.*)", character.CharacterHandler)
         self._add_handler(r"/charactercode/?(.*)", character.CharacterCodeHandler)
         self._add_handler(r"/image/?(.*)", image.ImageHandler)
-        self._add_handler(r"/usercharacter/next", user_character.UserCharacterNextHandler)
-        self._add_handler(r"/usercharacter/grasp", user_character.UserCharacterGraspHandler)
-        self._add_handler(r"/usercharacter/current", user_character.UserCharacterCurrentHandler)
-        self._add_handler(r"/usercharacter/count/(.*)", user_character.UserCharacterCountHandler)
-        self._add_handler(r"/usercharacter/learning", user_character.UserCharacterCountHandler)
         self._add_handler(r"/characterimages/(.*)", character_image.CharacterImagesHandler)
         self._add_handler(r"/characterimage/character/([0-9a-zA-Z]*)/image/(.*)", character_image.CharacterImageHandler)
         self._add_handler(r"/charactersounds/(.*)", character_sound.CharacterSoundsHandler)

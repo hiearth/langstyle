@@ -79,3 +79,29 @@
 	2) slide left  -> previous
 
 19. record user's speak to improve pronounce and memory
+
+20. word choose algrithom
+    1) basic 1, visual words, from most frequent, common
+       level 1) simple and base word
+       level 2) most frequent and visualized word
+       level 3) common and visualized word
+    2) basic 2, words that can be explain by simple word
+       level 4) most frequent and can be expalined by grasp words
+       level 5) common and can be explained by grasp words
+    3) middle, simple sentence
+       1) most frequenct sentence, for example, fact description
+       2) common sentence
+    4) advance, advance, dialog
+
+21. word grasp algrithom
+    1) if pass first time, mark it as known
+       1) grasp standard, last time pass.
+       2) if continual two times fail, mark it as new word (see new word)
+    2) if fail firt time, mark it as new word
+       repeat three times
+       1) grasp standard, last two times pass.
+       2) if not grasp add repeat time until grasp
+
+22. multi-meanings word
+
+23. english - chinese dictionary

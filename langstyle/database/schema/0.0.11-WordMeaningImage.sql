@@ -1,8 +1,8 @@
 use langstyle;
 
-create table CharacterImage(
+create table WordMeaningImage(
     UserId int,
-    CharacterId int,
+    WordMeaningId int,
     ImageId int
 );
 
@@ -20,4 +20,4 @@ create table CharacterImage(
 
 
 insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)
-values ('0.0.7-CharacterImage.sql', 0, 0, 7, now());
+values ('0.0.11-WordMeaningImage.sql', 0, 0, 11, now());

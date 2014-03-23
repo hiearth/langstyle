@@ -1,7 +1,7 @@
 use langstyle;
 
 create table WordLanguage(
-	LanguageId int primary key, 
+	LanguageId int primary key auto_increment, 
 	Name varchar(64)
 );
 

@@ -1,10 +1,10 @@
 use langstyle;
 
-create table CharacterSound(
+create table WordMeaningSound(
     UserId int,
-    CharacterId int,
+    WordMeaningId int,
     SoundId int
 );
 
 insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)
-values ('0.0.8-CharacterSound.sql', 0, 0, 8, now());
+values ('0.0.12-WordMeaningSound.sql', 0, 0, 12, now());

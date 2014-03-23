@@ -7,15 +7,12 @@ import json
 class UserProgressNextHandler(web.RequestHandler):
     
     def get(self):
-        if not self.has_permission():
-            self.send_access_denied()
-            return
-        character_id = config.service_factory.get_user_character_service().next(self.user_id)
-        if character_id is None:
+        word_meaning = config.service_factory.get_user_progress_service().next(self.user_id)
+        if word_meaning is None:
             self.send_not_found()
             return
-        next_word = {"characterId": character_id}
-        next_word["characterCode"] = config.service_factory.get_character_service().get(character_id)
-        next_word["images"] = config.service_factory.get_character_image_service().get_images(self.user_id, character_id)
-        next_word["sounds"] = config.service_factory.get_character_sound_service().get_sounds(self.user_id, character_id)
+        next_word = {"wordMeaningId": word_meaning.id, 
+                     "characterCode": word_meaning.character_code}
+        next_word["images"] = config.service_factory.get_word_meaning_image_service().get_images(self.user_id, word_meaning.id)
+        next_word["sounds"] = config.service_factory.get_word_meaning_sound_service().get_sounds(self.user_id, word_meaning.id)
         self.send_headers_and_content(json.dumps(next_word))

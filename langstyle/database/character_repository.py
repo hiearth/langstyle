@@ -19,9 +19,7 @@ class CharacterRepository(base_repository.BaseRepository):
         return None
 
     def get_id(self, word_character):
-        similar_characters = self._call_proc_query_all("WordCharacter_S_By_Code", [word_character])
-        exact_match_character = helper.find_first(similar_characters, 
-            (lambda character: character[1] == word_character))
-        if exact_match_character:
-            return exact_match_character[0]
+        result = self._call_proc_query_one("WordCharacter_S_By_Code", [word_character])
+        if result:
+            return result[0]
         return None

@@ -3,8 +3,4 @@
 import langstyle.server
 import langstyle.install.database
 
-#upgrade database
-#langstyle.install.database.drop_and_create()
-langstyle.install.database.upgrade()
-
 langstyle.server.start()

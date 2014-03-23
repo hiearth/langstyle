@@ -7,8 +7,10 @@ class _RepositoryFactory:
     def __init__(self):
         self._character_repository = None
         self._user_character_repository = None
-        self._character_image_repository = None
-        self._character_sound_repository = None
+        self._user_progress_repository = None
+        self._word_meaning_image_repository = None
+        self._word_meaning_repository = None
+        self._word_meaning_sound_repository = None
         self._image_repository = None
         self._sound_repository = None
         self._user_repository = None
@@ -19,23 +21,35 @@ class _RepositoryFactory:
             self._character_repository = character_repository.CharacterRepository()
         return self._character_repository
 
+    def get_user_progress_repository(self):
+        if not self._user_progress_repository:
+            from .database import user_progress_repository
+            self._user_progress_repository = user_progress_repository.UserProgressRepository()
+        return self._user_progress_repository
+
     def get_user_character_repository(self):
         if not self._user_character_repository:
             from .database import user_character_repository
             self._user_character_repository = user_character_repository.UserCharacterRepository()
         return self._user_character_repository
 
-    def get_character_image_repository(self):
-        if not self._character_image_repository:
-            from .database import character_image_repository
-            self._character_image_repository = character_image_repository.CharacterImageRepository()
-        return self._character_image_repository
+    def get_word_meaning_repository(self):
+        if not self._word_meaning_repository:
+            from .database import word_meaning_repository 
+            self._word_meaning_repository = word_meaning_repository.WordMeaningRepository
+        return self._word_meaning_repository
 
-    def get_character_sound_repository(self):
-        if not self._character_sound_repository:
-            from .database import character_sound_repository
-            self._character_sound_repository = character_sound_repository.CharacterSoundRepository()
-        return self._character_sound_repository
+    def get_word_meaning_image_repository(self):
+        if not self._word_meaning_image_repository:
+            from .database import word_meaning_image_repository
+            self._word_meaning_image_repository = word_meaning_image_repository.WordMeaningImageRepository()
+        return self._word_meaning_image_repository
+
+    def get_word_meaning_sound_repository(self):
+        if not self._word_meaning_sound_repository:
+            from .database import word_meaning_sound_repository
+            self._word_meaning_sound_repository = word_meaning_sound_repository.WordMeaningSoundRepository()
+        return self._word_meaning_sound_repository
 
     def get_image_repository(self):
         if not self._image_repository:
@@ -60,15 +74,16 @@ class _ServiceFactory:
 
     def __init__(self):
         self._character_service = None
-        self._user_character_service = None
-        self._character_image_service = None
-        self._character_sound_service = None
         self._image_service = None
         self._sound_service = None
-        self._log_service = None
+        self._user_service = None
+        self._user_progress_service = None
+        self._word_meaning_service = None
+        self._word_meaning_image_service = None
+        self._word_meaning_sound_service = None
         self._image_file_service=None
         self._sound_file_service = None
-        self._user_service = None
+        self._log_service = None
 
     def get_log_service(self):
         if not self._log_service:
@@ -83,26 +98,33 @@ class _ServiceFactory:
             self._character_service = character_service.CharacterService(repository)
         return self._character_service
 
-    def get_user_character_service(self):
-        if not self._user_character_service:
-            from .service import user_character_service
-            repository = repository_factory.get_user_character_repository()
-            self._user_character_service = user_character_service.UserCharacterService(repository)
-        return self._user_character_service
+    def get_user_progress_service(self):
+        if not self._user_progress_service:
+            from .service import user_progress_service
+            repository = repository_factory.get_user_progress_repository()
+            self._user_progress_service = user_progress_service.UserProgressService(repository)
+        return self._user_progress_service
 
-    def get_character_image_service(self):
-        if not self._character_image_service:
-            from .service import character_image_service
-            repository = repository_factory.get_character_image_repository()
-            self._character_image_service = character_image_service.CharacterImageService(repository)
-        return self._character_image_service
+    def get_word_meaning_service(self):
+        if not self._word_meaning_service:
+            from .service import word_meaning_service
+            repository = repository_factory.get_word_meaning_repository()
+            self._word_meaning_service = word_meaning_service.WordMeaningService(repository)
+        return self._word_meaning_service
 
-    def get_character_sound_service(self):
-        if not self._character_sound_service:
-            from .service import character_sound_service
-            repository = repository_factory.get_character_sound_repository()
-            self._character_sound_service = character_sound_service.CharacterSoundService(repository)
-        return self._character_sound_service
+    def get_word_meaning_image_service(self):
+        if not self._word_meaning_image_service:
+            from .service import word_meaning_image_service
+            repository = repository_factory.get_word_meaning_image_repository()
+            self._word_meaning_image_service = word_meaning_image_service.WordMeaningImageService(repository)
+        return self._word_meaning_image_service
+
+    def get_word_meaning_sound_service(self):
+        if not self._word_meaning_sound_service:
+            from .service import word_meaning_sound_service
+            repository = repository_factory.get_word_meaning_sound_repository()
+            self._word_meaning_sound_service = word_meaning_sound_service.WordMeaningSoundService(repository)
+        return self._word_meaning_sound_service
 
     def get_image_service(self):
         if not self._image_service:
