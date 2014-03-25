@@ -27,7 +27,8 @@
 
         this.characterView = new langstyle.CharacterView({
             "characterViewId": options.characterViewId,
-            "characterId": options.characterId
+            "characterId": options.characterId,
+            "characterExplainationId":options.characterExplainationId
         });
 
         this.imageView = new langstyle.ImageView({
@@ -74,12 +75,15 @@
         _getNextWord: function () {
             this.userProgress.getNext().then(function (nextWord) {
                 var nextWordObj = JSON.parse(nextWord);
-                this._character = nextWordObj.characterCode;
+                this._character = {
+                    "characterCode": nextWordObj.characterCode, 
+                    "explaination": nextWordObj.explaination
+                };
                 this._imageIds = nextWordObj.images;
                 this._soundIds = nextWordObj.sounds;
             } .bind(this),
                 function () {
-                    this._character = "";
+                    this._character = {};
                     this._imageIds = [];
                     this._soundIds = [];
                 } .bind(this)

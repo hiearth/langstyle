@@ -166,7 +166,15 @@ ol
 {
 	text-align: center;
     margin: 15px 0 5px 0;
+}
+.characterView .characterCode
+{
 	font-size:x-large;
+    margin-bottom:5px;
+}
+.characterView .characterExplaination
+{
+    font-size:medium;
 }
 
 .imageNavigation

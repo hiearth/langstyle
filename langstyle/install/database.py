@@ -60,7 +60,7 @@ def _execute_non_query(cmd_text):
             conn.close()
     return False
 
-file_name_regex = re.compile(r"(?i)^([0-9]){1}\.([0-9]){1}\.([0-9]){1}\-(.*)\.sql$")
+file_name_regex = re.compile(r"(?i)^([0-9]+)\.([0-9]+)\.([0-9]+)\-(.*)\.sql$")
 
 def _file_number_compare(first_file_pattern, second_file_pattern):
     if first_file_pattern[0] > second_file_pattern[0]:

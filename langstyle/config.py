@@ -36,7 +36,7 @@ class _RepositoryFactory:
     def get_word_meaning_repository(self):
         if not self._word_meaning_repository:
             from .database import word_meaning_repository 
-            self._word_meaning_repository = word_meaning_repository.WordMeaningRepository
+            self._word_meaning_repository = word_meaning_repository.WordMeaningRepository()
         return self._word_meaning_repository
 
     def get_word_meaning_image_repository(self):

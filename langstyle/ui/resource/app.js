@@ -11,6 +11,7 @@
             "stageId": "wordStage",
             "characterViewId":"characterView",
             "characterId": "character",
+            "characterExplainationId":"characterExplaination",
             "characterTestId": "characterTest",
             "userCharacterInputId":"userCharacterInput",
             "characterHintId":"characterHint",

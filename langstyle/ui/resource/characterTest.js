@@ -29,21 +29,14 @@
                 this._testRealTime(e.target);
             } .bind(this);
 
-//            this.characterInputElement.onkeypress = function (e) {
-//                this._clearTimer();
-//                if (!this._isHintShown()) {
-//                    this._hintTimer = setTimeout(this._showHint.bind(this), 4000);
-//                }
-//            } .bind(this);
-
             this.characterHintElement.onclick = function () {
                 this.characterView.show();
             } .bind(this);
         },
 
-        load: function (characterCode) {
+        load: function (character) {
             this._reset();
-            this._characterCode = characterCode;
+            this._characterCode = character.characterCode;
         },
 
         _testRealTime: function (inputElement) {

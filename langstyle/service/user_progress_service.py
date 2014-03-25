@@ -27,7 +27,7 @@ class UserProgressService:
         return None
 
     def _get_word_meanings(self, ids):
-        word_meaning_service = config.get_word_meaning_service()
+        word_meaning_service = config.service_factory.get_word_meaning_service()
         return [word_meaning_service.get(id) for id in ids]
 
     def _need_add_learning_word_meaning(self, learning_count):
