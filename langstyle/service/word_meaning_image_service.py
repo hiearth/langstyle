@@ -9,11 +9,11 @@ class WordMeaningImageService:
         self._word_meaning_image_repository = word_meaning_image_repository
 
     def _need_additional_images(self, custom_images):
-        return len(custom_images) < config.IMAGES_COUNT_PER_CHARACTER
+        return len(custom_images) < config.IMAGES_COUNT_PER_WORD_MEANING
 
     def _combine_custom_and_statistic(self, custom_images, statistic_images):
         image_not_custom = (lambda image_id: image_id not in custom_images)
-        additional_count = config.IMAGES_COUNT_PER_CHARACTER - len(custom_images)
+        additional_count = config.IMAGES_COUNT_PER_WORD_MEANING - len(custom_images)
         return helper.chain_lists(custom_images, helper.get_matched_items(
             statistic_images, image_not_custom, additional_count))
 
@@ -21,7 +21,7 @@ class WordMeaningImageService:
         custom_images = self._word_meaning_image_repository.get_images(user_id, word_meaning_id)
         if self._need_additional_images(custom_images):
             statistic_images = self._word_meaning_image_repository.get_most_used_images(
-                word_meaning_id, config.IMAGES_COUNT_PER_CHARACTER)
+                word_meaning_id, config.IMAGES_COUNT_PER_WORD_MEANING)
             return self._combine_custom_and_statistic(custom_images, statistic_images)
         return custom_images
 

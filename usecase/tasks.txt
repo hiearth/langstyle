@@ -92,6 +92,19 @@
        1) most frequenct sentence, for example, fact description
        2) common sentence
     4) advance, advance, dialog
+	new word
+		1) number of learning words, for example 7, each with 3 pictures
+		2) word that learned just now will not show until learning next more 3 words
+		3) first learn low level words, then higher level words, for example level 1 -> 2 -> 3
+	review word
+		1) 50% fogot rate in 24 hours
+		2) review words passed in 20 minutes - 60 minutes
+		3) review words passed in 60 minutes - 24 hours
+		4) review words passed in 24 hours - 7 days
+		5) review words passed in 7 days - 1 month
+		6) review words passed in 1 month - 3 months
+	never revew word
+		1) grasped words
 
 21. word grasp algrithom
     1) if pass first time, mark it as known

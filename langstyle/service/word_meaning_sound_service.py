@@ -10,8 +10,8 @@ class WordMeaningSoundService:
 
     def get_sounds(self, user_id, word_meaning_id):
         custom_sounds = self._word_meaning_sound_repository.get_sounds(user_id, word_meaning_id)
-        if len(custom_sounds) > config.SOUNDS_COUNT_PRE_CHARACTER:
-            return custom_sounds[0:config.SOUNDS_COUNT_PRE_CHARACTER]
+        if len(custom_sounds) > config.SOUNDS_COUNT_PRE_WORD_MEANING:
+            return custom_sounds[0:config.SOUNDS_COUNT_PRE_WORD_MEANING]
         return custom_sounds
 
     def link_exist(self, user_id, word_meaning_id, sound_id):

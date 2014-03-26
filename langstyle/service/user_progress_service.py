@@ -56,3 +56,42 @@ class UserProgressService:
 
     def get_unknown(self, user_id):
         return self._user_progress_repository.get_unknown(user_id)
+
+
+def choose_next():
+    # get_could_show_words
+    # choose one from word list
+    pass
+
+def get_learning():
+    pass
+
+def get_review():
+    pass
+
+def get_should_not_show_words():
+    # words that learned in last config.CROSS_WORDS_COUNT_SHOW_AGAIN_AFTER_LEARN
+    # words that in the top config.CROSS_WORDS_COUNT_SHOW_AGAIN_AFTER_LEARN order by learned time desc;
+    pass
+
+def get_could_show_words():
+    # get all learning and review words
+    # exclude the should not show words
+    pass
+
+def should_add_learning_word():
+    # learning words count less than max in-learning count
+    pass
+
+def should_add_review_word():
+    # review words count less than max review count
+    pass
+
+def get_lowest_level_to_learn():
+    pass
+
+def get_all_levels_to_learn():
+    pass
+
+def get_words_of_level(level):
+    pass
