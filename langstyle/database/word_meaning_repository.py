@@ -18,3 +18,9 @@ class WordMeaningRepository(base_repository.BaseRepository):
     def add(self):
         #todo
         pass
+
+    def get_levels(self, language_map_id):
+        all_levels = self._call_proc_query_all("WordMeaning_Levels_S", [language_map_id])
+        if all_levels:
+            return helper.list_comprehension_by_index(all_levels, 0)
+        return []

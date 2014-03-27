@@ -2,10 +2,10 @@ use langstyle;
 
 create table User(
 	UserId int primary key auto_increment,
-    LanguageMapId int,
 	Name varchar(64) not null,
 	UserPassword varchar(64) not null,
-	Email varchar(256)
+	Email varchar(256),
+    LanguageMapId int
 );
 
 insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)

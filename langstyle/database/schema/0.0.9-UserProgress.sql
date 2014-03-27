@@ -6,8 +6,7 @@ create table UserProgress(
 	RepeatCount int,
 	IsCurrent bit(1),
     Status varchar(32),
-	LastLearningTime datetime,
-	GraspTime datetime
+	LastLearningTime datetime
 );
 
 insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)

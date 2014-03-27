@@ -15,5 +15,11 @@ class UserRepository(base_repository.BaseRepository):
     def get(self, user_name):
         user_info = self._call_proc_query_one("User_S_By_Name", [user_name])
         if user_info:
-            return user.User(user_info[0], user_info[1],user_info[2])
+            return user.User(user_info[0], user_info[1],user_info[2], user_info[3], user_info[4])
+        return None
+
+    def get_by_id(self, user_id):
+        user_info = self._call_proc_query_one("User_S", [user_id])
+        if user_info:
+            return user.User(user_info[0], user_info[1], user_info[2], user_info[3], user_info[4])
         return None

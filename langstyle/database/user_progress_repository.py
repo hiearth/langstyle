@@ -2,6 +2,7 @@
 
 from .. import helper
 from . import base_repository
+from ..entity import user_progress
 
 class UserProgressRepository(base_repository.BaseRepository):
 
@@ -17,13 +18,32 @@ class UserProgressRepository(base_repository.BaseRepository):
 
     def get_learning(self, user_id):
         learning_word_meanings = self._call_proc_query_all("UserProgress_Learning_S", [user_id])
-        return helper.list_comprehension_by_index(learning_word_meanings, 0)
+        if learning_word_meanings:
+            return self._get_progresses(learning_word_meanings)
+        return []
+
+    def get_know(self, user_id):
+        know_word_meanings = self._call_proc_query_all("UserProgress_S_By_Status", [user_id, "Know"])
+        if know_word_meanings:
+            return self._get_progresses(know_word_meanings)
+        return []
+
+    def _get_progresses(self, progress_list):
+        for progress in progress_list:
+            yield user_progress.UserProgress(user_id, learning_item[0], learning_item[1], 
+                                            learning_item[2], learning_item[3], learning_item[4])
 
     def get_current(self, user_id):
         result = self._call_proc_query_one("UserProgress_Current_S",[user_id])
         if result:
             return result[0]
         return None
+
+    def get_review(self, user_id):
+        review_word_meanings = self._call_proc_query_all("UserProgress_S_By_Status", [user_id, "Review"])
+        if review_word_meanings:
+            return self._get_progresses(review_word_meanings)
+        return []
 
     def get_unknown(self, user_id):
         unknown_word_meanings = self._call_proc_query_all("UserProgress_Unknown_S", [user_id])
@@ -40,3 +60,19 @@ class UserProgressRepository(base_repository.BaseRepository):
 
     def mark_grasp(self, user_id, word_meaning_id):
         self._call_proc_non_query("UserProgress_Grasp_U", [user_id,word_meaning_id])
+
+    def get_levels(self, user_id):
+        levels = self._call_proc_query_all("UserProgress_Levels_S", [user_id])
+        return helper.list_comprehension_by_index(levels, 0)
+
+    def is_level_complete(self, user_id, level):
+        is_complete = self._call_proc_query_one("UserProgress_Level_Complete", [user_id, level])
+        if is_complete:
+            return True
+        return False
+
+    def get_word_meanings_of_level(self, user_id, level):
+        word_ids = self._call_proc_query_all("UserProgress_WordMeanings_S_By_Level", [user_id, level])
+        if word_ids:
+            return helper.list_comprehension_by_index(word_ids, 0)
+        return []
