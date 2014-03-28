@@ -8,5 +8,5 @@ begin
 	insert into UserProgress
 	(UserId, WordMeaningId, RepeatCount, IsCurrent, Status, LastLearningTime)	
 	values
-	(p_userId, p_wordMeaningId, 0, 0, '', null);
+	(p_userId, p_wordMeaningId, 0, 0, 'Learning', null);
 end

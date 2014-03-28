@@ -19,19 +19,19 @@ class UserProgressRepository(base_repository.BaseRepository):
     def get_learning(self, user_id):
         learning_word_meanings = self._call_proc_query_all("UserProgress_Learning_S", [user_id])
         if learning_word_meanings:
-            return self._get_progresses(learning_word_meanings)
+            return self._get_progresses(user_id,learning_word_meanings)
         return []
 
     def get_know(self, user_id):
         know_word_meanings = self._call_proc_query_all("UserProgress_S_By_Status", [user_id, "Know"])
         if know_word_meanings:
-            return self._get_progresses(know_word_meanings)
+            return self._get_progresses(user_id,know_word_meanings)
         return []
 
-    def _get_progresses(self, progress_list):
-        for progress in progress_list:
-            yield user_progress.UserProgress(user_id, learning_item[0], learning_item[1], 
-                                            learning_item[2], learning_item[3], learning_item[4])
+    def _get_progresses(self, user_id, progress_list):
+        return [user_progress.UserProgress(user_id, learning_item[0], learning_item[1], 
+                                            learning_item[2], learning_item[3], learning_item[4]) 
+                for learning_item in progress_list]
 
     def get_current(self, user_id):
         result = self._call_proc_query_one("UserProgress_Current_S",[user_id])
@@ -42,7 +42,7 @@ class UserProgressRepository(base_repository.BaseRepository):
     def get_review(self, user_id):
         review_word_meanings = self._call_proc_query_all("UserProgress_S_By_Status", [user_id, "Review"])
         if review_word_meanings:
-            return self._get_progresses(review_word_meanings)
+            return self._get_progresses(user_id,review_word_meanings)
         return []
 
     def get_unknown(self, user_id):

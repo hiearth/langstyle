@@ -112,7 +112,7 @@ class UserProgressService:
         should_not_show = self.get_should_not_show_words(user_id)
         if should_not_show:
             return [word for word in progress_words if word not in should_not_show]
-        return should_not_show
+        return progress_words
 
     def should_add_learning_word(self, user_id):
         return len(self.get_learning(user_id)) < config.MAX_IN_LEARNING_COUNT
