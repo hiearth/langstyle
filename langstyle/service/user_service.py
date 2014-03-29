@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from ..entity import user
+
 class UserService:
 
     def __init__(self, user_repository):
@@ -25,3 +27,7 @@ class UserService:
         if exist_user:
             return exist_user.password == password
         return False
+
+    def update_language_map(self, user_id, language_map_id):
+        user_info = user.User(language_map_id=language_map_id)
+        return self._user_repository.update(user_id, user_info)

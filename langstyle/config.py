@@ -6,6 +6,7 @@ class _RepositoryFactory:
     
     def __init__(self):
         self._character_repository = None
+        self._language_map_repository = None
         self._user_character_repository = None
         self._user_progress_repository = None
         self._word_meaning_image_repository = None
@@ -14,6 +15,7 @@ class _RepositoryFactory:
         self._image_repository = None
         self._sound_repository = None
         self._user_repository = None
+        self._language_repository = None
        
     def get_character_repository(self):
         if not self._character_repository:
@@ -69,10 +71,24 @@ class _RepositoryFactory:
             self._user_repository = user_repository.UserRepository()
         return self._user_repository
 
+    def get_language_repository(self):
+        if not self._language_repository:
+            from .database import language_repository
+            self._language_repository = language_repository.LanguageRepository()
+        return self._language_repository
+
+    def get_language_map_repository(self):
+        if not self._language_map_repository:
+            from .database import language_map_repository
+            self._language_map_repository = language_map_repository.LanguageMapRepository()
+        return self._language_map_repository
+
 
 class _ServiceFactory:
 
     def __init__(self):
+        self._language_service = None
+        self._language_map_service = None
         self._character_service = None
         self._image_service = None
         self._sound_service = None
@@ -84,6 +100,20 @@ class _ServiceFactory:
         self._image_file_service=None
         self._sound_file_service = None
         self._log_service = None
+
+    def get_language_service(self):
+        if not self._language_service:
+            from .service import language_service
+            repository = repository_factory.get_language_repository()
+            self._language_service = language_service.LanguageService(repository)
+        return self._language_service
+
+    def get_language_map_service(self):
+        if not self._language_map_service:
+            from .service import language_map_service
+            repository = repository_factory.get_language_map_repository()
+            self._language_map_service = language_map_service.LanguageMapService(repository)
+        return self._language_map_service
 
     def get_log_service(self):
         if not self._log_service:
