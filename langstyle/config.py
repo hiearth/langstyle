@@ -9,6 +9,7 @@ class _RepositoryFactory:
         self._language_map_repository = None
         self._user_character_repository = None
         self._user_progress_repository = None
+        self._user_progress_audit_repository = None
         self._word_meaning_image_repository = None
         self._word_meaning_repository = None
         self._word_meaning_sound_repository = None
@@ -28,6 +29,12 @@ class _RepositoryFactory:
             from .database import user_progress_repository
             self._user_progress_repository = user_progress_repository.UserProgressRepository()
         return self._user_progress_repository
+    
+    def get_user_progress_audit_repository(self):
+        if not self._user_progress_audit_repository:
+            from .database import user_progress_audit_repository
+            self._user_progress_audit_repository = user_progress_audit_repository.UserProgressAuditRepository()
+        return self._user_progress_audit_repository
 
     def get_user_character_repository(self):
         if not self._user_character_repository:
@@ -94,6 +101,7 @@ class _ServiceFactory:
         self._sound_service = None
         self._user_service = None
         self._user_progress_service = None
+        self._user_progress_audit_service = None
         self._word_meaning_service = None
         self._word_meaning_image_service = None
         self._word_meaning_sound_service = None
@@ -134,6 +142,13 @@ class _ServiceFactory:
             repository = repository_factory.get_user_progress_repository()
             self._user_progress_service = user_progress_service.UserProgressService(repository)
         return self._user_progress_service
+
+    def get_user_progress_audit_service(self):
+        if not self._user_progress_audit_service:
+            from .service import user_progress_audit_service
+            repository = repository_factory.get_user_progress_audit_repository()
+            self._user_progress_audit_service = user_progress_audit_service.UserProgressAuditService(repository)
+        return self._user_progress_audit_service
 
     def get_word_meaning_service(self):
         if not self._word_meaning_service:

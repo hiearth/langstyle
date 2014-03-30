@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import pdb
+#import pdb
 from . import web
 from .. import config
 
@@ -33,7 +33,6 @@ class UserHandler(web.RequestHandler):
 
     def _set_language_map(self, user_id):
         user_info = config.service_factory.get_user_service().get_by_id(user_id)
-        pdb.set_trace()
         if user_info.language_map_id is None:
             language_map_service = config.service_factory.get_language_map_service()
             chinese_to_english_id = language_map_service.get_id("Chinese", "English")

@@ -1,4 +1,4 @@
-(function (langstyle) {
+(function (langstyle, ajax, dom) {
 
     var CharacterTest = function (options) {
         if (!(this instanceof CharacterTest)) {
@@ -13,11 +13,14 @@
         this.characterHintElement = dom.getById(options.characterHintId);
         this.characterView = options.characterView;
         this._characterCode = null;
+        this._wordMeaningId = null;
         this._passSign = "pass";
         this._wrongSign = "wrong";
         this._correctSign = "correct";
         this._hiddenSign = "hidden";
         this._hintTimer = null;
+        this._feedbackUrl = "/charactertest";
+        this._feedbackSent = false;
 
         this.init()
     };
@@ -34,9 +37,10 @@
             } .bind(this);
         },
 
-        load: function (character) {
+        load: function (wordMeaning) {
             this._reset();
-            this._characterCode = character.characterCode;
+            this._wordMeaningId = wordMeaning.wordMeaningId;
+            this._characterCode = wordMeaning.characterCode;
         },
 
         _testRealTime: function (inputElement) {
@@ -112,12 +116,24 @@
             this.characterInputElement.classList.remove(this._wrongSign);
             this.characterInputElement.classList.add(this._correctSign);
             this.characterTestElement.classList.add(this._passSign);
+            this._sendFeedback();
         },
 
         _showWrongSign: function () {
             this.characterInputElement.classList.remove(this._correctSign);
             this.characterInputElement.classList.add(this._wrongSign);
             this.characterTestElement.classList.remove(this._passSign);
+        },
+        
+        _sendFeedback:function(){
+            if(!this._feedbackSent){
+                var feedback = {
+                    "wordMeaningId": this._wordMeaningId,
+                    "isPass": !this._isHintShown()
+                };
+                ajax.post(this._feedbackUrl, null, JSON.stringify(feedback));
+                this._feedbackSent = true;
+            }
         },
 
         _showHint: function () {
@@ -157,6 +173,7 @@
 
         _reset: function () {
             this.characterInputElement.value = "";
+            this._feedbackSent = false;
             this._resetSign();
             this._clearTimer();
             this._hideHint();
@@ -186,4 +203,4 @@
 
     langstyle.CharacterTest = CharacterTest;
 
-} (langstyle));
+} (langstyle, ajax, dom));

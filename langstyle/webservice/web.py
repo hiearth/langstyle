@@ -51,6 +51,7 @@ class RequestHandler:
     def head(self):
         '''get header'''
         self.send_method_not_allowed()    
+
     def has_permission(self):
         return self.user_id is not None
 

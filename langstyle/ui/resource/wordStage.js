@@ -6,7 +6,7 @@
         }
 
         this._stageNode = dom.getById(options.stageId);
-        this._character = null;
+        this._wordMeaning = null;
         this._images = [];
         this._sound = null;
 
@@ -75,7 +75,8 @@
         _getNextWord: function () {
             this.userProgress.getNext().then(function (nextWord) {
                 var nextWordObj = JSON.parse(nextWord);
-                this._character = {
+                this._wordMeaning = {
+                    "wordMeaningId": nextWordObj.wordMeaningId,
                     "characterCode": nextWordObj.characterCode, 
                     "explaination": nextWordObj.explaination
                 };
@@ -83,14 +84,14 @@
                 this._soundIds = nextWordObj.sounds;
             } .bind(this),
                 function () {
-                    this._character = {};
+                    this._wordMeaning = {};
                     this._imageIds = [];
                     this._soundIds = [];
                 } .bind(this)
             ).then(function () {
                 var imageUrls = this._getImageUrlsByIds(this._imageIds);
                 var soundUrls = this._getSoundUrlsByIds(this._soundIds);
-                this.stageFrame.load(this._character, imageUrls, soundUrls);
+                this.stageFrame.load(this._wordMeaning, imageUrls, soundUrls);
             } .bind(this));
         },
 

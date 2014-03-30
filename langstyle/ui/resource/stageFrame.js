@@ -13,12 +13,12 @@
 
     StageFrame.prototype = {
 
-        load: function (characterCode, imageUrls, soundUrls) {
+        load: function (wordMeaning, imageUrls, soundUrls) {
             this._showCharacterView();
-            this._characterView.load(characterCode);
+            this._characterView.load(wordMeaning);
             this._imageView.load(imageUrls);
             this._soundSpeak.load(soundUrls);
-            this._characterTest.load(characterCode);
+            this._characterTest.load(wordMeaning);
         },
 
         next: function () {

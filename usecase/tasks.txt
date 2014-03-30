@@ -107,14 +107,38 @@
 		1) grasped words
 
 21. word grasp algrithom
-    1) if pass first time, mark it as known
-       1) grasp standard, last time pass.
-       2) if continual two times fail, mark it as new word (see new word)
-    2) if fail firt time, mark it as new word
+    1) status: unknown, learning, learned, review, known, grasp
+    2) status evolve: 
+        1) unknow -> learning -> learned -> review -> grasp
+        2) unknow -> learning -> learned -> review -> learning -> learned -> review -> grasp
+        3) unknow -> known -> grasp
+        4) unknow -> known -> learning -> learned -> review -> grasp
+
+    3) if pass first time, mark it as known
+       1) grasp standard: last time pass.
+       2) if one time fail, mark it as new word (see new word)
+       3) example, pass -> known -> pass -> grasp
+                   pass -> known -> fail -> learning
+
+    4) if fail firt time, mark it as new word
        repeat three times
        1) grasp standard, last two times pass.
        2) if not grasp add repeat time until grasp
+       3) example, fail -> learning -> pass -> learned -> pass -> review
+                   fail -> learning -> pass -> learned -> fail -> learning
+    5) review
+       1) example, pass -> grasp
+                   fail -> learning
+    6) use table UserProgressAudit to track the grasp process
+       1) record user learning detail. pass or fail each time
+       2) use the audit information to find usage status, like or un-statisfy, usage interval
 
-22. multi-meanings word
+    7) how to check pass or fail
+       whether use hint
 
-23. english - chinese dictionary
+22. feedback each time (pass or fail)
+
+23. multi-meanings word
+
+24. english - chinese dictionary
+
