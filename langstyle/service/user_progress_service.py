@@ -32,7 +32,7 @@ class UserProgressService:
         if learning_ids:
             word_meanings = self._get_word_meanings(learning_ids)
             return random.choice(word_meanings)
-        return None
+        return None
     def _get_word_meanings(self, ids):
         word_meaning_service = config.service_factory.get_word_meaning_service()
         return [word_meaning_service.get(id) for id in ids]
@@ -131,3 +131,8 @@ class UserProgressService:
     def get_all_levels_to_learn(self, user_id):
         user_info = config.service_factory.get_user_service().get_by_id(user_id)
         return config.service_factory.get_word_meaning_service().get_levels(user_info.language_map_id)
+
+    def update_status(self):
+        # user progress audit record user's learning detail
+        # get latest status by grasp algrithom
+        # update status in user progress table
