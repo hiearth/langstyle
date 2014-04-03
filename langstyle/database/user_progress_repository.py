@@ -16,10 +16,16 @@ class UserProgressRepository(base_repository.BaseRepository):
             return result[0]
         return None
 
-    def get_learning(self, user_id):
-        learning_word_meanings = self._call_proc_query_all("UserProgress_Learning_S", [user_id])
+    def get_learn(self, user_id):
+        learning_word_meanings = self._call_proc_query_all("UserProgress_Learn_S", [user_id])
         if learning_word_meanings:
             return self._get_progresses(user_id,learning_word_meanings)
+        return []
+
+    def get_by_status(self, user_id,status):
+        word_meanings = self._call_proc_query_all("UserProgress_S_By_Status", [user_id, status])
+        if word_meanings:
+            return self._get_progresses(user_id, word_meanings)
         return []
 
     def get_know(self, user_id):
@@ -29,9 +35,8 @@ class UserProgressRepository(base_repository.BaseRepository):
         return []
 
     def _get_progresses(self, user_id, progress_list):
-        return [user_progress.UserProgress(user_id, learning_item[0], learning_item[1], 
-                                            learning_item[2], learning_item[3], learning_item[4]) 
-                for learning_item in progress_list]
+        return [user_progress.UserProgress(user_id, item[0], item[1], item[2], item[3], item[4])
+                for item in progress_list]
 
     def get_current(self, user_id):
         result = self._call_proc_query_one("UserProgress_Current_S",[user_id])
@@ -76,3 +81,12 @@ class UserProgressRepository(base_repository.BaseRepository):
         if word_ids:
             return helper.list_comprehension_by_index(word_ids, 0)
         return []
+
+    def get(self, user_id, word_meaning_id):
+        progress = self._call_proc_query_one("UserProgress_S", [user_id, word_meaning_id])
+        if progress:
+            return user_progress.UserProgress(user_id, word_meaning_id, progress[0], progress[1], progress[2], progress[3])
+        return None
+
+    def update(self, user_id, word_meaning_id, status):
+        self._call_proc_non_query("UserProgress_U", [user_id, word_meaning_id, status])

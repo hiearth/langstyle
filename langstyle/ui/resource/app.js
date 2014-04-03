@@ -20,7 +20,7 @@
             "imageViewId": "images",
             "soundSpeakId": "sounds",
             "voiceRecordId": "voice",
-            "userCharacterInputId": "userCharacterInput",
+            "nextUnavailableId":"nextUnavailable",
             "stageFrameId": "stageFrame",
             "previousFrameId": "previousFrame",
             "nextFrameId": "nextFrame"

@@ -4,6 +4,7 @@ import os
 from http.server import HTTPServer
 from http.server import BaseHTTPRequestHandler
 from .webservice import router
+from . import config
 
 class HTTPRequestHandler(BaseHTTPRequestHandler):
     """handle all types of request"""
@@ -16,11 +17,15 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
         return None
 
     def _call_handle_method(self, handle_method):
-        handler = self._get_handler()
-        if handler:
-            request_handle = getattr(handler, handle_method)
-            if request_handle:
-                request_handle()
+        try:
+            handler = self._get_handler()
+            if handler:
+                request_handle = getattr(handler, handle_method)
+                if request_handle:
+                    request_handle()
+        except Exception as e:
+            config.service_factory.get_log_service().error(str(e))
+            self.send_error(500)
 
     def do_GET(self):
         self._call_handle_method("get")

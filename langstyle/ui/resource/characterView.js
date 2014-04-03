@@ -19,8 +19,8 @@
     CharacterView.prototype = {
 
         load: function (wordMeaning) {
-            this._characterCode = wordMeaning.characterCode;
-            this._explaination = wordMeaning.explaination;
+            this._characterCode = wordMeaning.characterCode || "";
+            this._explaination = wordMeaning.explaination || "";
             this._characterElement.textContent = this._characterCode;
             this._characterExplainationElement.textContent = this._explaination;
         },

@@ -1,7 +1,7 @@
 
 create database langstyle
 	default character set utf8
-	default collate utf8_bin;
+    default collate utf8_general_ci;
 
 
 use langstyle;

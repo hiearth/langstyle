@@ -9,6 +9,7 @@
         this._imageView = options.imageView;
         this._soundSpeak = options.soundSpeak;
         this._characterTest = options.characterTest;
+        this._characterUnavailable = options.characterUnavailable;
     };
 
     StageFrame.prototype = {
@@ -62,12 +63,29 @@
 
         _showCharacterView: function () {
             this._characterTest.hide();
+            this._characterUnavailable.hide();
             this._characterView.show();
         },
 
         _showCharacterTest: function () {
             this._characterView.hide();
+            this._characterUnavailable.hide();
             this._characterTest.show();
+        },
+
+        _showCharacterUnavailable:function(){
+            this._characterView.hide();
+            this._characterTest.hide();
+            this._characterUnavailable.show();
+        },
+
+        nextUnavailable:function(responseStatusCode){
+            this._showCharacterUnavailable()
+            this._characterUnavailable.load(responseStatusCode);
+            this._characterView.load({});
+            this._imageView.load([]);
+            this._soundSpeak.load([]);
+            this._characterTest.load({});
         }
     };
 

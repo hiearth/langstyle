@@ -238,6 +238,11 @@ ol
 	margin-top: -0.36em;
 }
 
+.unavailableMessage{
+    font-size:smaller;
+    text-align: center;
+}
+
 .sound span
 {
 	/*background-image: url("../image/sound.png");*/

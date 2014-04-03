@@ -40,7 +40,7 @@
         load: function (wordMeaning) {
             this._reset();
             this._wordMeaningId = wordMeaning.wordMeaningId;
-            this._characterCode = wordMeaning.characterCode;
+            this._characterCode = wordMeaning.characterCode || "";
         },
 
         _testRealTime: function (inputElement) {
@@ -60,7 +60,7 @@
             this._clearTimer();
             if (startTimer) {
                 if (!this._isHintShown()) {
-                    this._hintTimer = setTimeout(this._showHint.bind(this), 4000);
+                    this._hintTimer = setTimeout(this._showHint.bind(this), 3000);
                 }
             }
         },
@@ -194,6 +194,7 @@
 
         show: function () {
             this.characterTestElement.classList.remove(this._hiddenSign);
+            this.characterInputElement.focus();
         },
 
         hide: function () {

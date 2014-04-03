@@ -3,7 +3,8 @@ use langstyle;
 create table WordCharacter(
 	CharacterId int primary key auto_increment, 
 	CharacterCode varchar(64)
-);
+)
+collate utf8_bin;
 
 
 insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)

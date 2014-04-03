@@ -11,7 +11,10 @@
                     promise.fulfill(httpRequest.responseText);
                 }
                 else {
-                    promise.reject(httpRequest.statusText);
+                    promise.reject({
+                        "statusText": httpRequest.statusText, 
+                        "status":httpRequest.status
+                    });
                 }
             }
         };

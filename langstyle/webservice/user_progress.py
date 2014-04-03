@@ -26,6 +26,7 @@ class CharacterTestHandler(web.RequestHandler):
         word_meaning_id = int(self.get_form_parameter("wordMeaningId"))
         is_pass = self.get_form_parameter("isPass")
         config.service_factory.get_user_progress_audit_service().add(self.user_id, word_meaning_id, is_pass)
+        config.service_factory.get_user_progress_service().update_status(self.user_id, word_meaning_id, is_pass)
         self.send_success_headers()
 
 

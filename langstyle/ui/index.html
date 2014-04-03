@@ -22,6 +22,7 @@
         <script type="text/javascript" src="resource/characterTest.js"></script>
         <script type="text/javascript" src="resource/recorder.js"></script>
         <script type="text/javascript" src="resource/voiceRecord.js"></script>
+        <script type="text/javascript" src="resource/characterUnavailable.js"></script>
         <script type="text/javascript" src="resource/stageFrame.js"></script>
         <script type="text/javascript" src="resource/wordStage.js"></script>
         <script type="text/javascript" src="resource/fileUploader.js"></script>
@@ -60,6 +61,8 @@
                     <input type="button" id="nextWord" class="js-next" onclick="javascript:app.wordStage.play()" value="Next" />
                 </div>
                 <div>
+                    <div id="nextUnavailable" class="unavailableMessage hidden"></div>
+
                     <div id="characterTest" class="characterTest hidden">
                         <input type="text" id="userCharacterInput" />
                         <br />

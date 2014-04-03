@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import datetime
 class UserProgress:
 
     def __init__(self, user_id=None, word_meaning_id=None, 
@@ -11,13 +10,4 @@ class UserProgress:
         self.repeat_count=repeat_count
         self.is_current = is_current
         self.status = status
-        self._last_learning_time = last_learning_time
-
-    @property
-    def last_learning_time(self):
-        if not self._last_learning_time:
-            return datetime.datetime.min
-
-    @last_learning_time.setter
-    def last_learning_time(self, value):
-        self._last_learning_time = value
+        self.last_learning_time = last_learning_time

@@ -5,10 +5,8 @@
             return new WordStage(options);
         }
 
+        this._options = options;
         this._stageNode = dom.getById(options.stageId);
-        this._wordMeaning = null;
-        this._images = [];
-        this._sound = null;
 
         this.userProgress = new langstyle.UserProgress();
 
@@ -49,6 +47,10 @@
             "characterView": this.characterView
         });
 
+        this.characterUnavailable = new langstyle.CharacterUnavailable({
+            "nextUnavailableId":options.nextUnavailableId
+        });
+
         this.stageFrame = new langstyle.StageFrame({
             "nextFrameId": options.nextFrameId,
             "previousFrameId": options.previousFrameId,
@@ -56,7 +58,8 @@
             "characterView": this.characterView,
             "imageView": this.imageView,
             "soundSpeak": this.soundSpeak,
-            "characterTest": this.characterTest
+            "characterTest": this.characterTest,
+            "characterUnavailable":this.characterUnavailable
         });
 
     };
@@ -75,24 +78,19 @@
         _getNextWord: function () {
             this.userProgress.getNext().then(function (nextWord) {
                 var nextWordObj = JSON.parse(nextWord);
-                this._wordMeaning = {
+                var wordMeaning = {
                     "wordMeaningId": nextWordObj.wordMeaningId,
                     "characterCode": nextWordObj.characterCode, 
                     "explaination": nextWordObj.explaination
                 };
-                this._imageIds = nextWordObj.images;
-                this._soundIds = nextWordObj.sounds;
+                var imageUrls = this._getImageUrlsByIds(nextWordObj.images);
+                var soundUrls = this._getSoundUrlsByIds(nextWordObj.sounds);
+                this.stageFrame.load(wordMeaning, imageUrls, soundUrls);
             } .bind(this),
-                function () {
-                    this._wordMeaning = {};
-                    this._imageIds = [];
-                    this._soundIds = [];
+                function (errorResponse) {
+                    this.stageFrame.nextUnavailable(errorResponse.status);
                 } .bind(this)
-            ).then(function () {
-                var imageUrls = this._getImageUrlsByIds(this._imageIds);
-                var soundUrls = this._getSoundUrlsByIds(this._soundIds);
-                this.stageFrame.load(this._wordMeaning, imageUrls, soundUrls);
-            } .bind(this));
+            );
         },
 
         _getImageUrlsByIds: function (imageIds) {
