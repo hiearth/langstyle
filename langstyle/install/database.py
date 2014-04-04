@@ -60,7 +60,8 @@ def _execute_non_query(cmd_text):
             conn.close()
     return False
 
-file_name_regex = re.compile(r"(?i)^([0-9]+)\.([0-9]+)\.([0-9]+)\-(.*)\.sql$")
+schema_file_name_regex = re.compile(r"(?i)^([0-9]+)\.([0-9]+)\.([0-9]+)\-(.*)\.sql$")
+sql_file_regex = re.compile(r"(?i)(.*)\.sql$")
 
 def _file_number_compare(first_file_pattern, second_file_pattern):
     if first_file_pattern[0] > second_file_pattern[0]:
@@ -81,8 +82,8 @@ def _get_file_number_pattern(file_pattern):
     return (int(file_pattern[0]), int(file_pattern[1]), int(file_pattern[2]))
 
 def _file_compare(first_file_name, second_file_name):
-    first_file_pattern = file_name_regex.findall(first_file_name)[0]
-    second_file_pattern = file_name_regex.findall(second_file_name)[0]
+    first_file_pattern = schema_file_name_regex.findall(first_file_name)[0]
+    second_file_pattern = schema_file_name_regex.findall(second_file_name)[0]
     first_number_pattern = _get_file_number_pattern(first_file_pattern)
     second_number_pattern = _get_file_number_pattern(second_file_pattern)
     return _file_number_compare(first_number_pattern, second_number_pattern)
@@ -100,14 +101,14 @@ def _sort_files(files):
         sorted.insert(insert_index, file_name)
     return sorted
 
-def _filter_file(file_name):
-    if file_name_regex.match(file_name):
+def _is_schema_file(file_name):
+    if schema_file_name_regex.match(file_name):
         return True
     return False
 
 def _get_schema_file_names(dir):
     files = os.listdir(dir)
-    return [file_name for file_name in files if _filter_file(file_name)]
+    return [file_name for file_name in files if _is_schema_file(file_name)]
 
 def _get_sorted_schema_files(dir):
     try:
@@ -134,20 +135,40 @@ def _create_schema():
     schema_files = _get_sorted_schema_files(config.DATABASE_SCHEMA_DIR)
     _run_schema_files(schema_files)
 
+def _is_sql_file(file_name):
+    if sql_file_regex.match(file_name):
+        return True
+    return False
+
 def _get_procedure_files():
     dir = config.DATABASE_PROCEDURE_DIR
     files = os.listdir(dir)
-    return [os.path.join(dir, file_name) for file_name in files]
+    return [os.path.join(dir, file_name) for file_name in files if _is_sql_file(file_name)]
 
 def _create_procedure():
     procedure_files = _get_procedure_files()
-    db_conn = config.database_connection.copy()
+    #db_conn = config.database_connection.copy()
     for file in procedure_files:
-        _log_debug(file)
-        mysql_process = Popen("mysql -h%s -u%s -p%s -D%s < %s" % (db_conn["host"], db_conn["user"], db_conn["password"], db_conn["database"], file), stdout=PIPE, stdin=PIPE, shell=True)
-        std_out, std_error = mysql_process.communicate()
-        if std_error:
-            _log_error(std_error)
+        _run_in_mysql_process(file)
+
+def _run_in_mysql_process(sql_file):
+    _log_debug(sql_file)
+    db_conn = config.database_connection.copy()
+    mysql_parameters = (db_conn["host"], db_conn["user"], db_conn["password"], db_conn["database"], sql_file)
+    mysql_process = Popen("mysql -h%s -u%s -p%s -D%s < %s" % mysql_parameters, stdout=PIPE, stdin=PIPE, shell=True)
+    std_out, std_error = mysql_process.communicate()
+    if std_error:
+        _log_error(std_error)
+
+def _get_prepopulation_files():
+    dir = config.DATABASE_PREPOPULATION_DIR
+    files = os.listdir(dir)
+    return [os.path.join(dir, file_name) for file_name in files if _is_sql_file(file_name)]
+
+def _do_prepopulation():
+    prepop_files = _get_prepopulation_files()
+    for file in prepop_files:
+        _run_in_mysql_process(file)
 
 def _get_upgrade_files(max_number_pattern):
     try:
@@ -155,7 +176,7 @@ def _get_upgrade_files(max_number_pattern):
         schema_file_names = _get_schema_file_names(schema_dir)
         sorted_schema_files = _sort_files(schema_file_names)
         for i in range(0, len(sorted_schema_files)):
-            file_pattern = file_name_regex.findall(sorted_schema_files[i])[0]
+            file_pattern = schema_file_name_regex.findall(sorted_schema_files[i])[0]
             file_number_pattern = _get_file_number_pattern(file_pattern)
             if _file_number_compare(file_number_pattern, max_number_pattern) > 0:
                 return sorted_schema_files[i:]
@@ -185,6 +206,7 @@ def drop():
 def create():
     _create_schema()
     _create_procedure()
+    _do_prepopulation()
 
 def upgrade():
     _create_upgrade_schemas()

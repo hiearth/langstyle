@@ -26,12 +26,14 @@ friend                   朋友
 mother                   母亲
 man                      男人
 woman                    女人
-lady                     女士；小姐
+lady                     女士
 mom                      妈妈
 dad                      爸爸
-grandma/grandmother（外）祖母 
-grandpa/grandfather（外）祖父 
-cousin                   堂（表）兄弟；堂（表）姐妹
+grandma                  奶奶
+grandmother              外祖母
+grandpa                  爷爷
+grandfather              外祖父 
+cousin                   堂(表)兄弟；堂(表)姐妹
 kid                      小孩
 queen                    女王
 visitor                  参观者
@@ -90,7 +92,7 @@ ship                     轮船
 yacht                    快艇
 taxi                     出租车
 jeep                     吉普车
-van                      小货车；面包车
+van                      有盖(小)货车
 subway                   地铁
 motorcycle               摩托车
 bed                      床
@@ -179,9 +181,9 @@ September                九月
 October                  十月
 November                 十一月
 December                 十二月
-spring                   春
-summer                   夏
-autumn                   秋
+spring                   春天
+summer                   夏天
+autumn                   秋天
 winter                   冬天
 south                    南
 north                    北
@@ -211,7 +213,7 @@ eighth                   第八
 ninth                    第九
 twelfth                  第十二
 twentieth                第二十
-active                   积极的；活跃的
+active                   活跃的
 nice                     好看的
 kind                     和蔼可亲的
 strict                   严格的
