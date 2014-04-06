@@ -11,6 +11,11 @@ log_service.debug("begin create database")
 database.drop_and_create()
 log_service.debug("finish create database")
 
+# populate words
+log_service.debug("begin populate words")
+english_word.chinese_english_words()
+log_service.debug("finish populate words")
+
 # populate english characters
 log_service.debug("begin populate english characters")
 start_time = time.time()

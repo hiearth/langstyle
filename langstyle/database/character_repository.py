@@ -7,7 +7,7 @@ from .. import helper
 class CharacterRepository(base_repository.BaseRepository):
 
     def add(self, word_character):
-        result = self._call_proc_non_query("WordCharacter_I",(word_character, None))
+        result = self._call_proc_non_query("WordCharacter_I",[word_character, None])
         if result:
             return result[1]
         return None

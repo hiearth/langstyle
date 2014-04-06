@@ -6,7 +6,8 @@ create table WordMeaning(
     LanguageMapId int,
     Explaination varchar(1024),
     Level int
-);
+)
+collate utf8_bin;
 
 insert into SchemaChange(ScriptName, MajorReleaseNumber, MinorReleaseNumber, BuildNumber, DateApplied)
 values ('0.0.5-WordMeaning.sql', 0, 0, 5, now());

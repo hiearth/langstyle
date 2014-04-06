@@ -15,6 +15,7 @@ cet_file = os.path.join(character_dir, "CET.txt")
 sound_download_urls = [("http://translate.google.com.hk/translate_tts?ie=UTF-8&tl=en&q=","uk"),
                        ("http://translate.google.com/translate_tts?ie=UTF-8&tl=en&q=","us")]
 
+# sound
 def populate_sounds():
     characters = _get_cet_characters()
     for c in characters:
@@ -83,6 +84,7 @@ def _save_to_file(file_path, content):
         f.write(content)
 
 
+# character
 def populate_cet_characters():
     cet_characters = _get_cet_characters()
     character_service = config.service_factory.get_character_service()
@@ -118,13 +120,52 @@ def _add_characters(characters, new_characters):
             characters.append(c)
 
 def _get_character_list_in_line(line):
-    if line:
-        characters = line.split()
-        return characters
-    return []
+    return line.split() if line else []
 
 def _write_characters_to_file(characters):
     if characters:
         with open(cet_file, mode="a", encoding="utf-8") as f:
             for c in characters:
                 f.write(c + os.linesep)
+
+
+# words
+
+dictionary_dir = os.path.join(config.ENGLISH_POPULATION_DIRECTORY, "dictionary")
+basic_1_level_file = os.path.join(dictionary_dir, "basic_1.txt")
+basic_2_level_file = os.path.join(dictionary_dir, "basic_2.txt")
+basic_3_level_file = os.path.join(dictionary_dir, "basic_3.txt")
+basic_4_level_file = os.path.join(dictionary_dir, "basic_4.txt")
+
+def chinese_english_words():
+    language_map_service = config.service_factory.get_language_map_service()
+    chinese_to_english_map_id = language_map_service.get_id("Chinese", "English")
+    level_files = [(basic_1_level_file, 1),(basic_2_level_file, 2),
+                   (basic_3_level_file, 3),(basic_4_level_file, 4)]
+    character_service = config.service_factory.get_character_service()
+    word_meaning_service = config.service_factory.get_word_meaning_service()
+    for file_name, level in level_files:
+        word_meanings = _get_words_in_file(file_name)
+        for character_code, explaination in word_meanings:
+            character_id = character_service.add(character_code)
+            word_meaning_service.add(character_id,chinese_to_english_map_id, explaination, level)
+
+def _get_words_in_file(file_name):
+    with(open(file_name, mode="r", encoding="utf-8")) as f:
+        lines = f.readlines()
+    return _get_word_meanings(lines)
+
+def _get_word_meanings(lines):
+    if not lines:
+        return []
+    return [_get_word_meaning_in_line(line) for line in lines 
+            if _has_word_meaning_in_line(line)]
+
+def _has_word_meaning_in_line(line):
+    if line:
+        return len(line.strip()) > 0
+    return False
+
+def _get_word_meaning_in_line(line):
+    return line.split() if line else None
+
