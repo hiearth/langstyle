@@ -28,12 +28,6 @@ class UserProgressRepository(base_repository.BaseRepository):
             return self._get_progresses(user_id, word_meanings)
         return []
 
-    def get_know(self, user_id):
-        know_word_meanings = self._call_proc_query_all("UserProgress_S_By_Status", [user_id, "Know"])
-        if know_word_meanings:
-            return self._get_progresses(user_id,know_word_meanings)
-        return []
-
     def _get_progresses(self, user_id, progress_list):
         return [user_progress.UserProgress(user_id, item[0], item[1], item[2], item[3], item[4])
                 for item in progress_list]
@@ -50,8 +44,12 @@ class UserProgressRepository(base_repository.BaseRepository):
             return self._get_progresses(user_id,review_word_meanings)
         return []
 
-    def get_unknown(self, user_id):
+    def get_all_unknown(self, user_id):
         unknown_word_meanings = self._call_proc_query_all("UserProgress_Unknown_S", [user_id])
+        return helper.list_comprehension_by_index(unknown_word_meanings, 0)
+
+    def get_unknown(self, user_id, level):
+        unknown_word_meanings = self._call_proc_query_all("UserProgress_Unknown_In_Level_S", [user_id, level])
         return helper.list_comprehension_by_index(unknown_word_meanings, 0)
 
     def begin_learn(self, user_id, word_meaning_id):
@@ -72,7 +70,7 @@ class UserProgressRepository(base_repository.BaseRepository):
 
     def is_level_complete(self, user_id, level):
         is_complete = self._call_proc_query_one("UserProgress_Level_Complete", [user_id, level])
-        if is_complete:
+        if is_complete and is_complete[0]:
             return True
         return False
 

@@ -13,7 +13,9 @@ log_service.debug("finish create database")
 
 # populate words
 log_service.debug("begin populate words")
+start_time = time.time()
 english_word.chinese_english_words()
+log_service.debug(str(time.time()-start_time) + " seconds")
 log_service.debug("finish populate words")
 
 # populate english characters

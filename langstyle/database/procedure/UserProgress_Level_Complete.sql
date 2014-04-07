@@ -10,8 +10,8 @@ begin
 			  and WordMeaningId not in (select WordMeaningId 
 										from UserProgress 
 										where UserId = p_userId)) then
-		select 1;
-	else
 		select 0;
+	else
+		select 1;
 	end if;
 end

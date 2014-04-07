@@ -1,4 +1,5 @@
-﻿paper                    纸
+﻿
+paper                    纸
 piece                    块
 ink                      墨水
 bottle                   瓶

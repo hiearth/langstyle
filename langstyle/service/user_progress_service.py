@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-#import pdb
 import random
 import datetime
 import concurrent.futures
@@ -20,9 +19,9 @@ class UserProgressService:
     def next(self, user_id):
         show_candidate_words = self._get_could_show_words(user_id)
         if show_candidate_words:
+            random_word = random.choice(show_candidate_words)
             word_meaning_service = config.service_factory.get_word_meaning_service()
-            return random.choice([word_meaning_service.get(candidate_word.word_meaning_id) 
-                    for candidate_word in show_candidate_words])
+            return word_meaning_service.get(random_word.word_meaning_id)
         return None
 
         #current_word_meaning_id = self.get_current(user_id)
@@ -36,21 +35,29 @@ class UserProgressService:
     def _need_add_learning_word_meaning(self, learning_count):
         return learning_count < config.MAX_IN_LEARNING_COUNT
 
-    def _add_learning_words(self, user_id, asyn=True):
+    def _add_learning_words(self, user_id, count, asyn=True):
         try:
             executor = concurrent.futures.ThreadPoolExecutor(1)
-            executor.submit(self._add_word_meaning_to_learning_list, user_id)
+            executor.submit(self._add_word_meaning_to_learning_list, user_id,count)
         except Exception as e:
             config.service_factory.get_log_service().error(str(e))
         finally:
             executor.shutdown(not asyn)
 
-    def _add_word_meaning_to_learning_list(self, user_id):
-        unknown_word_meanings = self.get_unknown(user_id)
-        # need use a more intelligent class/function to do the next job
-        if unknown_word_meanings:
-            candidate_word_meaning = random.choice(unknown_word_meanings)
-            self._user_progress_repository.begin_learn(user_id, candidate_word_meaning)
+    def _add_word_meaning_to_learning_list(self, user_id, count):
+        try:
+            level = self._get_highest_available_level_to_learn(user_id)
+            unknown_word_meanings = self.get_unknown(user_id, level)
+            # need use a more intelligent class/function to do the next job
+            if not unknown_word_meanings:
+                return
+            for i in range(0,count):
+                index = random.choice(range(0, len(unknown_word_meanings)))
+                candidate_word_meaning = unknown_word_meanings[index]
+                del unknown_word_meanings[index]
+                self._user_progress_repository.begin_learn(user_id, candidate_word_meaning)
+        except Exception as e:
+            config.service_factory.get_log_service().error(str(e))
 
     def get(self, user_id, word_meaning_id):
         return self._user_progress_repository.get(user_id, word_meaning_id)
@@ -65,14 +72,11 @@ class UserProgressService:
         '''get recent learning word meaning id list'''
         learning_words = self._user_progress_repository.get_learn(user_id)
         if not learning_words:
-            self._add_learning_words(user_id, False)
+            self._add_learning_words(user_id,config.MAX_IN_LEARNING_COUNT,False)
             learning_words = self._user_progress_repository.get_learn(user_id)
         elif self._need_add_learning_word_meaning(len(learning_words)):
-            self._add_learning_words(user_id)
+            self._add_learning_words(user_id,(config.MAX_IN_LEARNING_COUNT-len(learning_words)))
         return learning_words
-
-    def get_know(self, user_id):
-        return self._user_progress_repository.get_know(user_id)
 
     def get_known(self, user_id):
         return self._user_progress_repository.get_by_status(user_id, "Known")
@@ -81,8 +85,11 @@ class UserProgressService:
         '''get current learning word meaning id'''
         return self._user_progress_repository.get_current(user_id)
 
-    def get_unknown(self, user_id):
-        return self._user_progress_repository.get_unknown(user_id)
+    def get_all_unknown(self, user_id):
+        return self._user_progress_repository.get_all_unknown(user_id)
+
+    def get_unknown(self, user_id, level):
+        return self._user_progress_repository.get_unknown(user_id, level)
 
     def get_levels(self, user_id):
         return self._user_progress_repository.get_levels(user_id)
@@ -102,20 +109,13 @@ class UserProgressService:
         words.extend(self.get_review(user_id))
         return words
 
-    def _get_should_not_show_words(self, user_id):
-        words = self._get_on_progress_words(user_id)
-        sort_key = (lambda progress_item: progress_item.last_learning_time 
-                    if progress_item.last_learning_time else datetime.datetime.min)
-        words.sort(key=sort_key)
-        if len(words) > config.WORD_SHOW_AGAIN_MIN_INTERVAL:
-            return words[-config.WORD_SHOW_AGAIN_MIN_INTERVAL:]
-        return []
-
     def _get_could_show_words(self, user_id):
         progress_words = self._get_on_progress_words(user_id)
-        should_not_show = self._get_should_not_show_words(user_id)
-        if should_not_show:
-            return [word for word in progress_words if word not in should_not_show]
+        sort_key = (lambda progress_item: progress_item.last_learning_time 
+                    if progress_item.last_learning_time else datetime.datetime.min)
+        progress_words.sort(key=sort_key)
+        if len(progress_words) > config.WORD_SHOW_AGAIN_MIN_INTERVAL:
+            return progress_words[0:-config.WORD_SHOW_AGAIN_MIN_INTERVAL]
         return progress_words
 
     def _should_add_review_word(self, user_id):
@@ -123,10 +123,11 @@ class UserProgressService:
 
     def _get_highest_available_level_to_learn(self, user_id):
         learned_levels = self.get_levels(user_id)
-        highest_level = max(learned_levels)
+        highest_level = max(learned_levels) if learned_levels else 0
         if self.is_level_complete(user_id, highest_level):
             all_levels = self._get_all_levels_to_learn(user_id)
-            highest_level = min((level for level in all_levels if level > highest_level))
+            higher_levels = [level for level in all_levels if level > highest_level]
+            highest_level = min(higher_levels) if higher_levels else 0
         return highest_level
 
     def _get_all_levels_to_learn(self, user_id):
@@ -138,7 +139,6 @@ class UserProgressService:
 
     def update_status(self, user_id, word_meaning_id, is_pass):
         # user progress audit table record user's learning detail
-        #pdb.set_trace()
         progress_item = self.get(user_id, word_meaning_id)
         next_status = self._get_next_status(progress_item.status, is_pass, progress_item.last_learning_time)
         self._user_progress_repository.update(user_id, word_meaning_id, next_status)

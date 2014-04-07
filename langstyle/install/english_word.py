@@ -163,7 +163,7 @@ def _get_word_meanings(lines):
 
 def _has_word_meaning_in_line(line):
     if line:
-        return len(line.strip()) > 0
+        return (len(line.strip()) > 0) and (len(line.split()) == 2)
     return False
 
 def _get_word_meaning_in_line(line):

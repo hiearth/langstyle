@@ -1,4 +1,5 @@
-﻿pen                      钢笔
+﻿
+pen                      钢笔
 pencil                   铅笔
 ruler                    尺子
 eraser                   橡皮擦
