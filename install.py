@@ -31,3 +31,11 @@ start_time = time.time()
 #english_word.populate_sounds()
 log_service.debug(str(time.time()-start_time) + " seconds")
 log_service.debug("finish populate english sounds")
+
+# populate images
+log_service.debug("begin populate english images")
+start_time = time.time()
+english_word.populate_images()
+log_service.debug(str(time.time()-start_time) + " seconds")
+log_service.debug("finish populate english images")
+

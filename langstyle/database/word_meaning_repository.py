@@ -31,3 +31,9 @@ class WordMeaningRepository(base_repository.BaseRepository):
         if all_levels:
             return helper.list_comprehension_by_index(all_levels, 0)
         return []
+
+    def get_by_level(self,language_map_id, level):
+        word_meanings = self._call_proc_query_all("WordMeaning_S_By_Level",[language_map_id, level])
+        return [word_meaning.WordMeaning(item[0],item[1].decode("utf-8"),item[2].decode("utf-8"),level) 
+                for item in word_meanings]
+

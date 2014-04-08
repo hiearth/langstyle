@@ -79,9 +79,11 @@
                 this.stageSwitch.showWord();
             } .bind(this);
 
-            this.addMenu.onclick = function (e) {
-                this.stageSwitch.showAdd();
-            } .bind(this);
+            if(this.addMenu){
+                this.addMenu.onclick = function (e) {
+                    this.stageSwitch.showAdd();
+                } .bind(this);
+            }
 
             this.registerUserMenu.onclick = function (e) {
                 this.stageSwitch.showRegister();
@@ -93,7 +95,6 @@
 
             this.logoutButton.onclick = function () {
                 this.userLogin.logout().then(function () {
-                    this.hideMenus();
                     this.hideUserName();
                     this.stageSwitch.showLogin();
                 } .bind(this));
@@ -102,7 +103,6 @@
             this.loginButton.onclick = function (e) {
                 if (this.userLogin.validate()) {
                     this.userLogin.login().then(function () {
-                        this.showMenus();
                         this.showUserName();
                         this.stageSwitch.showWord();
                     } .bind(this));
@@ -112,7 +112,6 @@
             this.registerButton.onclick = function (e) {
                 if (this.userRegister.validate()) {
                     this.userRegister.register().then(function () {
-                        this.showMenus();
                         this.showUserName();
                         this.stageSwitch.showWord();
                     } .bind(this));
@@ -131,18 +130,7 @@
         hideUserName: function () {
             this.userNameLink.textContent = "";
             this.userNameLink.onclick = null;
-        },
-
-        hideMenus: function () {
-            this.startMenu.classList.add(this.hiddenSign);
-            this.addMenu.classList.add(this.hiddenSign);
-        },
-
-        showMenus: function () {
-            this.startMenu.classList.remove(this.hiddenSign);
-            this.addMenu.classList.remove(this.hiddenSign);
         }
-
     };
 
     langstyle.Application = Application;

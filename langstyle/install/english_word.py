@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import re
 import time
 from socket import timeout
 import urllib.request
@@ -132,16 +133,16 @@ def _write_characters_to_file(characters):
 # words
 
 dictionary_dir = os.path.join(config.ENGLISH_POPULATION_DIRECTORY, "dictionary")
-basic_1_level_file = os.path.join(dictionary_dir, "basic_1.txt")
-basic_2_level_file = os.path.join(dictionary_dir, "basic_2.txt")
-basic_3_level_file = os.path.join(dictionary_dir, "basic_3.txt")
-basic_4_level_file = os.path.join(dictionary_dir, "basic_4.txt")
+word_level_1_file = os.path.join(dictionary_dir, "level_1.txt")
+word_level_2_file = os.path.join(dictionary_dir, "level_2.txt")
+word_level_3_file = os.path.join(dictionary_dir, "level_3.txt")
+word_level_4_file = os.path.join(dictionary_dir, "level_4.txt")
 
 def chinese_english_words():
     language_map_service = config.service_factory.get_language_map_service()
     chinese_to_english_map_id = language_map_service.get_id("Chinese", "English")
-    level_files = [(basic_1_level_file, 1),(basic_2_level_file, 2),
-                   (basic_3_level_file, 3),(basic_4_level_file, 4)]
+    level_files = [(word_level_1_file, 1),(word_level_2_file, 2),
+                   (word_level_3_file, 3),(word_level_4_file, 4)]
     character_service = config.service_factory.get_character_service()
     word_meaning_service = config.service_factory.get_word_meaning_service()
     for file_name, level in level_files:
@@ -168,4 +169,40 @@ def _has_word_meaning_in_line(line):
 
 def _get_word_meaning_in_line(line):
     return line.split() if line else None
+
+
+# image
+image_dir = os.path.join(config.ENGLISH_POPULATION_DIRECTORY, "image")
+image_level_1_dir = os.path.join(image_dir, "level_1")
+image_file_regex = re.compile(r"(.*)_([0-9]+)\.jpg")
+
+def populate_images():
+    language_map_service = config.service_factory.get_language_map_service()
+    chinese_to_english_map_id = language_map_service.get_id("Chinese", "English")
+    level_dirs = [(image_level_1_dir, 1)]
+    for level_dir, level in level_dirs:
+        _link_words_in_level(level_dir, level, chinese_to_english_map_id)
+
+def _link_words_in_level(level_dir, level, language_map_id):
+    word_meanings = config.service_factory.get_word_meaning_service().get_by_level(language_map_id,level)
+    for word_item in word_meanings:
+        related_images = _get_images_by_character(os.listdir(level_dir),word_item.character_code)
+        image_paths = [os.path.join(level_dir, image_file_name) 
+                       for image_file_name in related_images]
+        _link_image_and_word(image_paths, word_item.id)
+
+def _link_image_and_word(image_paths,word_meaning_id):
+    for image_path in image_paths:
+        image_data = _read_file(image_path)
+        image_id = config.service_factory.get_image_service().add(image_data,config.ADMINISTRATOR_ID)
+        config.service_factory.get_word_meaning_image_service().link(config.ADMINISTRATOR_ID, word_meaning_id, image_id)
+
+def _get_images_by_character(file_names,character_code):
+    image_files = []
+    for file_name in file_names:
+        file_pattern = image_file_regex.findall(file_name)
+        if file_pattern and file_pattern[0][0]==character_code:
+            image_files.append(file_name)
+    return image_files
+
 

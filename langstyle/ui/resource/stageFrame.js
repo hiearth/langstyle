@@ -31,8 +31,10 @@
                     this._showCharacterTest();
                 }
             }
-            this._imageView.showNext();
-            this._soundSpeak.playNext();
+            else{
+                this._imageView.showNext();
+                this._soundSpeak.playNext();
+            }
         },
 
         previous: function () {

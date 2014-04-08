@@ -25,3 +25,7 @@ class WordMeaningService:
 
     def get_levels(self, language_map_id):
         return self._word_meaning_repository.get_levels(language_map_id)
+
+    def get_by_level(self,language_map_id, level):
+        return self._word_meaning_repository.get_by_level(language_map_id, level)
+

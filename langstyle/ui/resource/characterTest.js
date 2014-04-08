@@ -73,7 +73,7 @@
             var startTimer = this.characterInputElement.classList.contains(this._wrongSign);
             if (startTimer) {
                 if (!this._isHintShown()) {
-                    this._hintTimer = setTimeout(this._showHint.bind(this), 3000);
+                    this._hintTimer = setTimeout(this._showHint.bind(this), 4000);
                 }
             }
             else{
