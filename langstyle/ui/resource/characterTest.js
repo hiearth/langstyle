@@ -21,6 +21,7 @@
         this._hintTimer = null;
         this._feedbackUrl = "/charactertest";
         this._feedbackSent = false;
+        this._correctSignChanged = new ObservableEvent();
 
         this.init()
     };
@@ -35,6 +36,8 @@
             this.characterHintElement.onclick = function () {
                 this.characterView.show();
             } .bind(this);
+
+            this._correctSignChanged.subscribe(this._manageTimer.bind(this));
         },
 
         load: function (wordMeaning) {
@@ -43,49 +46,50 @@
             this._characterCode = wordMeaning.characterCode || "";
         },
 
-        _testRealTime: function (inputElement) {
-            var userInput = inputElement.value.trim();
+        _testRealTime: function () {
+            var userInput = this._getUserInput();
             var correct = false;
             if (userInput.length < this._characterCode.length) {
-                correct = this._partialCorrect(userInput);
+                correct = this._partialCorrect();
+                if (correct) {
+                    this._resetSign();
+                }
+                else {
+                    this._showWrongSign();
+                }
             }
             else {
                 correct = this._totalCorrect(userInput);
+                if (correct) {
+                    this._showCorrectSign();
+                }
+                else {
+                    this._showWrongSign();
+                }
             }
-
-            this._manageTimer(!correct);
         },
 
-        _manageTimer: function (startTimer) {
-            this._clearTimer();
+        _manageTimer: function () {
+            var startTimer = this.characterInputElement.classList.contains(this._wrongSign);
             if (startTimer) {
                 if (!this._isHintShown()) {
                     this._hintTimer = setTimeout(this._showHint.bind(this), 3000);
                 }
             }
+            else{
+                this._clearTimer();
+            }
         },
 
-        _partialCorrect: function (userInput) {
+        _partialCorrect: function () {
+            var userInput = this._getUserInput();
             var leftPartCharacter = this._characterCode.slice(0, userInput.length);
-            if (userInput !== leftPartCharacter) {
-                this._showWrongSign();
-                return false;
-            }
-            else {
-                this._resetSign();
-                return true;
-            }
+            return userInput === leftPartCharacter
         },
 
-        _totalCorrect: function (userInput) {
-            if (userInput !== this._characterCode) {
-                this._showWrongSign();
-                return false;
-            }
-            else {
-                this._showCorrectSign();
-                return true;
-            }
+        _totalCorrect: function () {
+            var userInput = this._getUserInput();
+            return userInput === this._characterCode;
         },
 
         isWaitingTest: function () {
@@ -93,7 +97,7 @@
         },
 
         test: function () {
-            if (this._isCorrect()) {
+            if (this._totalCorrect()) {
                 this._showCorrectSign();
             }
             else {
@@ -113,16 +117,36 @@
         },
 
         _showCorrectSign: function () {
+            var inputClassList=this.characterInputElement.classList;
+            var isChanged = inputClassList.contains(this._wrongSign);
             this.characterInputElement.classList.remove(this._wrongSign);
+
+            isChanged = isChanged || !inputClassList.contains(this._correctSign);
             this.characterInputElement.classList.add(this._correctSign);
+
+            isChanged = isChanged || !inputClassList.contains(this._passSign);
             this.characterTestElement.classList.add(this._passSign);
+            if(isChanged){
+                this._correctSignChanged.notify();
+            }
+
             this._sendFeedback();
         },
 
         _showWrongSign: function () {
+            var inputClassList=this.characterInputElement.classList;
+            var isChanged = inputClassList.contains(this._correctSign);
             this.characterInputElement.classList.remove(this._correctSign);
+
+            isChanged = isChanged || !inputClassList.contains(this._wrongSign);
             this.characterInputElement.classList.add(this._wrongSign);
+
+            isChanged = isChanged || inputClassList.contains(this._passSign);
             this.characterTestElement.classList.remove(this._passSign);
+
+            if(isChanged){
+                this._correctSignChanged.notify();
+            }
         },
         
         _sendFeedback:function(){
@@ -146,11 +170,6 @@
 
         _isHintShown: function () {
             return !this.characterHintElement.classList.contains(this._hiddenSign);
-        },
-
-        _isCorrect: function () {
-            var userInput = this._getUserInput();
-            return userInput === this._characterCode;
         },
 
         _getUserInput: function () {
@@ -181,9 +200,18 @@
         },
 
         _resetSign: function () {
+            var inputClassList=this.characterInputElement.classList;
+            var isChanged = inputClassList.contains(this._correctSign);
             this.characterInputElement.classList.remove(this._correctSign);
+
+            isChanged = isChanged || inputClassList.contains(this._wrongSign);
             this.characterInputElement.classList.remove(this._wrongSign);
+
+            isChanged = isChanged || inputClassList.contains(this._passSign);
             this.characterTestElement.classList.remove(this._passSign);
+            if(isChanged){
+                this._correctSignChanged.notify();
+            }
         },
 
         _clearTimer: function () {
